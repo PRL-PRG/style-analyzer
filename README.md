@@ -176,6 +176,36 @@ QUALITY_REPORT_REPOS_WITH_VNODE="./lookout/style/format/benchmarks/data/quality_
 BASE_REPORT_VERSION="0.1.0"
 ```
 
+```bash
+python3 -m lookout.style.format --log-level DEBUG quality-report -o $QUALITY_REPORT_DIR -i $QUALITY_REPORT_REPOS 2>&1 | tee -a $QUALITY_REPORT_DIR/logs.txt
+```
+
+```bash
+python3 -m lookout.style.format --log-level DEBUG quality-report -o ${QUALITY_REPORT_DIR}.new -i $QUALITY_REPORT_REPOS 2>&1 | tee -a ${QUALITY_REPORT_DIR}.new/logs.txt
+```
+
+### Results
+
+Interesting bits of the log:
+
+```
+DEBUG:FeaturesExtractor:Removed 9/17 labels by support 80 
+DEBUG:FeaturesExtractor:12800 out of 25405 are labeled and saved after filtering
+...
+INFO:QualityReportAnalyzer:extracted 12800 samples to train, searching for the best hyperparameters
+```
+
+This gives us
+```
+            in log      in log      paper       paper 
+project     labels      samples     labels      samples
+carlo       9/17 (8)    12800       8           5529
+reveal.js   37/47 (10)  52262       14          9974
+```
+
+There's more interesting stuff in there. TODO
+
+### Reports
 
 It looks like the report used in the paper is deposited at:
 
@@ -185,8 +215,7 @@ $QUALITY_REPORT_DIR/telescope-model_report.md
 
 rules and avg rules are in the `Summary` section
 
-```
-```
+
 
 ### Stuff
 
