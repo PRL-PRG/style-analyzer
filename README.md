@@ -83,3 +83,115 @@ fixer backed by machine learning, it is always a good idea to discuss it on
 ## License
 
 AGPL-3.0, see [LICENSE.md](LICENSE.md).
+
+## Notes for paper:
+
+They say they stick to JavaScript.
+
+## Reproduction notes
+
+Installing dependencies: (Python 3.7)
+
+The package requires PyStemmer 1.3, which looks like is not maintained right now and errors out. The src-d people made a fork.
+
+```
+pip3 install pip install git+git://github.com/snowballstem/pystemmer
+sudo apt install --reinstall python3
+pip3 install bblfsh
+pip3 install jinja
+```
+
+Misc tools (superset):
+
+```
+pip3 install --ignore-installed PyYAML
+pip3 install pylint pytest flake8 mypy pre-commit isort black
+```
+
+Installing dependencies:
+
+```
+pip3 install -e .
+```
+
+Installing things:
+
+```
+pip3 install lookout
+pip3 install lookout-sdk-ml
+pip3 install lookout-style
+```
+
+They talk about their datasets in here: https://github.com/src-d/datasets
+
+### Projects used for the evaluation:
+
+```
+repository
+https://github.com/nodejs/node.git
+https://github.com/webpack/webpack.git
+https://github.com/meteor/meteor.git
+https://github.com/facebook/react.git
+https://github.com/atom/atom.git
+https://github.com/facebook/react-native.git
+https://github.com/jquery/jquery.git
+https://github.com/storybookjs/storybook.git
+https://github.com/freeCodeCamp/freeCodeCamp.git
+https://github.com/expressjs/express.git
+https://github.com/30-seconds/30-seconds-of-code.git
+https://github.com/evergreen-ci/evergreen.git
+https://github.com/nodejs/citgm.git
+https://github.com/axios/axios.git
+https://github.com/facebook/create-react-app.git
+https://github.com/reduxjs/redux.git
+https://github.com/hakimel/reveal.js.git
+https://github.com/GoogleChromeLabs/carlo.git
+https://github.com/laravel/telescope.git
+```
+
+Running the docker container:
+
+```bash
+docker run --rm -it --network host \
+    -v /home/kondziu/Workspace/style-analyzer/.git:/style-analyzer/.git \
+    -v /home/kondziu/Workspace/style-analyzer/lookout/core/server:/style-analyzer/lookout/core/server \
+    --entrypoint /bin/sh \
+    -v/home/kondziu/Workspace/style-analyzer/sdk:/style-analyzer/sdk \
+    -w /style-analyzer \
+    srcd/style-analyzer:latest
+```
+
+Variables:
+
+```bash
+REPORTS_DIR="$(pwd)/lookout/style/format/benchmarks/reports"
+REPORT_VERSION=untagged
+REPORT_DIR="$REPORTS_DIR/$REPORT_VERSION"
+SMOKE_REPORT_DIR="$REPORT_DIR/js_smoke"
+NOISY_REPORT_DIR="$REPORT_DIR/noise"
+QUALITY_REPORT_DIR="$REPORT_DIR/quality"
+SMOKE_INIT="./lookout/style/format/benchmarks/data/js_smoke_init.tar.xz"
+QUALITY_REPORT_REPOS="./lookout/style/format/benchmarks/data/quality_report_repos_small.csv"
+QUALITY_REPORT_REPOS_WITH_VNODE="./lookout/style/format/benchmarks/data/quality_report_repos_with_vnodes_number.csv"
+BASE_REPORT_VERSION="0.1.0"
+```
+
+
+It looks like the report used in the paper is deposited at:
+
+```bash
+$QUALITY_REPORT_DIR/telescope-model_report.md
+```
+
+rules and avg rules are in the `Summary` section
+
+```
+```
+
+### Stuff
+
+### Other notes
+
+I suspect in the Makefile there might be a typo and `srcd/style-analyzer:test` should be `srcd/style-analyzer:latest`
+
+I had a problem with apt_pkg. Making a manual link as advised here helped (36 to 37): https://stackoverflow.com/questions/13708180/python-dev-installation-error-importerror-no-module-named-apt-pkg

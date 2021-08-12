@@ -33,7 +33,7 @@ docker-test:
 		-v $(current_dir)/.git:/style-analyzer/.git \
 		-v $(current_dir)/lookout/core/server:/style-analyzer/lookout/core/server \
 		--entrypoint python3 -w /style-analyzer \
-			srcd/style-analyzer:test -m unittest discover
+			srcd/style-analyzer:latest -m unittest discover
 
 bblfsh-start:
 	! docker ps | grep bblfshd # bblfsh server has been run already.
