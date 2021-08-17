@@ -430,7 +430,6 @@ dependencies = [
 [[package]]
 name = "djanco"
 version = "0.3.5"
-source = "git+https://github.com/PRL-PRG/djanco?branch=main#9c0604754e896e8cc1700125f20c658c4be71908"
 dependencies = [
  "anyhow",
  "bstr",
@@ -1317,6 +1316,7 @@ dependencies = [
  "clap 3.0.0-beta.4",
  "djanco",
  "djanco_ext",
+ "itertools",
 ]
 
 [[package]]
