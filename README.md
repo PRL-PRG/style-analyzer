@@ -161,6 +161,7 @@ docker run --rm -it --network host \
     srcd/style-analyzer:latest
 ```
 
+
 Variables:
 
 ```bash
@@ -182,6 +183,105 @@ python3 -m lookout.style.format --log-level DEBUG quality-report -o $QUALITY_REP
 
 ```bash
 python3 -m lookout.style.format --log-level DEBUG quality-report -o ${QUALITY_REPORT_DIR}.new -i $QUALITY_REPORT_REPOS 2>&1 | tee -a ${QUALITY_REPORT_DIR}.new/logs.txt
+```
+
+config:
+
+```json
+{
+   "javascript":{
+      "feature_extractor":{
+         "cutoff_label_support":80,
+         "debug_parsing":false,
+         "left_features":[
+            "length",
+            "diff_offset",
+            "diff_col",
+            "diff_line",
+            "internal_type",
+            "label",
+            "reserved",
+            "roles"
+         ],
+         "left_siblings_window":5,
+         "no_labels_on_right":true,
+         "node_features":[
+            "start_line",
+            "start_col"
+         ],
+         "parent_features":[
+            "internal_type",
+            "roles"
+         ],
+         "parents_depth":2,
+         "return_sibling_indices":false,
+         "right_features":[
+            "length",
+            "internal_type",
+            "reserved",
+            "roles"
+         ],
+         "right_siblings_window":5,
+         "select_features_number":500
+      },
+      "line_length_limit":500,
+      "lines_ratio_train_trigger":0.2,
+      "lower_bound_instances":500,
+      "optimizer":{
+         "base_model_name_categories":[
+            "sklearn.ensemble.RandomForestClassifier",
+            "sklearn.tree.DecisionTreeClassifier"
+         ],
+         "cv":3,
+         "max_depth_categories":[
+            "None",
+            5,
+            10
+         ],
+         "max_features_categories":[
+            "None",
+            "auto"
+         ],
+         "min_samples_leaf_max":120,
+         "min_samples_leaf_min":90,
+         "min_samples_split_max":240,
+         "min_samples_split_min":180,
+         "n_iter":50,
+         "n_jobs":-1
+      },
+      "overall_size_limit":5242880,
+      "random_state":42,
+      "test_dataset_ratio":0.2,
+      "trainable_rules":{
+         "attribute_similarity_threshold":0.98,
+         "confidence_threshold":0.92,
+         "n_estimators":10,
+         "prune_attributes":true,
+         "prune_branches_algorithms":[
+            "reduced-error"
+         ],
+         "prune_dataset_ratio":0.2,
+         "top_down_greedy_budget":[
+            false,
+            0.5
+         ]
+      }
+   }
+}
+```
+
+```bash
+CONFIG_JSON=$(cat config.json | tr -d "\n" | xargs -I {} echo '"{}"')
+```
+
+```bash
+python3 -m lookout.style.format --log-level DEBUG quality-report --config "$CONFIG_JSON" -o ${QUALITY_REPORT_DIR}.tmp -i $QUALITY_REPORT_REPOS 2>&1 | tee -a ${QUALITY_REPORT_DIR}.tmp/logs.txt
+```
+
+I don't know why it's not using the config i provide. I canb overwrite the values in python though:
+
+``` 
+vim lookout/style/format/config.py
 ```
 
 ### Results
@@ -215,12 +315,39 @@ $QUALITY_REPORT_DIR/telescope-model_report.md
 
 rules and avg rules are in the `Summary` section
 
+```
+report              paper
+repo                repository
+???                 PredR
+precision           precision 
+recall              -
+full_recall         recall
+f1                  -
+full_f1             f1
+ppcr                -
+support             -   
+full_support        train samples
+???                 LoC
+<elsewhere>         unique labels
+Rules Number        rules
+Average Rule Len    avg rule len
+???                 avg training time, min(utes)
+```
 
+Annoyingly, I don't see a summary.
 
-### Stuff
+#### unique labels
+
+Unique labels can be derived from quality test reports (eg `lookout/style/format/benchmarks/reports/0.1.0/quality/telescope.test_report.md`) by counting the number of rows in the classification report (#-3) or the number of columns in the confusion matrix (#-1). Maybe easier to read a line starting with `"cl_report_full"` and count the number of unicode labels (`"\u` strings). Messiest, but easiest.
+
+#### locs
+
+Djanco?
 
 ### Other notes
 
 I suspect in the Makefile there might be a typo and `srcd/style-analyzer:test` should be `srcd/style-analyzer:latest`
 
 I had a problem with apt_pkg. Making a manual link as advised here helped (36 to 37): https://stackoverflow.com/questions/13708180/python-dev-installation-error-importerror-no-module-named-apt-pkg
+
+I think sample and vnode are the same thing?
