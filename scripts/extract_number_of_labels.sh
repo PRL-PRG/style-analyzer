@@ -12,11 +12,11 @@ REPORT_DIR="$1"
 # Get the relative path where the script is.
 SCRIPT_DIR=$(dirname "$0")
 
-# Expecting to have an accompanying `extract_number_of_rules.awk` parked next to the script.
-EXTRACTION_AWK_SCRIPT="$SCRIPT_DIR/extract_number_of_rules.awk"
+# Expecting to have an accompanying `extract_number_of_labels.awk` parked next to the script.
+EXTRACTION_AWK_SCRIPT="$SCRIPT_DIR/extract_number_of_labels.awk"
 
 # Print out the CSV header
-echo "project, rules"
+echo "project, labels"
 
 # Find all test reports in the report directory, expecting them to be named according to the pattern:
 #
@@ -35,8 +35,8 @@ do
     fi
 
     # Run the AWK scriptr for each report.
-    rules=$(<"$report" awk -f $EXTRACTION_AWK_SCRIPT)   
+    labels=$(<"$report" awk -f $EXTRACTION_AWK_SCRIPT)   
 
     # Print out the extracted value
-    echo "${project_name}, $rules"
+    echo "${project_name}, $labels"
 done

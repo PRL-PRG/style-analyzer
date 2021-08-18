@@ -17,7 +17,7 @@ use djanco_ext::*;
 
 // use itertools;
 
-const SELECTED_PROJECTS: usize = 19;
+const SELECTED_PROJECTS: usize = 20;
 const SEEDS: [u128; 10] = [1,2,3,5,7,11,13,17,19,23];
 
 // Base commit is going to be a commit this many percent commits in the past.
