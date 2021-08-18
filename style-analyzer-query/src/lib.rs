@@ -36,9 +36,18 @@ const BASE_COMMIT_OFFSET_RATIO: usize = 10;
 #[djanco(May, 2021, subsets(JavaScript))]
 pub fn all_projects(database: &Database, _log: &Log, output: &Path) -> Result<(), std::io::Error>  {
     database.projects()
-        //.filter_by(Equal(project::Substore, Store::Large(store::Language::JavaScript)))
+        .filter_by(Equal(project::Substore, Store::Large(store::Language::JavaScript)))
         .filter_by(AnyIn(project::Languages, vec![Language::JavaScript]))
         .into_csv_in_dir(output, "javascript_projects.csv")
+}
+
+#[djanco(May, 2021, subsets(JavaScript))]
+pub fn project_locs(database: &Database, _log: &Log, output: &Path) -> Result<(), std::io::Error>  {
+    database.projects()
+    .filter_by(Equal(project::Substore, Store::Large(store::Language::JavaScript)))
+    .filter_by(AnyIn(project::Languages, vec![Language::JavaScript]))
+    .map_into(Select!(project::URL, project::Locs))
+    .into_csv_in_dir(output, "project_locs.csv")
 }
 
 #[djanco(May, 2021, subsets(JavaScript))] pub fn random_projects_0(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects(database, log, output, 0) }

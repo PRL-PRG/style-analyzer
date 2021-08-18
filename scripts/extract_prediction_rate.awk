@@ -13,7 +13,7 @@
 #   = Ends: None                                                                   =
 #   ================================================================================
 #
-$0 ~ /^=\s+http/ {
+$0 ~ /^= +http/ {
     # URL is the second word. Stick it into a variable so it persists in
     # all subsequent rules until a new URL is found
     url = $2;
@@ -72,13 +72,18 @@ END {
     OFS = ", ";
 
     # Print out header
-    print "url", "samples", "predictions", "uncovered", "prediction rate";
+    print "repo", "url", "samples", "predictions", "uncovered", "prediction rate";
 
     # Go over collected data and print it out, we iterate over the samples map, 
     # which should have the samne URL keys as the missed map.
     for (url in samples) {
         # Calculate predictions from the number of samples without predictions
         predictions = samples[url] - uncovered[url];
+
+        # Extract the project name from the URL
+        project = url;
+        gsub(/^.*\//, "", project);
+        gsub(/\.git$/, "", project);
 
         # Calculate prediction rate, or set to NA if number of samples is zero
         if (samples[url] == 0) {
@@ -88,7 +93,7 @@ END {
         }
 
         # Print out one line of data per each collected URL
-        print url, samples[url], predictions, uncovered[url], prediction_rate;
+        print project, url, samples[url], predictions, uncovered[url], prediction_rate;
     }
 }
 

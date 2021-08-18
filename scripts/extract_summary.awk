@@ -51,22 +51,13 @@ NR != 2 {
 
         # Remove whitespace padding
         gsub(/^ +/,"",field);
-        gsub(/ +$/,"",field);    
+        gsub(/ +$/,"",field);          
 
-        if (NR == 1) {
-            # Store field name to map
-            columns[i] = field;
-        } else {
-            # otherwise, save the value to a field in the data table
-            data[i][NR-2] = field;
-        }        
-
-        # Maybe we can just print it in place?
+        # Print out.
         if (i == NF - 1 - 1) {
             printf("%s\n", field);
         } else {
             printf("%s, ", field);
-        }
-        
+        }   
     }
 }

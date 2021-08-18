@@ -16,7 +16,7 @@ SCRIPT_DIR=$(dirname "$0")
 EXTRACTION_AWK_SCRIPT="$SCRIPT_DIR/extract_number_of_labels.awk"
 
 # Print out the CSV header
-echo "project, labels"
+echo "repo, labels"
 
 # Find all test reports in the report directory, expecting them to be named according to the pattern:
 #
