@@ -351,3 +351,13 @@ I suspect in the Makefile there might be a typo and `srcd/style-analyzer:test` s
 I had a problem with apt_pkg. Making a manual link as advised here helped (36 to 37): https://stackoverflow.com/questions/13708180/python-dev-installation-error-importerror-no-module-named-apt-pkg
 
 I think sample and vnode are the same thing?
+
+
+
+### How run
+
+Inside docker:
+
+```
+mkdir -p ${QUALITY_REPORT_DIR}; time python3 -m lookout.style.format --log-level DEBUG quality-report --config "$CONFIG_JSON" -o ${QUALITY_REPORT_DIR} -i $QUALITY_REPORT_REPOS 2>&1 | tee -a ${QUALITY_REPORT_DIR}/logs.txt
+```

@@ -9,6 +9,8 @@ import sys
 from typing import (Any, Dict, Iterable, Iterator, List, Mapping, NamedTuple, Optional,
                     Sequence, Set, Tuple, Union)
 
+import traceback
+
 from bblfsh import role_name
 from igraph import Graph
 from lookout.core import slogging
@@ -164,7 +166,14 @@ class Rules:
             prediction[xi] = rules[winner_index].stats.cls
             if return_winner_indices:
                 winner_indices[xi] = winner_index
-        self._log.debug("No rule was triggered in %d cases.", numpy.sum(prediction == -1))
+        self._log.debug("No rule was triggered in %d cases.", 
+                        numpy.sum(prediction == -1))
+
+        self._log.info("Predictions: %d, Untriggered: %d, Samples: %d, Training: %r",
+                       len(X) - numpy.sum(prediction == -1),
+                       numpy.sum(prediction == -1), len(X), 
+                       not return_winner_indices)
+
         if return_winner_indices:
             return prediction, winner_indices
         return prediction
@@ -412,7 +421,7 @@ class TrainableRules(BaseEstimator, ClassifierMixin):
 
     _log = logging.getLogger("TrainableRules")
 
-    def __init__(self, *, base_model_name: str = "sklearn.tree.DecisionTreeClassifier",
+    def __init__(self, *,  base_model_name: str = "sklearn.tree.DecisionTreeClassifier",
                  prune_branches_algorithms=("reduced-error", "top-down-greedy"),
                  top_down_greedy_budget: Tuple[bool, Union[float, int]] = (False, 1.0),
                  prune_attributes=True, confidence_threshold=0.8,
