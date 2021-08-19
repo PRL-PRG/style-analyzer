@@ -356,8 +356,51 @@ I think sample and vnode are the same thing?
 
 ### How run
 
-Inside docker:
+#### Prerequisites
+
+TODO (see above)
+
+#### Start docker
+
+Running the docker container:
+
+```bash
+docker run --rm -it --network host \
+    -v /home/kondziu/Workspace/style-analyzer/.git:/style-analyzer/.git \
+    -v /home/kondziu/Workspace/style-analyzer/lookout/core/server:/style-analyzer/lookout/core/server \
+    --entrypoint /bin/sh \
+    -v/home/kondziu/Workspace/style-analyzer/sdk:/style-analyzer/sdk \
+    -v/home/kondziu/Workspace/style-analyzer/reproductions:/style-analyzer/reproductions \
+    -w /style-analyzer \
+    srcd/style-analyzer:latest
+```
+
+#### Inside docker
+
+Set variables
 
 ```
-mkdir -p ${QUALITY_REPORT_DIR}; time python3 -m lookout.style.format --log-level DEBUG quality-report --config "$CONFIG_JSON" -o ${QUALITY_REPORT_DIR} -i $QUALITY_REPORT_REPOS 2>&1 | tee -a ${QUALITY_REPORT_DIR}/logs.txt
+REPORTS_DIR="$(pwd)/lookout/style/format/benchmarks/reports"
+REPORT_VERSION=untagged
+REPORT_DIR="$REPORTS_DIR/$REPORT_VERSION"
+SMOKE_REPORT_DIR="$REPORT_DIR/js_smoke"
+NOISY_REPORT_DIR="$REPORT_DIR/noise"
+QUALITY_REPORT_DIR="$REPORT_DIR/quality"
+SMOKE_INIT="./lookout/style/format/benchmarks/data/js_smoke_init.tar.xz"
+QUALITY_REPORT_REPOS="./lookout/style/format/benchmarks/data/quality_report_repos_small.csv"
+QUALITY_REPORT_REPOS_WITH_VNODE="./lookout/style/format/benchmarks/data/quality_report_repos_with_vnodes_number.csv"
+BASE_REPORT_VERSION="0.1.0"
 ```
+
+Run command:
+
+```
+mkdir -p ${QUALITY_REPORT_DIR}; 
+time python3 -m lookout.style.format \
+   --log-level DEBUG quality-report --config "$CONFIG_JSON" \
+   -o ${QUALITY_REPORT_DIR} \
+   -i $QUALITY_REPORT_REPOS \
+   2>&1 | tee -a ${QUALITY_REPORT_DIR}/logs.txt
+```
+
+Results and logs are in QUALITY_REPORT_DIR

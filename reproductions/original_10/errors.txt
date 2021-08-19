@@ -1,0 +1,48 @@
+--------------------
+Failed to process https://github.com/atom/atom.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 135, in measure_quality
+    (restarts, repository))
+RuntimeError: Run out of 3 attempts. Failed to train proper model for https://github.com/atom/atom.git.
+--------------------
+Failed to process https://github.com/freecodecamp/freecodecamp.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 137, in measure_quality
+    bblfsh=bblfsh, config_json=config)
+  File "/lookout-sdk-ml/lookout/core/helpers/analyzer_context_manager.py", line 87, in review
+    log_level=log_level, config_json=config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 101, in review
+    return self._run("review", fr, to, port, git_dir, bblfsh, log_level, config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 131, in _run
+    return subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 438, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/tmp/lookout-sdk-ml/lookout-sdk-v0.7.0', 'review', 'ipv4://localhost:19166', '--from', '925c19efd1726c4626b47ff3857d479af7304199', '--to', '3133723f4a3045544b43164bedeaa060158accb5', '--git-dir', '/tmp/top-repos-quality-repos-oxbqbfzd/freecodecamp.git', '--log-format', 'json', '--log-level', 'warning', '--config-json', '{"style.format.analyzer.FormatAnalyzer": {"javascript": {"feature_extractor": {"cutoff_label_support": 80, "debug_parsing": false, "left_features": ["length", "diff_offset", "diff_col", "diff_line", "internal_type", "label", "reserved", "roles"], "left_siblings_window": 5, "no_labels_on_right": true, "node_features": ["start_line", "start_col"], "parent_features": ["internal_type", "roles"], "parents_depth": 2, "return_sibling_indices": false, "right_features": ["length", "internal_type", "reserved", "roles"], "right_siblings_window": 5, "select_features_number": 500}, "line_length_limit": 500, "lines_ratio_train_trigger": 0.2, "lower_bound_instances": 500, "optimizer": {"base_model_name_categories": ["sklearn.ensemble.RandomForestClassifier", "sklearn.tree.DecisionTreeClassifier"], "cv": 3, "max_depth_categories": ["None", 5, 10], "max_features_categories": ["None", "auto"], "min_samples_leaf_max": 120, "min_samples_leaf_min": 80, "min_samples_split_max": 240, "min_samples_split_min": 180, "n_iter": 50, "n_jobs": -1}, "overall_size_limit": 5242880, "random_state": 42, "test_dataset_ratio": 0.2, "trainable_rules": {"attribute_similarity_threshold": 0.98, "confidence_threshold": 0.92, "n_estimators": 10, "prune_attributes": true, "prune_branches_algorithms": ["reduced-error"], "prune_dataset_ratio": 0.2, "top_down_greedy_budget": [false, 0.5]}}, "aggregate": true}}']' returned non-zero exit status 1.
+--------------------
+Failed to process https://github.com/expressjs/express.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 137, in measure_quality
+    bblfsh=bblfsh, config_json=config)
+  File "/lookout-sdk-ml/lookout/core/helpers/analyzer_context_manager.py", line 87, in review
+    log_level=log_level, config_json=config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 101, in review
+    return self._run("review", fr, to, port, git_dir, bblfsh, log_level, config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 131, in _run
+    return subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 438, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/tmp/lookout-sdk-ml/lookout-sdk-v0.7.0', 'review', 'ipv4://localhost:19166', '--from', '24fce9deb374e7259f518e0bd69da8dffb6e282d', '--to', '884e080a19015a81a46aef73792be12ad3220715', '--git-dir', '/tmp/top-repos-quality-repos-9ujhpmze/express.git', '--log-format', 'json', '--log-level', 'warning', '--config-json', '{"style.format.analyzer.FormatAnalyzer": {"javascript": {"feature_extractor": {"cutoff_label_support": 80, "debug_parsing": false, "left_features": ["length", "diff_offset", "diff_col", "diff_line", "internal_type", "label", "reserved", "roles"], "left_siblings_window": 5, "no_labels_on_right": true, "node_features": ["start_line", "start_col"], "parent_features": ["internal_type", "roles"], "parents_depth": 2, "return_sibling_indices": false, "right_features": ["length", "internal_type", "reserved", "roles"], "right_siblings_window": 5, "select_features_number": 500}, "line_length_limit": 500, "lines_ratio_train_trigger": 0.2, "lower_bound_instances": 500, "optimizer": {"base_model_name_categories": ["sklearn.ensemble.RandomForestClassifier", "sklearn.tree.DecisionTreeClassifier"], "cv": 3, "max_depth_categories": ["None", 5, 10], "max_features_categories": ["None", "auto"], "min_samples_leaf_max": 120, "min_samples_leaf_min": 80, "min_samples_split_max": 240, "min_samples_split_min": 180, "n_iter": 50, "n_jobs": -1}, "overall_size_limit": 5242880, "random_state": 42, "test_dataset_ratio": 0.2, "trainable_rules": {"attribute_similarity_threshold": 0.98, "confidence_threshold": 0.92, "n_estimators": 10, "prune_attributes": true, "prune_branches_algorithms": ["reduced-error"], "prune_dataset_ratio": 0.2, "top_down_greedy_budget": [false, 0.5]}}, "aggregate": true}}']' returned non-zero exit status 1.
+--------------------
+Failed to process https://github.com/30-seconds/30-seconds-of-code.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 135, in measure_quality
+    (restarts, repository))
+RuntimeError: Run out of 3 attempts. Failed to train proper model for https://github.com/30-seconds/30-seconds-of-code.git.
