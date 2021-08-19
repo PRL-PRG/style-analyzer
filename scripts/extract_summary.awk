@@ -46,18 +46,18 @@ NR != 2 {
     # Save the value of each column into a map. We start with field two and end
     # with one field less than the nuymber of fields, since the table starts 
     # and ends with |
-    for (i = 2; i < NF - 1; i++) {
+    for (i = 2; i < NF; i++) {
         field = $i;
 
         # Remove whitespace padding
         gsub(/^ +/,"",field);
-        gsub(/ +$/,"",field);          
+        gsub(/ +$/,"",field);    
 
         # Print out.
-        if (i == NF - 1 - 1) {
+        if (i == NF - 1) {
             printf("%s\n", field);
         } else {
             printf("%s, ", field);
-        }   
+        }
     }
 }

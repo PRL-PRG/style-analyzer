@@ -15,97 +15,146 @@ library(kableExtra)
 ```
 
 ```{r}
-REPRO_DIR <- "reproductions/original_reproduction/"
+# This is where the results of style-analyzer-query live.
+# Must have a / at the end.
 DJANCO_DIR <- "style-analyzer-query/output/"
 
+# This is where the results of experiments live. 
+# Each experiment is a separatre subdir, containing reports and the execution log as .txt (not compressed). 
+# The path should not have spaces in it. Must have a / at the end.
+REPRO_DIR <- "reproductions/"
+
+# A list of all rperoductions, these are subdirectories of REPRO_DIR. These should not have spaces in them.
+# They are used as names, they should not have / in them.
+EXPERIMENTS <- c("original_reproduction", "original_10")
+
 # Convert to bash variables
-Sys.setenv(REPRO_DIR = REPRO_DIR)
+Sys.setenv(REPRO_DIRS = paste(paste0(REPRO_DIR, "/", EXPERIMENTS), collapse = " "))
 ```
 
 ```{bash}
-# Calculate prediction rates by analyzing the log.
-scripts/extract_prediction_rate.awk \
-    <"${REPRO_DIR}/logs.txt" \
-    >"${REPRO_DIR}/predictions.csv" 
-
-# Convert summary test report into CSV.
-scripts/extract_summary.awk \
-    <"${REPRO_DIR}/summary-test_report.md" \
-    >"${REPRO_DIR}/summary.csv"
-
-# Extract unique label counts from individual reports.
-scripts/extract_number_of_labels.sh \
-     "${REPRO_DIR}/" \
-    >"${REPRO_DIR}/labels.csv" 
+# We execute this once for every experiment.
+for REPRO_DIR in $REPRO_DIRS 
+do
+  # Calculate prediction rates by analyzing the log.
+  scripts/extract_prediction_rate.awk \
+      <"${REPRO_DIR}/logs.txt" \
+      >"${REPRO_DIR}/predictions.csv" 
+  
+  # Convert summary test report into CSV.
+  scripts/extract_summary.awk \
+      <"${REPRO_DIR}/summary-test_report.md" \
+      >"${REPRO_DIR}/summary.csv"
+  
+  # Extract unique label counts from individual reports.
+  scripts/extract_number_of_labels.sh \
+       "${REPRO_DIR}/" \
+      >"${REPRO_DIR}/labels.csv" 
+done    
 ```
 
 ```{r}
-# Paths
-all_projects_path <- paste0(DJANCO_DIR, "javascript_projects.csv")
-project_locs_path <- paste0(DJANCO_DIR, "project_locs.csv")
-predictions_path <- paste0(REPRO_DIR, "predictions.csv")
-summary_path <- paste0(REPRO_DIR, "summary.csv")
-labels_path <- paste0(REPRO_DIR, "labels.csv")
+# Construct a table with the results of one experiment
+prepare_data <- function(experiment) {
+  cat(paste0("Preparing results for ", experiment))
+  
+  # Paths
+  all_projects_path <- paste0(DJANCO_DIR, "javascript_projects.csv")
+  project_locs_path <- paste0(DJANCO_DIR, "project_locs.csv")
+  predictions_path <- paste0(REPRO_DIR, experiment, "/predictions.csv")
+  summary_path <- paste0(REPRO_DIR, experiment, "/summary.csv")
+  labels_path <- paste0(REPRO_DIR, experiment, "/labels.csv")
+  
+  # Some helper functions
+  url_to_repo <- function(url) str_replace_all(url, c("(^.*/)|([.]git$)"), "")
+  
+  # CSVs
+  all_projects <- read_csv(all_projects_path) %>% mutate(repo = url_to_repo(url))
+  project_locs <- read_csv(project_locs_path) %>% mutate(repo = url_to_repo(url))
+  predictions <- read_csv(predictions_path) %>% select(-url) # there is one in project_locs and this one has a different format
+  summary <- read_csv(summary_path) %>% mutate(repo = url_to_repo(repo))
+  labels <- read_csv(labels_path) %>% mutate(repo = url_to_repo(repo))
+  
+  # Collate results 
+  collated <- summary %>%
+    left_join(project_locs, by="repo") %>%
+    left_join(labels, by="repo") %>% 
+    left_join(predictions, by="repo") %>%
+    mutate(training_time=NA)# TODO
+  
+  # Format the output
+  collated %>%
+    select(-recall, -f1) %>%
+    mutate(pred_r=predictions/samples) %>%
+    rename(recall=full_recall, 
+           f1=full_f1,
+           suppport=full_support,
+           avg_rule_len=`Average Rule Len`,
+           rules=`Rules Number`) %>%
+    select(url, repo, precision, pred_r, 
+           recall, f1, support, locs,
+           labels, rules, avg_rule_len,  
+           training_time)
+}
 
-# Some helper functions
-url_to_repo <- function(url) str_replace_all(url, c("(^.*/)|([.]git$)"), "")
-
-# CSVs
-all_projects <- read_csv(all_projects_path) %>% mutate(repo = url_to_repo(url))
-project_locs <- read_csv(project_locs_path) %>% mutate(repo = url_to_repo(url))
-predictions <- read_csv(predictions_path) %>% select(-url) # there is one in project_locs and this one has a different format
-summary <- read_csv(summary_path)
-labels <- read_csv(labels_path)
-
-# Collate results
-results <- summary %>%
-  left_join(project_locs, by="repo") %>%
-  left_join(labels, by="repo") %>% 
-  left_join(predictions, by="repo") %>%
-  mutate(training_time=NA) # TODO
+# Prepare data for all experiments. Put the results in a list.
+experiment_data <- lapply(EXPERIMENTS, prepare_data)
+names(experiment_data) <- EXPERIMENTS
 ```
 
 Results table a la the paper:
 
 ```{r}
-data <- 
-  results %>% 
-  select(-recall, -f1) %>%
-  rename(
-         pred_r=predictions/samples, 
-         recall=full_recall, 
-         f1=full_f1,
-         suppport=full_support,
-         rules=`Rules Number`) %>%
-  select(repo, precision, pred_r, 
-         recall, f1, support, 
-         rules, locs, labels, 
-         training_time)
+make_paper_table <- function(data, latex = FALSE) {
 
-average <- 
-  data %>% 
-  summarize(repo = "average", 
-            precision = mean(precision, na.rm=TRUE),
-            pred_r = mean(pred_r, na.rm=TRUE), 
-            recall = mean(recall, na.rm=TRUE),
-            f1 = mean(f1, na.rm=TRUE),
-            support = mean(support, na.rm=TRUE),
-            rules = mean(rules, na.rm=TRUE),
-            locs = mean(locs, na.rm=TRUE),
-            labels = mean(labels, na.rm=TRUE),
-            training_time = mean(training_time, na.rm=TRUE))
+  average <- 
+    data %>% 
+    summarize(repo = "average", 
+              precision = mean(precision),
+              pred_r = mean(pred_r), 
+              recall = mean(recall),
+              f1 = mean(f1),
+              support = mean(support),
+              locs = mean(locs),
+              rules = mean(rules),
+              avg_rule_len = mean(avg_rule_len),
+              labels = mean(labels),
+              training_time = mean(training_time))
+  
+  
+  
+  weighted_average <- 
+    data %>% 
+    summarize(repo = "weighted average", 
+              precision = weighted.mean(precision, support),
+              pred_r = weighted.mean(pred_r, support), 
+              recall = weighted.mean(recall, support),
+              f1 = weighted.mean(f1, support),
+              locs = weighted.mean(locs, support),
+              rules = weighted.mean(rules, support),
+              avg_rule_len = weighted.mean(avg_rule_len, support),
+              labels = weighted.mean(labels, support),
+              training_time = weighted.mean(training_time, support),
+              support = NA)
+  
+  table <- bind_rows(data, average, weighted_average) %>%
+    rename(repository=repo,
+           `PredR`=pred_r,
+           `train samples` = support,
+           `LoC` = locs,
+           `unique labels` = labels,
+           `avg. rule length` = avg_rule_len,
+           `training time, min` = training_time) %>%
+    select(`repository`, `precision`, `PredR`, `recall`, `f1`, `train samples`, `LoC`, `unique labels`, `rules`, `avg. rule length`, `training time, min`)
+  
+  
+  k <- kable(table, booktabs = TRUE, format = ifelse(latex, "latex", "html")) %>%
+    kable_styling(latex_options = "striped") %>%
+    row_spec((table %>% count)$n - 3, hline_after = TRUE) # Add hline before average and weighted average
+  
+  return(k)
+}
 
-weighted_average <- 
-  data %>% 
-  summarize(repo = "weighted average", 
-            precision = weighted.mean(precision, support),
-            pred_r = weighted.mean(pred_r, support), 
-            recall = weighted.mean(recall, support),
-            f1 = weighted.mean(f1, support),
-            support = NA,
-            rules = weighted.mean(rules, support),
-            locs = weighted.mean(locs, support),
-            labels = weighted.mean(labels, support),
-            training_time = weighted.mean(training_time, support))
-
+make_paper_table(experiment_data$original_10)
+make_paper_table(experiment_data$original_10, TRUE)
 ```
