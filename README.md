@@ -391,12 +391,11 @@ Bash!
 bash
 ```
 
-
 Set important variables:
 
 ```bash
 # Where to write out the reports
-REPORT_DIR="$REPORTS_DIR/$REPORT_VERSION"
+REPORTS_DIR="$(pwd)/lookout/style/format/benchmarks/reports"
 # Where to get the repository list from
 QUALITY_REPORT_REPOS="./lookout/style/format/benchmarks/data/quality_report_repos.csv"
 ```
@@ -404,14 +403,14 @@ QUALITY_REPORT_REPOS="./lookout/style/format/benchmarks/data/quality_report_repo
 Set other necessary but unimportant variables
 
 ```bash
-REPORTS_DIR="$(pwd)/lookout/style/format/benchmarks/reports"
 REPORT_VERSION=untagged
+REPORT_DIR="$REPORTS_DIR/$REPORT_VERSION"
+QUALITY_REPORT_DIR="$REPORT_DIR/quality"
 SMOKE_REPORT_DIR="$REPORT_DIR/js_smoke"
 NOISY_REPORT_DIR="$REPORT_DIR/noise"
 SMOKE_INIT="./lookout/style/format/benchmarks/data/js_smoke_init.tar.xz"
-QUALITY_REPORT_REPOS_WITH_VNODE="./lookout/style/format/benchmarks/data/quality_report_repos_with_vnodes_number.csv"
+#QUALITY_REPORT_REPOS_WITH_VNODE="./lookout/style/format/benchmarks/data/quality_report_repos_with_vnodes_number.csv"
 BASE_REPORT_VERSION="0.1.0"
-QUALITY_REPORT_DIR="$REPORT_DIR/quality"
 ```
 
 Quick tool update

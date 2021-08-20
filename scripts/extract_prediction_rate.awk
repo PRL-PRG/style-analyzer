@@ -22,6 +22,10 @@ $0 ~ /^= +http/ {
     # Both initially zero.
     samples[url] = 0;
     uncovered[url] = 0;
+    
+    # Maps for training and review times.
+    review_time[url] = 0;
+    training_time[url] = 0;
 
     # Each project is trained first, so set training flag to true
     training = "t";
@@ -30,6 +34,17 @@ $0 ~ /^= +http/ {
 # When we encounter a review event, the project switches from training to testing
 $0 == "INFO:EventListener:new ReviewEvent" {
     training = "f";
+}
+
+# Also extract training and review times.
+$1 == "INFO:EventListener:OK" {
+    seconds = $2;
+    gsub(/[.].*$/, "", seconds);
+    if (training == "t") {
+        training_time[url] += seconds;
+    } else {
+        review_time[url] += seconds;
+    }
 }
 
 # When we encounter a prediction message, we can harvest a sample size
@@ -72,7 +87,7 @@ END {
     OFS = ", ";
 
     # Print out header
-    print "repo", "url", "samples", "predictions", "uncovered", "prediction rate";
+    print "repo", "url", "samples", "predictions", "uncovered", "prediction_rate", "training_time", "review_time";
 
     # Go over collected data and print it out, we iterate over the samples map, 
     # which should have the samne URL keys as the missed map.
@@ -93,7 +108,7 @@ END {
         }
 
         # Print out one line of data per each collected URL
-        print project, url, samples[url], predictions, uncovered[url], prediction_rate;
+        print project, url, samples[url], predictions, uncovered[url], prediction_rate, training_time[url], review_time[url];
     }
 }
 

@@ -33,37 +33,37 @@ const SEEDS: [u128; 10] = [1,2,3,5,7,11,13,17,19,23];
 // All math is done on integers.
 const BASE_COMMIT_OFFSET_RATIO: usize = 10;
 
-#[djanco(May, 2021, subsets(JavaScript))]
+#[djanco(May, 2021, subsets(All))]
 pub fn all_projects(database: &Database, _log: &Log, output: &Path) -> Result<(), std::io::Error>  {
     database.projects()
-        .filter_by(Equal(project::Substore, Store::Large(store::Language::JavaScript)))
+        //.filter_by(Equal(project::Substore, Store::Large(store::Language::JavaScript)))
         .filter_by(AnyIn(project::Languages, vec![Language::JavaScript]))
         .into_csv_in_dir(output, "javascript_projects.csv")
 }
 
-#[djanco(May, 2021, subsets(JavaScript))]
+#[djanco(May, 2021, subsets(All))]
 pub fn project_locs(database: &Database, _log: &Log, output: &Path) -> Result<(), std::io::Error>  {
     database.projects()
-    .filter_by(Equal(project::Substore, Store::Large(store::Language::JavaScript)))
+    //.filter_by(Equal(project::Substore, Store::Large(store::Language::JavaScript)))
     .filter_by(AnyIn(project::Languages, vec![Language::JavaScript]))
     .map_into(Select!(project::URL, project::Locs))
-    .into_csv_in_dir(output, "project_locs.csv")
+    .into_csv_with_headers_in_dir(vec!["url", "locs"], output, "project_locs.csv")
 }
 
-#[djanco(May, 2021, subsets(JavaScript))] pub fn random_projects_0(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects(database, log, output, 0) }
-#[djanco(May, 2021, subsets(JavaScript))] pub fn random_projects_1(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects(database, log, output, 1) }
-#[djanco(May, 2021, subsets(JavaScript))] pub fn random_projects_2(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects(database, log, output, 2) }
-#[djanco(May, 2021, subsets(JavaScript))] pub fn random_projects_3(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects(database, log, output, 3) }
-#[djanco(May, 2021, subsets(JavaScript))] pub fn random_projects_4(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects(database, log, output, 4) }
-#[djanco(May, 2021, subsets(JavaScript))] pub fn random_projects_5(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects(database, log, output, 5) }
-#[djanco(May, 2021, subsets(JavaScript))] pub fn random_projects_6(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects(database, log, output, 6) }
-#[djanco(May, 2021, subsets(JavaScript))] pub fn random_projects_7(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects(database, log, output, 7) }
-#[djanco(May, 2021, subsets(JavaScript))] pub fn random_projects_8(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects(database, log, output, 8) }
-#[djanco(May, 2021, subsets(JavaScript))] pub fn random_projects_9(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects(database, log, output, 9) }
+#[djanco(May, 2021, subsets(All))] pub fn random_projects_0(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects(database, log, output, 0) }
+#[djanco(May, 2021, subsets(All))] pub fn random_projects_1(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects(database, log, output, 1) }
+#[djanco(May, 2021, subsets(All))] pub fn random_projects_2(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects(database, log, output, 2) }
+#[djanco(May, 2021, subsets(All))] pub fn random_projects_3(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects(database, log, output, 3) }
+#[djanco(May, 2021, subsets(All))] pub fn random_projects_4(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects(database, log, output, 4) }
+#[djanco(May, 2021, subsets(All))] pub fn random_projects_5(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects(database, log, output, 5) }
+#[djanco(May, 2021, subsets(All))] pub fn random_projects_6(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects(database, log, output, 6) }
+#[djanco(May, 2021, subsets(All))] pub fn random_projects_7(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects(database, log, output, 7) }
+#[djanco(May, 2021, subsets(All))] pub fn random_projects_8(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects(database, log, output, 8) }
+#[djanco(May, 2021, subsets(All))] pub fn random_projects_9(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects(database, log, output, 9) }
 
 pub fn random_projects(database: &Database, _log: &Log, output: &Path, seed_index: usize) -> Result<(), std::io::Error>  {
     database.projects()
-        .filter_by(Equal(project::Substore, Store::Large(store::Language::JavaScript)))
+        //.filter_by(Equal(project::Substore, Store::Large(store::Language::JavaScript)))
         .filter_by(AnyIn(project::Languages, vec![Language::JavaScript]))
         .filter(is_project_spec)
         .sample(Random(SELECTED_PROJECTS, Seed(SEEDS[seed_index])))
@@ -71,10 +71,39 @@ pub fn random_projects(database: &Database, _log: &Log, output: &Path, seed_inde
         .into_csv_with_headers_in_dir(vec!["url", "to", "from"], output, format!("random_projects_{}_{}.csv", seed_index, BASE_COMMIT_OFFSET_RATIO))
 }
 
-#[djanco(May, 2021, subsets(JavaScript))]
+#[djanco(May, 2021, subsets(All))] pub fn random_projects_by_size_0(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects_by_size(database, log, output, 0) }
+#[djanco(May, 2021, subsets(All))] pub fn random_projects_by_size_1(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects_by_size(database, log, output, 1) }
+#[djanco(May, 2021, subsets(All))] pub fn random_projects_by_size_2(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects_by_size(database, log, output, 2) }
+#[djanco(May, 2021, subsets(All))] pub fn random_projects_by_size_3(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects_by_size(database, log, output, 3) }
+#[djanco(May, 2021, subsets(All))] pub fn random_projects_by_size_4(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects_by_size(database, log, output, 4) }
+#[djanco(May, 2021, subsets(All))] pub fn random_projects_by_size_5(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects_by_size(database, log, output, 5) }
+#[djanco(May, 2021, subsets(All))] pub fn random_projects_by_size_6(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects_by_size(database, log, output, 6) }
+#[djanco(May, 2021, subsets(All))] pub fn random_projects_by_size_7(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects_by_size(database, log, output, 7) }
+#[djanco(May, 2021, subsets(All))] pub fn random_projects_by_size_8(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects_by_size(database, log, output, 8) }
+#[djanco(May, 2021, subsets(All))] pub fn random_projects_by_size_9(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects_by_size(database, log, output, 9) }
+
+pub fn random_projects_by_size(database: &Database, _log: &Log, output: &Path, seed_index: usize) -> Result<(), std::io::Error>  {
+    database.projects()
+        //.filter_by(Equal(project::Substore, Store::Large(store::Language::JavaScript)))
+        .filter_by(AnyIn(project::Languages, vec![Language::JavaScript]))
+        .filter(is_project_spec)
+        .sample(Stratified(project::Locs, 
+                                  Strata!("very large" -> Random(SELECTED_PROJECTS/4, Seed(SEEDS[seed_index])), 
+                                          "large" -> Random(SELECTED_PROJECTS/4, Seed(SEEDS[seed_index])), 
+                                          "medium" -> Random(SELECTED_PROJECTS/4, Seed(SEEDS[seed_index])),
+                                          "small" -> Random(SELECTED_PROJECTS/4, Seed(SEEDS[seed_index]))),
+                                  Thresholds::Inclusive(Conditions!("very large" -> 100_000,
+                                                                    "large" -> 10_000,
+                                                                    "medium" -> 1000),
+                                                                    "small")))
+        .flat_map(project_spec)
+        .into_csv_with_headers_in_dir(vec!["url", "to", "from"], output, format!("random_projects_by_size_{}_{}.csv", seed_index, BASE_COMMIT_OFFSET_RATIO))
+}
+
+#[djanco(May, 2021, subsets(All))]
 pub fn top_starred(database: &Database, _log: &Log, output: &Path) -> Result<(), std::io::Error>  {
     database.projects()
-        .filter_by(Equal(project::Substore, Store::Large(store::Language::JavaScript)))
+        //.filter_by(Equal(project::Substore, Store::Large(store::Language::JavaScript)))
         .filter_by(AnyIn(project::Languages, vec![Language::JavaScript]))
         .sort_by(project::Stars)
         .filter(is_project_spec)
@@ -82,30 +111,30 @@ pub fn top_starred(database: &Database, _log: &Log, output: &Path) -> Result<(),
         .into_csv_with_headers_in_dir(vec!["url", "to", "from"], output, "top_starred_projects.csv")
 }
 
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_0(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 0) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_1(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 1) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_2(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 2) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_3(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 3) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_4(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 4) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_5(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 5) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_6(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 6) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_7(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 7) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_8(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 8) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_9(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 9) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_10(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 10) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_11(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 11) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_12(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 12) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_13(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 13) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_14(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 14) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_15(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 15) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_16(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 16) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_17(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 17) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_18(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 18) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_19(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 19) }
+// #[djanco(May, 2021, subsets(All))] pub fn debug_0(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 0) }
+// #[djanco(May, 2021, subsets(All))] pub fn debug_1(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 1) }
+// #[djanco(May, 2021, subsets(All))] pub fn debug_2(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 2) }
+// #[djanco(May, 2021, subsets(All))] pub fn debug_3(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 3) }
+// #[djanco(May, 2021, subsets(All))] pub fn debug_4(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 4) }
+// #[djanco(May, 2021, subsets(All))] pub fn debug_5(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 5) }
+// #[djanco(May, 2021, subsets(All))] pub fn debug_6(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 6) }
+// #[djanco(May, 2021, subsets(All))] pub fn debug_7(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 7) }
+// #[djanco(May, 2021, subsets(All))] pub fn debug_8(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 8) }
+// #[djanco(May, 2021, subsets(All))] pub fn debug_9(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 9) }
+// #[djanco(May, 2021, subsets(All))] pub fn debug_10(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 10) }
+// #[djanco(May, 2021, subsets(All))] pub fn debug_11(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 11) }
+// #[djanco(May, 2021, subsets(All))] pub fn debug_12(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 12) }
+// #[djanco(May, 2021, subsets(All))] pub fn debug_13(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 13) }
+// #[djanco(May, 2021, subsets(All))] pub fn debug_14(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 14) }
+// #[djanco(May, 2021, subsets(All))] pub fn debug_15(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 15) }
+// #[djanco(May, 2021, subsets(All))] pub fn debug_16(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 16) }
+// #[djanco(May, 2021, subsets(All))] pub fn debug_17(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 17) }
+// #[djanco(May, 2021, subsets(All))] pub fn debug_18(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 18) }
+// #[djanco(May, 2021, subsets(All))] pub fn debug_19(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 19) }
 
 pub fn debug(database: &Database, _log: &Log, output: &Path, project_id: usize) -> Result<(), std::io::Error>  {
     database.projects()
-        .filter_by(Equal(project::Id, ProjectId::from(project_id)))       
+        //.filter_by(Equal(project::Id, ProjectId::from(project_id)))       
         .map_into(project::Commits)
         .flat_map(|e| e )
         .flat_map(|e| e)
@@ -113,21 +142,21 @@ pub fn debug(database: &Database, _log: &Log, output: &Path, project_id: usize) 
         .into_csv_in_dir(output, format!("{}_commits.csv", project_id))
 }
 
-//#[djanco(May, 2021, subsets(JavaScript))] 
+//#[djanco(May, 2021, subsets(All))] 
 pub fn debug_commits(database: &Database, _log: &Log, output: &Path) -> Result<(), std::io::Error>  { 
     database.commits()
         .sort_with_direction(Direction::Ascending, commit::Id)
         .map_into(Select!(commit::Id, commit::Hash))
         .into_csv_in_dir(output, "commits.csv") 
 }
-//#[djanco(May, 2021, subsets(JavaScript))]
+//#[djanco(May, 2021, subsets(All))]
 pub fn debug_commits_from_source(database: &Database, _log: &Log, output: &Path) -> Result<(), std::io::Error>  {
     let mut hashes: Vec<(djanco::objects::CommitId, String)> = database.source().commit_hashes().collect();
     hashes.sort_by_key(|(id, _hash)| *id);
     hashes.into_iter().into_csv_in_dir(output, "commits_from_source.csv")
 }
 
-// #[djanco(May, 2021, subsets(JavaScript))] 
+// #[djanco(May, 2021, subsets(All))] 
 pub fn debug_heads(database: &Database, _log: &Log, output: &Path) -> Result<(), std::io::Error>  { 
     let mut heads = database.projects()
         .map_into(Select!(project::Id, project::Heads))
@@ -142,7 +171,7 @@ pub fn debug_heads(database: &Database, _log: &Log, output: &Path) -> Result<(),
     heads.into_iter().into_csv_in_dir(output, "heads.csv")
 }
 
-// #[djanco(May, 2021, subsets(JavaScript))] 
+// #[djanco(May, 2021, subsets(All))] 
 pub fn debug_heads_from_source(database: &Database, _log: &Log, output: &Path) -> Result<(), std::io::Error>  { 
     let mut heads = database.source()
         .project_heads()
