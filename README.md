@@ -437,3 +437,21 @@ time python3 -m lookout.style.format \
 ```
 
 Results and logs are in QUALITY_REPORT_DIR
+
+Run for multiple selections
+
+```bash
+# BACKWARDS, just because I already did 0 and 1.
+SELECTIONS="$(seq 0 9 | tac | xargs -I{} echo -n "random_projects_by_size_{}_10 random_projects_{}_10 ") top_starred_projects"
+time for selection in $SELECTIONS
+do
+   QUALITY_REPORT_REPOS="$(pwd)/database/output/$selection.csv"
+   QUALITY_REPORT_DIR="$(pwd)/reproductions"
+   mkdir -p ${QUALITY_REPORT_DIR}; 
+   python3 -m lookout.style.format \
+      --log-level DEBUG quality-report \
+      -o ${QUALITY_REPORT_DIR} \
+      -i $QUALITY_REPORT_REPOS \
+      2>&1 | tee -a ${QUALITY_REPORT_DIR}/logs.txt
+done
+```
