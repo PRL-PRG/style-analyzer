@@ -140,12 +140,14 @@ for (experiment in EXPERIMENTS) {
     warning("Could not find file: ", query_result_path, ". Skipping.\n")
   } else {
     query_result <- read_csv(query_result_path) %>% select(url)
+    #print(paste0("WTF qr", experiment, "->", query_result  %>% count() %>% pull(n)))
     processed_projects <- experiment_data[[experiment]] %>% select(url)
     processed_projects_summary <- query_result %>% 
       mutate(experiment=experiment) %>% 
       left_join(processed_projects %>% mutate(done=TRUE), by="url") %>%
       left_join(project_locs, by="url")
     #print(processed_projects_summary)
+    #print(paste0("WTF ", experiment, "->", processed_projects_summary  %>% count() %>% pull(n)))
     status_table <- bind_rows(status_table, processed_projects_summary %>% select(experiment, url, locs, done))
   }
 }
@@ -176,7 +178,7 @@ summary_status_table %>%
 
 ```{r}
 classify_by_size <- function(n) {
-    ifelse(n >= 10**5, "very big", 
+    ifelse(n >= 10**5, "very large", 
     ifelse(n >= 10**4, "large",
     ifelse(n >= 10**3, "medium",
                        "small")))
@@ -184,11 +186,16 @@ classify_by_size <- function(n) {
 
 status_by_size <- status_table %>% 
   mutate(size=classify_by_size(locs)) %>% 
+  mutate(completed=ifelse(is.na(done), 0, ifelse(done, 1, 0))) %>% 
   group_by(size) %>%
-  mutate() %>%
+  summarise(projects=n(), 
+            completed=sum(completed), 
+            percent_completed=format((completed*100)/projects, digits=1), 
+            failed=projects-completed,
+            percent_failed=format((failed*100)/projects, digits=1)) %>%
   ungroup
   
-
+status_by_size
 
 ```
 
@@ -301,17 +308,29 @@ for (experiment in EXPERIMENTS) {
 ## Effect of the number of samples in the training set on precision
 
 ```{r}
-make_precision_support_graph <- function (experiment) {
+min_precision = sapply(experiment_data, function(data) min(data$precision)) %>% min
+max_support = sapply(experiment_data, function(data) max(data$support)) %>% max
+make_precision_support_graph <- function (experiment, uniform_scales=TRUE, labels=F) {
   data <- experiment_data[[experiment]]
-  ggplot(data, aes(x=precision, y=support)) +
-    geom_point(size=2) + 
-    geom_text(aes(label=repo), position=position_nudge(y=-5000),  size=3) +
+  plot <- ggplot(data, aes(x=precision, y=support)) +
+    geom_point(size=2)
+  if (labels) {
+    plot <- plot + geom_text(aes(label=repo), position=position_nudge(y=-10000),  size=3)
+  }
+  
+  plot +
     scale_x_continuous(labels=function(x) format(x, digits=2)) +
     scale_y_continuous(labels=label_number_si()) +
     xlab("Precision") + 
     ylab("Samples in the training set") +
     ggtitle(paste0("Selection: ", experiment)) +
     theme_bw()
+  
+  if (uniform_scales) {
+    plot + xlim(min_precision, 1) + ylim(0 - 10000, max_support) # -5000 to fit the stupid label
+  } else {
+    plot
+  }
 }
 ```
 
