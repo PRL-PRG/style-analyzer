@@ -1,0 +1,140 @@
+--------------------
+Failed to process https://github.com/guangchenpidouki/asteroids.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 137, in measure_quality
+    bblfsh=bblfsh, config_json=config)
+  File "/lookout-sdk-ml/lookout/core/helpers/analyzer_context_manager.py", line 87, in review
+    log_level=log_level, config_json=config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 101, in review
+    return self._run("review", fr, to, port, git_dir, bblfsh, log_level, config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 131, in _run
+    return subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/tmp/lookout-sdk-ml/lookout-sdk-v0.7.0', 'review', 'ipv4://localhost:2201', '--from', '354dfdd530b1631a2834b2e9e242d31e625c9c13', '--to', '30dff56bb74a7c2cc40849b59daf2614638556e3', '--git-dir', '/tmp/top-repos-quality-repos-efxcr55m/asteroids.git', '--log-format', 'json', '--log-level', 'warning', '--config-json', '{"style.format.analyzer.FormatAnalyzer": {"aggregate": true}}']' returned non-zero exit status 1.
+--------------------
+Failed to process https://github.com/scottsha/yellowpincenez.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 137, in measure_quality
+    bblfsh=bblfsh, config_json=config)
+  File "/lookout-sdk-ml/lookout/core/helpers/analyzer_context_manager.py", line 87, in review
+    log_level=log_level, config_json=config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 101, in review
+    return self._run("review", fr, to, port, git_dir, bblfsh, log_level, config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 131, in _run
+    return subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/tmp/lookout-sdk-ml/lookout-sdk-v0.7.0', 'review', 'ipv4://localhost:2201', '--from', '38ddeb08a5173093fff0d8b8351aca5d38487a8f', '--to', '5a12fab6e1cb9c067d062544f320be5e926f01db', '--git-dir', '/tmp/top-repos-quality-repos-8pzc8x6g/yellowpincenez.git', '--log-format', 'json', '--log-level', 'warning', '--config-json', '{"style.format.analyzer.FormatAnalyzer": {"aggregate": true}}']' returned non-zero exit status 1.
+--------------------
+Failed to process https://github.com/jrgleason/pi-serial-example.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 137, in measure_quality
+    bblfsh=bblfsh, config_json=config)
+  File "/lookout-sdk-ml/lookout/core/helpers/analyzer_context_manager.py", line 87, in review
+    log_level=log_level, config_json=config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 101, in review
+    return self._run("review", fr, to, port, git_dir, bblfsh, log_level, config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 131, in _run
+    return subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/tmp/lookout-sdk-ml/lookout-sdk-v0.7.0', 'review', 'ipv4://localhost:2201', '--from', '01507d28cbbc779816b0650e0e053077bb811896', '--to', '7cbe80327e8429b510e0a551ad4e44d6e6911121', '--git-dir', '/tmp/top-repos-quality-repos-kmxeiu5h/pi-serial-example.git', '--log-format', 'json', '--log-level', 'warning', '--config-json', '{"style.format.analyzer.FormatAnalyzer": {"aggregate": true}}']' returned non-zero exit status 1.
+--------------------
+Failed to process https://github.com/15dani1/casual-programming.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 123, in measure_quality
+    git_dir = ensure_repo(repository, tmpdirname)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 54, in ensure_repo
+    porcelain.clone(repository, git_dir)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/porcelain.py", line 353, in clone
+    depth=depth, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/porcelain.py", line 1121, in fetch
+    depth=depth)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/client.py", line 398, in fetch
+    progress=progress, depth=depth)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/client.py", line 1644, in fetch_pack
+    b"git-upload-pack", url)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/client.py", line 1532, in _discover_references
+    resp, read = self._http_request(url, headers, allow_compression=True)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/client.py", line 1510, in _http_request
+    (resp.status, url))
+dulwich.errors.GitProtocolError: unexpected http resp 401 for https://github.com/15dani1/casual-programming.git/info/refs?service=git-upload-pack
+--------------------
+Failed to process https://github.com/kevincastejon/js-raspberrypi-adafruit-trellis.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 137, in measure_quality
+    bblfsh=bblfsh, config_json=config)
+  File "/lookout-sdk-ml/lookout/core/helpers/analyzer_context_manager.py", line 87, in review
+    log_level=log_level, config_json=config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 101, in review
+    return self._run("review", fr, to, port, git_dir, bblfsh, log_level, config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 131, in _run
+    return subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/tmp/lookout-sdk-ml/lookout-sdk-v0.7.0', 'review', 'ipv4://localhost:2201', '--from', 'a18f6032a9437be7ad7b18e1dce3b5e8ab52c46b', '--to', 'a18f6032a9437be7ad7b18e1dce3b5e8ab52c46b', '--git-dir', '/tmp/top-repos-quality-repos-c3rakay9/js-raspberrypi-adafruit-trellis.git', '--log-format', 'json', '--log-level', 'warning', '--config-json', '{"style.format.analyzer.FormatAnalyzer": {"aggregate": true}}']' returned non-zero exit status 1.
+--------------------
+Failed to process https://github.com/shcallaway/scrape-mal.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 137, in measure_quality
+    bblfsh=bblfsh, config_json=config)
+  File "/lookout-sdk-ml/lookout/core/helpers/analyzer_context_manager.py", line 87, in review
+    log_level=log_level, config_json=config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 101, in review
+    return self._run("review", fr, to, port, git_dir, bblfsh, log_level, config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 131, in _run
+    return subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/tmp/lookout-sdk-ml/lookout-sdk-v0.7.0', 'review', 'ipv4://localhost:2201', '--from', '7ff98caad33d90c3e19f5693735d32f7f0b29913', '--to', '1c207cb6cb510217d96de591a4f008c774da012a', '--git-dir', '/tmp/top-repos-quality-repos-n8up5ps7/scrape-mal.git', '--log-format', 'json', '--log-level', 'warning', '--config-json', '{"style.format.analyzer.FormatAnalyzer": {"aggregate": true}}']' returned non-zero exit status 1.
+--------------------
+Failed to process https://github.com/sebastianopiyo/collaboration_project_htmlcssjs.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 123, in measure_quality
+    git_dir = ensure_repo(repository, tmpdirname)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 54, in ensure_repo
+    porcelain.clone(repository, git_dir)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/porcelain.py", line 353, in clone
+    depth=depth, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/porcelain.py", line 1121, in fetch
+    depth=depth)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/client.py", line 398, in fetch
+    progress=progress, depth=depth)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/client.py", line 1644, in fetch_pack
+    b"git-upload-pack", url)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/client.py", line 1532, in _discover_references
+    resp, read = self._http_request(url, headers, allow_compression=True)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/client.py", line 1510, in _http_request
+    (resp.status, url))
+dulwich.errors.GitProtocolError: unexpected http resp 401 for https://github.com/sebastianopiyo/collaboration_project_htmlcssjs.git/info/refs?service=git-upload-pack
+--------------------
+Failed to process https://github.com/novagc/prog_hw.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 137, in measure_quality
+    bblfsh=bblfsh, config_json=config)
+  File "/lookout-sdk-ml/lookout/core/helpers/analyzer_context_manager.py", line 87, in review
+    log_level=log_level, config_json=config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 101, in review
+    return self._run("review", fr, to, port, git_dir, bblfsh, log_level, config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 131, in _run
+    return subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/tmp/lookout-sdk-ml/lookout-sdk-v0.7.0', 'review', 'ipv4://localhost:2201', '--from', 'a7e65cdd5c350d05ed3af28d2703910119f684d1', '--to', 'a8bad58ab89f5e83e8df8e2e145057ec5be8e868', '--git-dir', '/tmp/top-repos-quality-repos-42k12tmu/prog_hw.git', '--log-format', 'json', '--log-level', 'warning', '--config-json', '{"style.format.analyzer.FormatAnalyzer": {"aggregate": true}}']' returned non-zero exit status 1.

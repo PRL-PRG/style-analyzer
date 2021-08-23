@@ -1,0 +1,64 @@
+--------------------
+Failed to process https://github.com/wnazaire/pose.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 137, in measure_quality
+    bblfsh=bblfsh, config_json=config)
+  File "/lookout-sdk-ml/lookout/core/helpers/analyzer_context_manager.py", line 87, in review
+    log_level=log_level, config_json=config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 101, in review
+    return self._run("review", fr, to, port, git_dir, bblfsh, log_level, config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 131, in _run
+    return subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/tmp/lookout-sdk-ml/lookout-sdk-v0.7.0', 'review', 'ipv4://localhost:9831', '--from', 'cebea8872d66386581b82fa1fcdd804ad71b4b72', '--to', '30dbe76d4f1be8ad031c1159bc39d2aa2d7afbb8', '--git-dir', '/tmp/top-repos-quality-repos-nmh3hmu8/pose.git', '--log-format', 'json', '--log-level', 'warning', '--config-json', '{"style.format.analyzer.FormatAnalyzer": {"aggregate": true}}']' returned non-zero exit status 1.
+--------------------
+Failed to process https://github.com/elizabethbylatova/djangogirls.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 137, in measure_quality
+    bblfsh=bblfsh, config_json=config)
+  File "/lookout-sdk-ml/lookout/core/helpers/analyzer_context_manager.py", line 87, in review
+    log_level=log_level, config_json=config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 101, in review
+    return self._run("review", fr, to, port, git_dir, bblfsh, log_level, config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 131, in _run
+    return subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/tmp/lookout-sdk-ml/lookout-sdk-v0.7.0', 'review', 'ipv4://localhost:9831', '--from', '88af18603d52e973c4a9f43da7d4a372892c93e9', '--to', '33de05bb428f797d8d87950f5160666f2484de19', '--git-dir', '/tmp/top-repos-quality-repos-nfl2tzsi/djangogirls.git', '--log-format', 'json', '--log-level', 'warning', '--config-json', '{"style.format.analyzer.FormatAnalyzer": {"aggregate": true}}']' returned non-zero exit status 1.
+--------------------
+Failed to process https://github.com/justinnhli/appoxy.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 135, in measure_quality
+    (restarts, repository))
+RuntimeError: Run out of 3 attempts. Failed to train proper model for https://github.com/justinnhli/appoxy.git.
+--------------------
+Failed to process https://github.com/yulqen/ctrack.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 135, in measure_quality
+    (restarts, repository))
+RuntimeError: Run out of 3 attempts. Failed to train proper model for https://github.com/yulqen/ctrack.git.
+--------------------
+Failed to process https://github.com/kanishk-k/cs50_web_project_2.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 137, in measure_quality
+    bblfsh=bblfsh, config_json=config)
+  File "/lookout-sdk-ml/lookout/core/helpers/analyzer_context_manager.py", line 87, in review
+    log_level=log_level, config_json=config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 101, in review
+    return self._run("review", fr, to, port, git_dir, bblfsh, log_level, config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 131, in _run
+    return subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/tmp/lookout-sdk-ml/lookout-sdk-v0.7.0', 'review', 'ipv4://localhost:9831', '--from', '5a685e7149620d6965292413a07153e906f84656', '--to', '5a685e7149620d6965292413a07153e906f84656', '--git-dir', '/tmp/top-repos-quality-repos-5djj2ahb/cs50_web_project_2.git', '--log-format', 'json', '--log-level', 'warning', '--config-json', '{"style.format.analyzer.FormatAnalyzer": {"aggregate": true}}']' returned non-zero exit status 1.

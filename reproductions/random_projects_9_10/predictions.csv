@@ -1,0 +1,16 @@
+repo, url, samples, predictions, uncovered, prediction_rate, training_time, review_time
+cocos-engine-230, https://github.com/wjf1616/cocos-engine-230.git, 486341, 421496, 64845, 0.866668, 4987, 1362
+sixcfj, https://github.com/sixcfj/sixcfj.git, 15097, 9373, 5724, 0.620852, 111, 96
+ce5508-wally, https://github.com/tavogfc/ce5508-wally.git, 4254, 1533, 2721, 0.360367, 30, 94
+sights, https://github.com/sightsdev/sights.git, 25634, 18994, 6640, 0.740969, 80, 76
+first-steps, https://github.com/nayaradesousa/first-steps.git, 35081, 30487, 4594, 0.869046, 95, 
+openglol, https://github.com/vipyne/openglol.git, 4388, 3598, 790, 0.819964, 47, 23
+speaker-recognition-project, https://github.com/leonardo5621/speaker-recognition-project.git, 61730, 54996, 6734, 0.890912, 176, 892
+django-polls, https://github.com/karthic25/django-polls.git, 18039, 13861, 4178, 0.768391, 54, 32
+winck-django, https://github.com/arthurwinck/winck-django.git, 79317, 55956, 23361, 0.705473, 297, 423
+taaara, https://github.com/collins-kariuki/taaara.git, 49841, 45431, 4410, 0.911519, 403, 
+share, https://github.com/souvikns/share.git, 2341, 467, 1874, 0.199487, 29, 102
+campus-navigator, https://github.com/cs3250team2/campus-navigator.git, 13894, 8277, 5617, 0.595725, 89, 51
+nc.js, https://github.com/steptools/nc.js.git, 74125, 46215, 27910, 0.623474, 253, 131
+web-positiviser, https://github.com/artdgn/web-positiviser.git, 3921, 1611, 2310, 0.410865, 46, 3
+pylearning, https://github.com/akhudavets/pylearning.git, 81270, 53692, 27578, 0.660662, 169, 902

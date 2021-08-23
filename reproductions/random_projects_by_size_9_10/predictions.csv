@@ -1,0 +1,15 @@
+repo, url, samples, predictions, uncovered, prediction_rate, training_time, review_time
+crucible, https://github.com/machinabio/crucible.git, 124307, 100566, 23741, 0.809013, 379, 512
+data-structure, https://github.com/ormaza/data-structure.git, 1429, 0, 1429, 0, 114, 
+yaq3r, https://github.com/holland01/yaq3r.git, 4698, 0, 4698, 0, 62, 
+linux-community-, https://github.com/1fandim647/linux-community-.git, 71988, 62734, 9254, 0.871451, 314, 280
+xerty, https://github.com/lukeacat/xerty.git, 3208, 224, 2984, 0.0698254, 120, 106
+django-devlopment, https://github.com/aadeshkale/django-devlopment.git, 3010, 280, 2730, 0.0930233, 92, 86
+facetrack, https://github.com/yanxiall/facetrack.git, 125532, 110036, 15496, 0.876557, 531, 3889
+weathertoto, https://github.com/sorrykim/weathertoto.git, 19249, 17927, 1322, 0.931321, 138, 
+fardelcms, https://github.com/fardelcms/fardelcms.git, 4834, 1069, 3765, 0.221142, 40, 5
+informatica-code-a-thon-2018, https://github.com/agrawal-prateek/informatica-code-a-thon-2018.git, 164417, 115085, 49332, 0.699958, 787, 573
+tdd-practice, https://github.com/qu3vipon/tdd-practice.git, 35947, 31501, 4446, 0.876318, 148, 
+new_for_react, https://github.com/shenxilong2000/new_for_react.git, 23503, 14385, 9118, 0.61205, 470, 138
+coloringbooks, https://github.com/shinelikastar/coloringbooks.git, 754, 122, 632, 0.161804, 136, 
+alphastoka-worker-instagram-legacy, https://github.com/ssabpisa/alphastoka-worker-instagram-legacy.git, 7478, 1850, 5628, 0.247392, 51, 85

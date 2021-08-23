@@ -1,0 +1,16 @@
+repo, url, samples, predictions, uncovered, prediction_rate, training_time, review_time
+emailgrabberr, https://github.com/gulativarun/emailgrabberr.git, 17554, 11459, 6095, 0.652786, 153, 109
+diy-biller, https://github.com/anubhawbhalotia/diy-biller.git, 9875, 6947, 2928, 0.703494, 135, 75
+django-search-movies, https://github.com/vladislavnep/django-search-movies.git, 40859, 34650, 6209, 0.848038, 141, 420
+esfera, https://github.com/hashimhayat/esfera.git, 7108, 2466, 4642, 0.346933, 101, 91
+source-engine-model-loader, https://github.com/gkjohnson/source-engine-model-loader.git, 15337, 13011, 2326, 0.848341, 137, 85
+contrihub-18, https://github.com/contrihub/contrihub-18.git, 58032, 49981, 8051, 0.861266, 256, 264
+dragonfly, https://github.com/cyrillegin/dragonfly.git, 20243, 14840, 5403, 0.733093, 67, 34
+csd2c, https://github.com/basdebruin/csd2c.git, 9536, 2616, 6920, 0.274329, 45, 74
+arrow_war, https://github.com/fc940411/arrow_war.git, 17291, 11717, 5574, 0.677636, 76, 39
+wordcloudapi, https://github.com/takukobayashi/wordcloudapi.git, 6960, 3969, 2991, 0.570259, 129, 99
+asr-web-based-restaurant, https://github.com/tongplw/asr-web-based-restaurant.git, 11970, 8041, 3929, 0.671763, 55, 31
+leetcode-javascript, https://github.com/onerice/leetcode-javascript.git, 14959, 12973, 1986, 0.867237, 174, 48
+dilp2019, https://github.com/riositp/dilp2019.git, 10957, 5821, 5136, 0.531259, 143, 111
+qasimulator_serverside, https://github.com/camsenec/qasimulator_serverside.git, 21120, 13534, 7586, 0.640814, 188, 75
+diyprojects, https://github.com/lejbron/diyprojects.git, 37832, 25700, 12132, 0.679319, 119, 98

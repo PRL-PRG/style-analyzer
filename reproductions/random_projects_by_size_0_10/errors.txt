@@ -1,0 +1,148 @@
+--------------------
+Failed to process https://github.com/m1lian/sandbox.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 123, in measure_quality
+    git_dir = ensure_repo(repository, tmpdirname)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 54, in ensure_repo
+    porcelain.clone(repository, git_dir)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/porcelain.py", line 353, in clone
+    depth=depth, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/porcelain.py", line 1121, in fetch
+    depth=depth)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/client.py", line 398, in fetch
+    progress=progress, depth=depth)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/client.py", line 1644, in fetch_pack
+    b"git-upload-pack", url)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/client.py", line 1532, in _discover_references
+    resp, read = self._http_request(url, headers, allow_compression=True)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/client.py", line 1510, in _http_request
+    (resp.status, url))
+dulwich.errors.GitProtocolError: unexpected http resp 401 for https://github.com/m1lian/sandbox.git/info/refs?service=git-upload-pack
+--------------------
+Failed to process https://github.com/aharpt/gulp-basic-library.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 137, in measure_quality
+    bblfsh=bblfsh, config_json=config)
+  File "/lookout-sdk-ml/lookout/core/helpers/analyzer_context_manager.py", line 87, in review
+    log_level=log_level, config_json=config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 101, in review
+    return self._run("review", fr, to, port, git_dir, bblfsh, log_level, config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 131, in _run
+    return subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/tmp/lookout-sdk-ml/lookout-sdk-v0.7.0', 'review', 'ipv4://localhost:5131', '--from', '2a21be97ea8725409f32ad2ee73055f82cd452b1', '--to', '28292676577f356177551c62c61a0575340ae306', '--git-dir', '/tmp/top-repos-quality-repos-4_yv7uni/gulp-basic-library.git', '--log-format', 'json', '--log-level', 'warning', '--config-json', '{"style.format.analyzer.FormatAnalyzer": {"aggregate": true}}']' returned non-zero exit status 1.
+--------------------
+Failed to process https://github.com/andrew-deng/memecamera.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 123, in measure_quality
+    git_dir = ensure_repo(repository, tmpdirname)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 54, in ensure_repo
+    porcelain.clone(repository, git_dir)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/porcelain.py", line 353, in clone
+    depth=depth, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/porcelain.py", line 1121, in fetch
+    depth=depth)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/client.py", line 398, in fetch
+    progress=progress, depth=depth)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/client.py", line 1644, in fetch_pack
+    b"git-upload-pack", url)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/client.py", line 1532, in _discover_references
+    resp, read = self._http_request(url, headers, allow_compression=True)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/client.py", line 1510, in _http_request
+    (resp.status, url))
+dulwich.errors.GitProtocolError: unexpected http resp 401 for https://github.com/andrew-deng/memecamera.git/info/refs?service=git-upload-pack
+--------------------
+Failed to process https://github.com/emilybauer/typeflowers.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 135, in measure_quality
+    (restarts, repository))
+RuntimeError: Run out of 3 attempts. Failed to train proper model for https://github.com/emilybauer/typeflowers.git.
+--------------------
+Failed to process https://github.com/geoffreynguyen011/eseaplayoffsinfo.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 135, in measure_quality
+    (restarts, repository))
+RuntimeError: Run out of 3 attempts. Failed to train proper model for https://github.com/geoffreynguyen011/eseaplayoffsinfo.git.
+--------------------
+Failed to process https://github.com/iiamoclittmw/cpage.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 137, in measure_quality
+    bblfsh=bblfsh, config_json=config)
+  File "/lookout-sdk-ml/lookout/core/helpers/analyzer_context_manager.py", line 87, in review
+    log_level=log_level, config_json=config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 101, in review
+    return self._run("review", fr, to, port, git_dir, bblfsh, log_level, config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 131, in _run
+    return subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/tmp/lookout-sdk-ml/lookout-sdk-v0.7.0', 'review', 'ipv4://localhost:5131', '--from', '54d5e4f38b3def69e708ed4fe3260af8beb178df', '--to', '54d5e4f38b3def69e708ed4fe3260af8beb178df', '--git-dir', '/tmp/top-repos-quality-repos-l23if8ww/cpage.git', '--log-format', 'json', '--log-level', 'warning', '--config-json', '{"style.format.analyzer.FormatAnalyzer": {"aggregate": true}}']' returned non-zero exit status 1.
+--------------------
+Failed to process https://github.com/sobostion/instareverse.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 137, in measure_quality
+    bblfsh=bblfsh, config_json=config)
+  File "/lookout-sdk-ml/lookout/core/helpers/analyzer_context_manager.py", line 87, in review
+    log_level=log_level, config_json=config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 101, in review
+    return self._run("review", fr, to, port, git_dir, bblfsh, log_level, config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 131, in _run
+    return subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/tmp/lookout-sdk-ml/lookout-sdk-v0.7.0', 'review', 'ipv4://localhost:5131', '--from', 'b98afcf90432fc3d3c827a62bcc24e01bd9be849', '--to', '650d0e4855248396124dc13100c50e947f27e535', '--git-dir', '/tmp/top-repos-quality-repos-v5lkwa5y/instareverse.git', '--log-format', 'json', '--log-level', 'warning', '--config-json', '{"style.format.analyzer.FormatAnalyzer": {"aggregate": true}}']' returned non-zero exit status 1.
+--------------------
+Failed to process https://github.com/jjjacques/belly-button-biodiversity.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 135, in measure_quality
+    (restarts, repository))
+RuntimeError: Run out of 3 attempts. Failed to train proper model for https://github.com/jjjacques/belly-button-biodiversity.git.
+--------------------
+Failed to process https://github.com/evghrn/smarthome.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 137, in measure_quality
+    bblfsh=bblfsh, config_json=config)
+  File "/lookout-sdk-ml/lookout/core/helpers/analyzer_context_manager.py", line 87, in review
+    log_level=log_level, config_json=config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 101, in review
+    return self._run("review", fr, to, port, git_dir, bblfsh, log_level, config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 131, in _run
+    return subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/tmp/lookout-sdk-ml/lookout-sdk-v0.7.0', 'review', 'ipv4://localhost:5131', '--from', '99ef8e32425b3addb01702bc29be9fb63f6eb193', '--to', 'cd433cb8bf5da1351c8ead566fb5fd3709d31d3b', '--git-dir', '/tmp/top-repos-quality-repos-qj5siibw/smarthome.git', '--log-format', 'json', '--log-level', 'warning', '--config-json', '{"style.format.analyzer.FormatAnalyzer": {"aggregate": true}}']' returned non-zero exit status 1.
+--------------------
+Failed to process https://github.com/ronenrozen/comunication_ltd.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 137, in measure_quality
+    bblfsh=bblfsh, config_json=config)
+  File "/lookout-sdk-ml/lookout/core/helpers/analyzer_context_manager.py", line 87, in review
+    log_level=log_level, config_json=config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 101, in review
+    return self._run("review", fr, to, port, git_dir, bblfsh, log_level, config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 131, in _run
+    return subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/tmp/lookout-sdk-ml/lookout-sdk-v0.7.0', 'review', 'ipv4://localhost:5131', '--from', '01da766e0a7504aab3d9e25b5559b210a6f13202', '--to', 'c0dc4a1e98a4b66ae7c960f7b5b3023f98ea1a60', '--git-dir', '/tmp/top-repos-quality-repos-k9vjn8v9/comunication_ltd.git', '--log-format', 'json', '--log-level', 'warning', '--config-json', '{"style.format.analyzer.FormatAnalyzer": {"aggregate": true}}']' returned non-zero exit status 1.

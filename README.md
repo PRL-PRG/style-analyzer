@@ -443,11 +443,14 @@ Run for multiple selections
 ```bash
 # BACKWARDS, just because I already did 0 and 1.
 SELECTIONS="$(seq 0 9 | tac | xargs -I{} echo -n "random_projects_by_size_{}_10 random_projects_{}_10 ") top_starred_projects"
+#timestamp=`date -u  | tr -s ' ' '_'`
 time for selection in $SELECTIONS
 do
    QUALITY_REPORT_REPOS="$(pwd)/database/output/$selection.csv"
-   QUALITY_REPORT_DIR="$(pwd)/reproductions"
-   mkdir -p ${QUALITY_REPORT_DIR}; 
+   QUALITY_REPORT_DIR="$(pwd)/reproductions/$selection"
+   mkdir -p ${QUALITY_REPORT_DIR};    
+   #touch ${QUALITY_REPORT_DIR}/logs_${timestamp}.txt
+   #ln -f ${QUALITY_REPORT_DIR}/logs_${timestamp}.txt ${QUALITY_REPORT_DIR}/logs.txt 
    python3 -m lookout.style.format \
       --log-level DEBUG quality-report \
       -o ${QUALITY_REPORT_DIR} \

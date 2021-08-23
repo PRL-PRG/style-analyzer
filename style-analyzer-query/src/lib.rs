@@ -116,7 +116,8 @@ pub fn top_starred(database: &Database, _log: &Log, output: &Path) -> Result<(),
         .filter_by(AnyIn(project::Languages, vec![Language::JavaScript]))
         .sort_by(project::Stars)
         .filter(is_project_spec)
-        .flat_map(project_spec)      
+        .sample(Top(SELECTED_PROJECTS))
+        .flat_map(project_spec)
         .into_csv_with_headers_in_dir(vec!["url", "to", "from"], output, "top_starred_projects.csv")
 }
 

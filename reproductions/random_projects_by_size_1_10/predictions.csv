@@ -1,0 +1,14 @@
+repo, url, samples, predictions, uncovered, prediction_rate, training_time, review_time
+belly_button_biodiversity, https://github.com/joja92/belly_button_biodiversity.git, 537, 211, 326, 0.392924, 57, 
+gists, https://github.com/kuhe/gists.git, 6761, 4659, 2102, 0.689099, 42, 20
+ic05, https://github.com/pzins/ic05.git, 217941, 189942, 27999, 0.871529, 842, 418
+reminder, https://github.com/lapshinmr/reminder.git, 1347, 898, 449, 0.666667, 123, 
+csci243, https://github.com/marleyjenkins4/csci243.git, 244, 66, 178, 0.270492, 32, 0
+compro_iot, https://github.com/toplordsaito/compro_iot.git, 2090, 576, 1514, 0.275598, 100, 
+pillars, https://github.com/marianyakubets/pillars.git, 3010, 1206, 1804, 0.400664, 45, 2
+agendas, https://github.com/victoraguilarc/agendas.git, 136338, 117474, 18864, 0.861638, 594, 697
+schoolwork, https://github.com/joshmcmahan/schoolwork.git, 225944, 158639, 67305, 0.702116, 1216, 1611
+zeo, https://github.com/exokitxr/zeo.git, 645097, 539016, 106081, 0.835558, 6161, 2266
+jmad, https://github.com/harisonmg/jmad.git, 17189, 8468, 8721, 0.492641, 49, 30
+estacionando, https://github.com/leandro-aol/estacionando.git, 31616, 27408, 4208, 0.866903, 87, 
+sigmapi-web, https://github.com/sigmapi-gammaiota/sigmapi-web.git, 198261, 160253, 38008, 0.808293, 986, 1138

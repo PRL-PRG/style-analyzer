@@ -1,0 +1,13 @@
+repo, url, samples, predictions, uncovered, prediction_rate, training_time, review_time
+hackoctoberfest, https://github.com/gomezgleonardob/hackoctoberfest.git, 29010, 25004, 4006, 0.86191, 185, 162
+native-app, https://github.com/fh-bi-camp-mi-sem2016-mod-swproj/native-app.git, 22723, 13716, 9007, 0.603617, 186, 75
+c-counter, https://github.com/spences10/c-counter.git, 1453, 574, 879, 0.395045, 38, 2
+coding-challenge-solutions, https://github.com/hb20007/coding-challenge-solutions.git, 16479, 12975, 3504, 0.787366, 70, 62
+avimehenwal.in, https://github.com/avimehenwal/avimehenwal.in.git, 49301, 37333, 11968, 0.757246, 167, 365
+noticed, https://github.com/myrmidonut/noticed.git, 52027, 41197, 10830, 0.791839, 202, 81
+sbfbackend, https://github.com/varinichiara/sbfbackend.git, 1529, 0, 1529, 0, 110, 
+soundcloud-uploadr, https://github.com/roguesherlock/soundcloud-uploadr.git, 5126, 1898, 3228, 0.370269, 44, 13
+oim-cms, https://github.com/dbca-wa/oim-cms.git, 4770, 2379, 2391, 0.498742, 140, 107
+mac-torrents, https://github.com/belvedersky/mac-torrents.git, 2021, 528, 1493, 0.261257, 54, 26
+chatbots, https://github.com/intelligo-io/chatbots.git, 783, 182, 601, 0.232439, 31, 0
+tads, https://github.com/thecogmel/tads.git, 3804, 1211, 2593, 0.318349, 30, 4

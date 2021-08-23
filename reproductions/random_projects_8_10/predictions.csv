@@ -1,0 +1,17 @@
+repo, url, samples, predictions, uncovered, prediction_rate, training_time, review_time
+instagram, https://github.com/hyeonski/instagram.git, 17189, 8468, 8721, 0.492641, 209, 102
+xiaochaoyue, https://github.com/augsesyh/xiaochaoyue.git, 78218, 66088, 12130, 0.844921, 430, 1134
+titanium-silver, https://github.com/ganesh-k13/titanium-silver.git, 21114, 14760, 6354, 0.699062, 172, 91
+aleph, https://github.com/alephdata/aleph.git, 16305, 6961, 9344, 0.426924, 69, 88
+gms, https://github.com/dvsreddy82/gms.git, 90973, 80285, 10688, 0.882515, 381, 384
+yeelight-adapter, https://github.com/webthingsio/yeelight-adapter.git, 3188, 1381, 1807, 0.433187, 95, 98
+mwd, https://github.com/kaigikinyua/mwd.git, 41351, 29697, 11654, 0.718169, 163, 809
+brooder, https://github.com/sly14flores/brooder.git, 597540, 514961, 82579, 0.861802, 7818, 1783
+algorithms, https://github.com/theflofly/algorithms.git, 1969, 841, 1128, 0.42712, 53, 2
+featherflew.github.io, https://github.com/featherflew/featherflew.github.io.git, 5418, 1605, 3813, 0.296235, 43, 7
+xchange, https://github.com/ghoff8/xchange.git, 18199, 10810, 7389, 0.593989, 230, 103
+pixelchain, https://github.com/benwiederhake/pixelchain.git, 4978, 915, 4063, 0.183809, 119, 79
+tera-data, https://github.com/tera-toolbox/tera-data.git, 629, 137, 492, 0.217806, 49, 
+dp-frontend, https://github.com/awaisdar001/dp-frontend.git, 5834, 2245, 3589, 0.384813, 35, 103
+moook, https://github.com/emmanouil/moook.git, 11684, 5575, 6109, 0.477148, 51, 11
+palelight, https://github.com/tedwenjun/palelight.git, 23494, 17102, 6392, 0.727931, 63, 70

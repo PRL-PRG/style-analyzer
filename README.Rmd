@@ -14,6 +14,9 @@ library(stringr)
 library(kableExtra)
 library(ggplot2)
 library(scales)
+library(cowplot)
+library(gridExtra)
+library(ggpubr)
 ```
 
 ```{r}
@@ -28,7 +31,9 @@ REPRO_DIR <- "reproductions/"
 
 # A list of all rperoductions, these are subdirectories of REPRO_DIR. These should not have spaces in them.
 # They are used as names, they should not have / in them.
-EXPERIMENTS <- c("original_reproduction", "original_10", "random_0_10", "random_1_10")
+random_projects <- paste0("random_projects_", c(0,2,3,6:9), "_", 10)
+random_projects_by_size <- paste0("random_projects_by_size_", c(0:2, 6:9), "_", 10)
+EXPERIMENTS <- c("original_reproduction", "original_10", random_projects, random_projects_by_size, "top_starred_projects")
 
 # Convert to bash variables
 Sys.setenv(REPRO_DIRS = paste(paste0(REPRO_DIR, "/", EXPERIMENTS), collapse = " "))
@@ -125,14 +130,76 @@ for (experiment in experiment_data) {
 }
 ```
 
+See what finished processing:
+
+```{r}
+status_table <- tibble(experiment=character(0), url=character(0), locs=integer(0), done=logical(0))
+for (experiment in EXPERIMENTS) {
+  query_result_path <- paste0(DJANCO_DIR, experiment, ".csv")
+  if (!file.exists(query_result_path)) {
+    warning("Could not find file: ", query_result_path, ". Skipping.\n")
+  } else {
+    query_result <- read_csv(query_result_path) %>% select(url)
+    processed_projects <- experiment_data[[experiment]] %>% select(url)
+    processed_projects_summary <- query_result %>% 
+      mutate(experiment=experiment) %>% 
+      left_join(processed_projects %>% mutate(done=TRUE), by="url") %>%
+      left_join(project_locs, by="url")
+    #print(processed_projects_summary)
+    status_table <- bind_rows(status_table, processed_projects_summary %>% select(experiment, url, locs, done))
+  }
+}
+status_table
+```
+
+```{r}
+summary_status_table <- status_table %>% 
+  mutate(completed=ifelse(is.na(done), 0, ifelse(done, 1, 0))) %>% 
+  group_by(experiment) %>% 
+  summarize(completed=sum(completed), 
+            percent_completed=(completed*100)/n(), 
+            failed=n()-completed, 
+            percent_failed=(100*failed)/n()) %>% 
+  ungroup
+
+summary_status_table
+```
+
+```{r}
+summary_status_table %>% 
+  summarize(projects_in_all_datasets=sum(completed) + sum(failed), 
+            completed=sum(completed), 
+            percent_completed=format((completed*100)/projects_in_all_datasets, digits=1), 
+            failed=sum(failed), 
+            percent_failed=format((100*failed)/projects_in_all_datasets, digits=1))
+```
+
+```{r}
+classify_by_size <- function(n) {
+    ifelse(n >= 10**5, "very big", 
+    ifelse(n >= 10**4, "large",
+    ifelse(n >= 10**3, "medium",
+                       "small")))
+  }
+
+status_by_size <- status_table %>% 
+  mutate(size=classify_by_size(locs)) %>% 
+  group_by(size) %>%
+  mutate() %>%
+  ungroup
+  
+
+
+```
+
 ## Metrics measured on the validation part of the dataset. 
 
 The last row is weighed by the number of samples.
 
 ```{r}
-make_paper_table <- function(data, latex = FALSE, digits=3) {
+make_paper_table <- function(experiment, latex = FALSE, digits=3) {
   
-  data <- data %>% mutate(`training time, min` = round(training_time/60))
+  data <- experiment_data[[experiment]] %>% mutate(`training time, min` = round(training_time/60))
   
   stringified <-
     data %>% 
@@ -157,11 +224,11 @@ make_paper_table <- function(data, latex = FALSE, digits=3) {
               recall = format(mean(recall), digits=digits),
               f1 = format(mean(f1), digits=digits),
               support = format(mean(support), digits=digits),
-              locs = format(mean(locs), digits=digits),
+              locs = NA,
               rules = format(mean(rules), digits=digits),
               avg_rule_len = format(mean(avg_rule_len), digits=digits),
               labels = format(mean(labels), digits=digits),
-              training_time = format(mean(training_time), digits=digits))
+              training_time = NA)
   
   weighted_average <- 
     data %>% 
@@ -170,11 +237,11 @@ make_paper_table <- function(data, latex = FALSE, digits=3) {
               pred_r = format(weighted.mean(pred_r, support),  digits=digits),
               recall = format(weighted.mean(recall, support), digits=digits),
               f1 = format(weighted.mean(f1, support), digits=digits),
-              locs = format(weighted.mean(locs, support), digits=digits),
-              rules = format(weighted.mean(rules, support), digits=digits),
-              avg_rule_len = format(weighted.mean(avg_rule_len, support), digits=digits),
-              labels = format(weighted.mean(labels, support), digits=digits),
-              training_time = format(weighted.mean(training_time, support), digits=digits),
+              locs = NA,
+              rules = NA,
+              avg_rule_len = NA,
+              labels = NA,
+              training_time = NA,
               support = NA)
   
   
@@ -190,10 +257,8 @@ make_paper_table <- function(data, latex = FALSE, digits=3) {
            `recall`, `f1`, `train samples`, `LoC`, 
            `unique labels`, `rules`, `avg. rule length`, 
            `training time, min`)
-    
   
-  
-  k <- kable(table, booktabs = TRUE, format = ifelse(latex, "latex", "html")) %>%
+  k <- kable(table, booktabs = TRUE, format = ifelse(latex, "latex", "html"), caption = paste0("Selection: ", experiment)) %>%
     kable_styling(latex_options = "striped") %>%
     row_spec((table %>% count)$n - 3, hline_after = TRUE) # Add hline before average and weighted average
   
@@ -202,54 +267,77 @@ make_paper_table <- function(data, latex = FALSE, digits=3) {
 ```
 
 ```{r}
-make_paper_table(experiment_data$original_reproduction, TRUE)
-make_paper_table(experiment_data$original_reproduction)
+#for (experiment in EXPERIMENTS) {
+#  print(make_paper_table(experiment, TRUE))
+#}
 ```
 
 ```{r}
-make_paper_table(experiment_data$original_10, TRUE)
-make_paper_table(experiment_data$original_10)
+make_paper_table("original_reproduction")
 ```
 
 ```{r}
-make_paper_table(experiment_data$random_0_10, TRUE)
-make_paper_table(experiment_data$random_0_10)
+make_paper_table("original_10")
 ```
 
 ```{r}
-make_paper_table(experiment_data$random_1_10, TRUE)
-make_paper_table(experiment_data$random_1_10)
+for (experiment in random_projects) {
+  print(make_paper_table(experiment))
+}
+```
+
+```{r}
+for (experiment in random_projects_by_size) {
+  print(make_paper_table(experiment))
+}
+```
+
+```{r}
+for (experiment in EXPERIMENTS) {
+  print(make_paper_table(experiment))
+}
 ```
 
 ## Effect of the number of samples in the training set on precision
 
 ```{r}
-make_precision_support_graph <- function (data) {
-ggplot(data, aes(x=precision, y=support)) +
-  geom_point(size=2) + 
-  geom_text(aes(label=repo), position=position_nudge(y=-5000),  size=3) +
-  scale_x_continuous(labels=function(x) format(x, digits=2)) +
-  scale_y_continuous(labels=label_number_si()) +
-  xlab("Precision") + 
-  ylab("Samples in the training set") +
-  theme_bw()
+make_precision_support_graph <- function (experiment) {
+  data <- experiment_data[[experiment]]
+  ggplot(data, aes(x=precision, y=support)) +
+    geom_point(size=2) + 
+    geom_text(aes(label=repo), position=position_nudge(y=-5000),  size=3) +
+    scale_x_continuous(labels=function(x) format(x, digits=2)) +
+    scale_y_continuous(labels=label_number_si()) +
+    xlab("Precision") + 
+    ylab("Samples in the training set") +
+    ggtitle(paste0("Selection: ", experiment)) +
+    theme_bw()
 }
 ```
 
 ```{r}
-make_precision_support_graph(experiment_data$original_reproduction)
+make_precision_support_graph("original_reproduction")
 ```
 
 ```{r}
-make_precision_support_graph(experiment_data$original_10)
+make_precision_support_graph("original_10")
+```
+
+
+```{r}
+for (experiment in random_projects) {
+  print(make_precision_support_graph(experiment))
+}
 ```
 
 ```{r}
-make_precision_support_graph(experiment_data$random_0_10)
+for (experiment in random_projects_by_size) {
+  print(make_precision_support_graph(experiment))
+}
 ```
 
 ```{r}
-make_precision_support_graph(experiment_data$random_1_10)
+make_precision_support_graph("top_starred_projects")
 ```
 
 # Notes

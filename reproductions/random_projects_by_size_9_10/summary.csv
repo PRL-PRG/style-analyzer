@@ -1,0 +1,10 @@
+repo, precision, recall, full_recall, f1, full_f1, ppcr, support, full_support, Rules Number, Average Rule Len
+fardelcms.git, 0.886, 0.886, 0.396, 0.886, 0.547, 0.447, 823, 1841, 2, 3.5
+linux-community-.git, 0.649, 0.649, 0.532, 0.649, 0.585, 0.819, 77, 94, 23, 7.4
+alphastoka-worker-instagram-legacy.git, 0.923, 0.923, 0.548, 0.923, 0.688, 0.593, 143, 241, 3, 4.7
+facetrack.git, 0.739, 0.739, 0.722, 0.739, 0.731, 0.977, 35063, 35893, 23, 8.0
+django-devlopment.git, 0.892, 0.892, 0.712, 0.892, 0.792, 0.798, 686, 860, 2, 2.5
+new_for_react.git, 0.867, 0.867, 0.765, 0.867, 0.813, 0.882, 4108, 4660, 28, 7.7
+crucible.git, 0.958, 0.958, 0.890, 0.958, 0.923, 0.929, 18348, 19746, 32, 8.1
+informatica-code-a-thon-2018.git, 0.955, 0.955, 0.741, 0.955, 0.835, 0.777, 10910, 14048, 42, 9.5
+xerty.git, 0.896, 0.896, 0.676, 0.896, 0.771, 0.755, 308, 408, 1, 1.0

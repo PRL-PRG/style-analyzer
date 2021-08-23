@@ -1,0 +1,102 @@
+--------------------
+Failed to process https://github.com/microapidev/email-microapi.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 135, in measure_quality
+    (restarts, repository))
+RuntimeError: Run out of 3 attempts. Failed to train proper model for https://github.com/microapidev/email-microapi.git.
+--------------------
+Failed to process https://github.com/netsamir/rammotors.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 135, in measure_quality
+    (restarts, repository))
+RuntimeError: Run out of 3 attempts. Failed to train proper model for https://github.com/netsamir/rammotors.git.
+--------------------
+Failed to process https://github.com/lovzi/surprise_music.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 123, in measure_quality
+    git_dir = ensure_repo(repository, tmpdirname)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 54, in ensure_repo
+    porcelain.clone(repository, git_dir)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/porcelain.py", line 353, in clone
+    depth=depth, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/porcelain.py", line 1121, in fetch
+    depth=depth)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/client.py", line 398, in fetch
+    progress=progress, depth=depth)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/client.py", line 1644, in fetch_pack
+    b"git-upload-pack", url)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/client.py", line 1532, in _discover_references
+    resp, read = self._http_request(url, headers, allow_compression=True)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/client.py", line 1510, in _http_request
+    (resp.status, url))
+dulwich.errors.GitProtocolError: unexpected http resp 401 for https://github.com/lovzi/surprise_music.git/info/refs?service=git-upload-pack
+--------------------
+Failed to process https://github.com/ambiso/teamspeak-formatting.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 135, in measure_quality
+    (restarts, repository))
+RuntimeError: Run out of 3 attempts. Failed to train proper model for https://github.com/ambiso/teamspeak-formatting.git.
+--------------------
+Failed to process https://github.com/sap-archive/lumira-extension-da-twitter.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 137, in measure_quality
+    bblfsh=bblfsh, config_json=config)
+  File "/lookout-sdk-ml/lookout/core/helpers/analyzer_context_manager.py", line 87, in review
+    log_level=log_level, config_json=config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 101, in review
+    return self._run("review", fr, to, port, git_dir, bblfsh, log_level, config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 131, in _run
+    return subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/tmp/lookout-sdk-ml/lookout-sdk-v0.7.0', 'review', 'ipv4://localhost:30238', '--from', '46d42eb6735299ac99d6562d5115df7c029659d3', '--to', '46d42eb6735299ac99d6562d5115df7c029659d3', '--git-dir', '/tmp/top-repos-quality-repos-durnpq6g/lumira-extension-da-twitter.git', '--log-format', 'json', '--log-level', 'warning', '--config-json', '{"style.format.analyzer.FormatAnalyzer": {"aggregate": true}}']' returned non-zero exit status 1.
+--------------------
+Failed to process https://github.com/diabhey/ab-heartbyte.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 137, in measure_quality
+    bblfsh=bblfsh, config_json=config)
+  File "/lookout-sdk-ml/lookout/core/helpers/analyzer_context_manager.py", line 87, in review
+    log_level=log_level, config_json=config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 101, in review
+    return self._run("review", fr, to, port, git_dir, bblfsh, log_level, config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 131, in _run
+    return subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/tmp/lookout-sdk-ml/lookout-sdk-v0.7.0', 'review', 'ipv4://localhost:30238', '--from', 'c900d239348b54b1885fe8473142c74cd70d2bd1', '--to', '13471db8bb889d1b70659a675c42e445d09bc44e', '--git-dir', '/tmp/top-repos-quality-repos-gm89nwod/ab-heartbyte.git', '--log-format', 'json', '--log-level', 'warning', '--config-json', '{"style.format.analyzer.FormatAnalyzer": {"aggregate": true}}']' returned non-zero exit status 1.
+--------------------
+Failed to process https://github.com/frm/mustacheme.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 135, in measure_quality
+    (restarts, repository))
+RuntimeError: Run out of 3 attempts. Failed to train proper model for https://github.com/frm/mustacheme.git.
+--------------------
+Failed to process https://github.com/spencergoudswaard/questlog.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 137, in measure_quality
+    bblfsh=bblfsh, config_json=config)
+  File "/lookout-sdk-ml/lookout/core/helpers/analyzer_context_manager.py", line 87, in review
+    log_level=log_level, config_json=config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 101, in review
+    return self._run("review", fr, to, port, git_dir, bblfsh, log_level, config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 131, in _run
+    return subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/tmp/lookout-sdk-ml/lookout-sdk-v0.7.0', 'review', 'ipv4://localhost:30238', '--from', '949dc98d8ccb63477ff39d7e5e92b64fa5db24ff', '--to', '4e3372208d064a0f8ee43230ae682e244c08b6b3', '--git-dir', '/tmp/top-repos-quality-repos-zhewr_yn/questlog.git', '--log-format', 'json', '--log-level', 'warning', '--config-json', '{"style.format.analyzer.FormatAnalyzer": {"aggregate": true}}']' returned non-zero exit status 1.

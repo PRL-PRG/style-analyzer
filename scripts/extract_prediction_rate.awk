@@ -19,13 +19,22 @@ $0 ~ /^= +http/ {
     url = $2;
 
     # Make two maps, one for samples, one for samples without predictions.
-    # Both initially zero.
-    samples[url] = 0;
-    uncovered[url] = 0;
-    
+    # Both initially zero, (unless there is something already in there, 
+    # because the log contains information from more than one run---we preserve those). 
+    if (! url in samples) {
+         samples[url] = 0;
+    }
+    if (! url in uncovered) {
+        uncovered[url] = 0;
+    }
+
     # Maps for training and review times.
-    review_time[url] = 0;
-    training_time[url] = 0;
+    if (! url in review_time) {
+        review_time[url] = 0;
+    }
+    if (! url in training_time) {
+        training_time[url] = 0;
+    }
 
     # Each project is trained first, so set training flag to true
     training = "t";
@@ -40,6 +49,7 @@ $0 == "INFO:EventListener:new ReviewEvent" {
 $1 == "INFO:EventListener:OK" {
     seconds = $2;
     gsub(/[.].*$/, "", seconds);
+
     if (training == "t") {
         training_time[url] += seconds;
     } else {
