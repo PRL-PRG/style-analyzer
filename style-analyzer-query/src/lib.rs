@@ -13,6 +13,7 @@ use djanco::objects::Language;
 use djanco::objects::Project;
 use djanco::objects::ProjectId;
 
+use djanco::time::Duration;
 use djanco_ext::*;
 
 // use itertools;
@@ -119,6 +120,37 @@ pub fn top_starred(database: &Database, _log: &Log, output: &Path) -> Result<(),
         .sample(Top(SELECTED_PROJECTS))
         .flat_map(project_spec)
         .into_csv_with_headers_in_dir(vec!["url", "to", "from"], output, "top_starred_projects.csv")
+}
+
+#[djanco(May, 2021, subsets(JavaScript))]
+pub fn quality_projects(database: &Database, _log: &Log, output: &Path) -> Result<(), std::io::Error>  {
+    database.projects()
+        .filter_by(Equal(project::Substore, Store::Large(store::Language::JavaScript)))
+        // Contains at least 80% JavaScript code
+        .filter(|project| {
+            project.language_composition().map_or(false, |languages| {
+                languages.into_iter()
+                    .any(|(language, propotion)| {
+                        language == Language::JavaScript && propotion >= 80
+                    })
+            })
+        })
+        // Contains at least 5KLOC in the head tree.
+        .filter_by(AtLeast(project::Locs, 5_000))
+        // The spanm between first and last commit is at least 1 year
+        .filter_by(AtLeast(project::Age, Duration::from_months(12)))
+        // Contains at least 100 commits total
+        .filter_by(AtLeast(Count(project::Commits), 100))        
+        // Has at least 2 users
+        .filter_by(AtLeast(Count(project::Users), 2))
+        // Only pick projects for which we can generate a base and head commit        
+        .filter(is_project_spec)
+        // Sample N projects at random (we're just going to do one selection, so take first seed)
+        // Instead fo doing 10 selections of N, I'll do one selection of 10 * N
+        .sample(Random(10 * SELECTED_PROJECTS, Seed(SEEDS[0]))) 
+        // Extract: url, head commit aka to, base commit aka from
+        .flat_map(project_spec)
+        .into_csv_with_headers_in_dir(vec!["url", "to", "from"], output, format!("quality_projects_{}.csv", BASE_COMMIT_OFFSET_RATIO))
 }
 
 // #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_0(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 0) }
