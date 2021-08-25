@@ -15,7 +15,7 @@ use djanco::objects::ProjectId;
 
 use djanco::time::Duration;
 use djanco_ext::*;
-use itertools::Itertools;
+//use itertools::Itertools;
 
 // use itertools;
 
@@ -123,44 +123,66 @@ pub fn top_starred(database: &Database, _log: &Log, output: &Path) -> Result<(),
         .into_csv_with_headers_in_dir(vec!["url", "to", "from"], output, "top_starred_projects.csv")
 }
 
-#[djanco(May, 2021, subsets(JavaScript))]
-pub fn quality_projects(database: &Database, _log: &Log, output: &Path) -> Result<(), std::io::Error>  {
-    let all = database.projects()
-        .filter_by(Equal(project::Substore, Store::Large(store::Language::JavaScript)))
-        // Contains at least 80% JavaScript code
-        .filter(|project| {
-            project.language_composition().map_or(false, |languages| {
-                languages.into_iter()
-                    .any(|(language, propotion)| {
-                        language == Language::JavaScript && propotion >= 80
-                    })
-            })
-        })
-        // Contains at least 5KLOC in the head tree.
-        .filter_by(AtLeast(project::Locs, 5_000))
-        // The spanm between first and last commit is at least 1 year
-        .filter_by(AtLeast(project::Age, Duration::from_months(12)))
-        // Contains at least 100 commits total
-        .filter_by(AtLeast(Count(project::Commits), 100))        
-        // Has at least 2 users
-        .filter_by(AtLeast(Count(project::Users), 2))
-        // Only pick projects for which we can generate a base and head commit        
-        .filter(is_project_spec)
-        // Sample N projects at random (we're just going to do one selection, so take first seed)
-        // Instead fo doing 10 selections of N, I'll do one selection of 10 * N
-        .sample(Random(10 * SELECTED_PROJECTS, Seed(SEEDS[0]))) 
-        // Extract: url, head commit aka to, base commit aka from
-        .flat_map(project_spec);
+// Putting it in a separate module, to avoid name conflicts with Itertools x.x
+pub mod quality_projects {
+    use std::path::Path;
 
-    // Now split the selection into N-sized chunks and output each one in a separate directory.       
-
-    for (i, chunk) in all.chunks(SELECTED_PROJECTS).into_iter().enumerate() {
-        let file = format!("quality_projects_{}_{}.csv", i, BASE_COMMIT_OFFSET_RATIO);
-        let header = vec!["url", "to", "from"];
-        chunk.into_csv_with_headers_in_dir(header, output, file)?;
-    }       
+    use djanco::*;
+    use djanco::database::*;
+    use djanco::log::*;
+    use djanco::csv::*;
     
-    Ok(())
+    use djanco::objects::Language;
+    
+    use djanco::time::Duration;
+    use djanco_ext::*;
+    use itertools::Itertools;
+
+    use crate::BASE_COMMIT_OFFSET_RATIO;
+    use crate::SEEDS;
+    use crate::SELECTED_PROJECTS;
+    use crate::is_project_spec;
+    use crate::project_spec;
+
+    #[djanco(May, 2021, subsets(JavaScript))]
+    pub fn quality_projects(database: &Database, _log: &Log, output: &Path) -> Result<(), std::io::Error>  {
+        let all = database.projects()
+            .filter_by(Equal(project::Substore, Store::Large(store::Language::JavaScript)))
+            // Contains at least 80% JavaScript code
+            .filter(|project| {
+                project.language_composition().map_or(false, |languages| {
+                    languages.into_iter()
+                        .any(|(language, propotion)| {
+                            language == Language::JavaScript && propotion >= 80
+                        })
+                })
+            })
+            // Contains at least 5KLOC in the head tree.
+            .filter_by(AtLeast(project::Locs, 5_000))
+            // The spanm between first and last commit is at least 1 year
+            .filter_by(AtLeast(project::Age, Duration::from_months(12)))
+            // Contains at least 100 commits total
+            .filter_by(AtLeast(Count(project::Commits), 100))        
+            // Has at least 2 users
+            .filter_by(AtLeast(Count(project::Users), 2))
+            // Only pick projects for which we can generate a base and head commit        
+            .filter(is_project_spec)
+            // Sample N projects at random (we're just going to do one selection, so take first seed)
+            // Instead fo doing 10 selections of N, I'll do one selection of 10 * N
+            .sample(Random(10 * SELECTED_PROJECTS, Seed(SEEDS[0]))) 
+            // Extract: url, head commit aka to, base commit aka from
+            .flat_map(project_spec);
+
+        // Now split the selection into N-sized chunks and output each one in a separate directory.       
+
+        for (i, chunk) in all.chunks(SELECTED_PROJECTS).into_iter().enumerate() {
+            let file = format!("quality_projects_{}_{}.csv", i, BASE_COMMIT_OFFSET_RATIO);
+            let header = vec!["url", "to", "from"];
+            chunk.into_csv_with_headers_in_dir(header, output, file)?;
+        }       
+        
+        Ok(())
+    }
 }
 
 // #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_0(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 0) }
