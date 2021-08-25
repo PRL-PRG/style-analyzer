@@ -15,6 +15,7 @@ use djanco::objects::ProjectId;
 
 use djanco::time::Duration;
 use djanco_ext::*;
+use itertools::Itertools;
 
 // use itertools;
 
@@ -124,7 +125,7 @@ pub fn top_starred(database: &Database, _log: &Log, output: &Path) -> Result<(),
 
 #[djanco(May, 2021, subsets(JavaScript))]
 pub fn quality_projects(database: &Database, _log: &Log, output: &Path) -> Result<(), std::io::Error>  {
-    database.projects()
+    let all = database.projects()
         .filter_by(Equal(project::Substore, Store::Large(store::Language::JavaScript)))
         // Contains at least 80% JavaScript code
         .filter(|project| {
@@ -149,8 +150,17 @@ pub fn quality_projects(database: &Database, _log: &Log, output: &Path) -> Resul
         // Instead fo doing 10 selections of N, I'll do one selection of 10 * N
         .sample(Random(10 * SELECTED_PROJECTS, Seed(SEEDS[0]))) 
         // Extract: url, head commit aka to, base commit aka from
-        .flat_map(project_spec)
-        .into_csv_with_headers_in_dir(vec!["url", "to", "from"], output, format!("quality_projects_{}.csv", BASE_COMMIT_OFFSET_RATIO))
+        .flat_map(project_spec);
+
+    // Now split the selection into N-sized chunks and output each one in a separate directory.       
+
+    for (i, chunk) in all.chunks(SELECTED_PROJECTS).into_iter().enumerate() {
+        let file = format!("quality_projects_{}_{}.csv", i, BASE_COMMIT_OFFSET_RATIO);
+        let header = vec!["url", "to", "from"];
+        chunk.into_csv_with_headers_in_dir(header, output, file)?;
+    }       
+    
+    Ok(())
 }
 
 // #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_0(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 0) }
