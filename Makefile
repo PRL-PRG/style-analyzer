@@ -42,6 +42,20 @@ bblfsh-start:
 	docker exec style_analyzer_bblfshd bblfshctl driver install \
 		javascript docker://bblfsh/javascript-driver\:v2.7.1
 
+# Run as `make run-experiment` for all experiments or
+# run as `make run-experiment selections="a b c"` to just execute specific selections a, b, c.
+run-experiment: 
+	docker run --rm -it --network host --entrypoint "" \
+		-v $(current_dir)/.git:/style-analyzer/.git \
+		-v $(current_dir)/lookout/core/server:/style-analyzer/lookout/core/server \
+		-v $(current_dir)/sdk:/style-analyzer/sdk \
+		-v $(current_dir)/reproductions:/style-analyzer/reproductions \
+		-v $(current_dir)/style-analyzer-query/output:/style-analyzer/selections \
+		-v $(current_dir)/scripts/:/style-analyzer/scripts \
+		-w /style-analyzer \
+		srcd/style-analyzer:latest \
+		scripts/run_experiment.sh $(selections)
+
 # Style analyzer Reporting system
 REPORTS_DIR ?= $(current_dir)/lookout/style/format/benchmarks/reports
 REPORT_VERSION ?= untagged

@@ -27,6 +27,9 @@ $0 ~ /^= +http/ {
     if (! url in uncovered) {
         uncovered[url] = 0;
     }
+    if (! url in training_samples) {
+         traininig_samples[url] = 0;
+    }
 
     # Maps for training and review times.
     if (! url in review_time) {
@@ -65,12 +68,12 @@ $1 == "INFO:EventListener:OK" {
 # We can match on the first word
 $1 == "DEBUG:Rules:predicting" {
     # We only do this after training, so if training is true, we move to the next line.
-    if (training == "t") {
-        next;
-    }
-
     found_sample = $2 # sample size is the second word
-    samples[url] += found_sample;
+    if (training == "t") {
+        training_samples[url] += found_sample;        
+    } else {
+        samples[url] += found_sample;
+    }
 }
 
 # When we encounter a missed predictions message, we can harvest the number of 
@@ -97,7 +100,7 @@ END {
     OFS = ", ";
 
     # Print out header
-    print "repo", "url", "samples", "predictions", "uncovered", "prediction_rate", "training_time", "review_time";
+    print "repo", "url", "training_samples", "samples", "predictions", "uncovered", "prediction_rate", "training_time", "review_time";
 
     # Go over collected data and print it out, we iterate over the samples map, 
     # which should have the samne URL keys as the missed map.
@@ -118,7 +121,7 @@ END {
         }
 
         # Print out one line of data per each collected URL
-        print project, url, samples[url], predictions, uncovered[url], prediction_rate, training_time[url], review_time[url];
+        print project, url, training_samples[url], samples[url], predictions, uncovered[url], prediction_rate, training_time[url], review_time[url];
     }
 }
 

@@ -368,28 +368,23 @@ Start bblfish
 make bblfsh-start
 ```
 
-Running the docker container:
+Running the analysis:
 
 ```bash
-docker run --rm -it --network host \
-    -v /home/kondziu/Workspace/style-analyzer/.git:/style-analyzer/.git \
-    -v /home/kondziu/Workspace/style-analyzer/lookout/core/server:/style-analyzer/lookout/core/server \
-    --entrypoint /bin/sh \
-    -v/home/kondziu/Workspace/style-analyzer/sdk:/style-analyzer/sdk \
-    -v/home/kondziu/Workspace/style-analyzer/reproductions:/style-analyzer/reproductions \
-    -v/home/kondziu/Workspace/style-analyzer/style-analyzer-query/output:/style-analyzer/queries \
-    -v/home/kondziu/Workspace/style-analyzer/database/:/style-analyzer/database \
-    -w /style-analyzer \
-    srcd/style-analyzer:latest
+make run-experiment
 ```
+
+This will run all available analyses (one for each selectrion in style-analyzer-query/output/selections)
+
+Or running just a few specific selections:
+
+```bash
+make run-experiment selections="a b c"
+```
+
+
 
 #### Inside docker
-
-Bash!
-
-```bash
-bash
-```
 
 Set important variables:
 
@@ -413,22 +408,32 @@ SMOKE_INIT="./lookout/style/format/benchmarks/data/js_smoke_init.tar.xz"
 BASE_REPORT_VERSION="0.1.0"
 ```
 
+Or, what I actually use:
+
+```bash
+QUALITY_REPORT_REPOS=database/output/quality_projects_10.csv
+QUALITY_REPORT_DIR=reproductions/quality_projects_10
+```
+
 Quick tool update
 
 ```bash
 apt update && apt install vim less
 ```
 
+<!--
 Database config
 
 ```bash
 echo -e "server: 0.0.0.0:9930\ndb: sqlite:///database/lookout.sqlite\nfs: /tmp\n" > config.yml
 ```
+-->
 
 Run command:
 
 ```bash
 mkdir -p ${QUALITY_REPORT_DIR}; \
+chmod a+rw ${QUALITY_REPORT_DIR}; \
 time python3 -m lookout.style.format \
    --log-level DEBUG quality-report \
    -o ${QUALITY_REPORT_DIR} \
@@ -438,17 +443,19 @@ time python3 -m lookout.style.format \
 
 Results and logs are in QUALITY_REPORT_DIR
 
-Run for multiple selections
+Run for multiple selections:
 
 ```bash
 # BACKWARDS, just because I already did 0 and 1.
 SELECTIONS="$(seq 0 9 | tac | xargs -I{} echo -n "random_projects_by_size_{}_10 random_projects_{}_10 ") top_starred_projects"
+SELECTIONS="quality_projects_10"
 #timestamp=`date -u  | tr -s ' ' '_'`
 time for selection in $SELECTIONS
 do
    QUALITY_REPORT_REPOS="$(pwd)/database/output/$selection.csv"
    QUALITY_REPORT_DIR="$(pwd)/reproductions/$selection"
-   mkdir -p ${QUALITY_REPORT_DIR};    
+   mkdir -p ${QUALITY_REPORT_DIR};   
+   chmod a+rw ${QUALITY_REPORT_DIR}; 
    #touch ${QUALITY_REPORT_DIR}/logs_${timestamp}.txt
    #ln -f ${QUALITY_REPORT_DIR}/logs_${timestamp}.txt ${QUALITY_REPORT_DIR}/logs.txt 
    python3 -m lookout.style.format \
@@ -457,4 +464,35 @@ do
       -i $QUALITY_REPORT_REPOS \
       2>&1 | tee -a ${QUALITY_REPORT_DIR}/logs.txt
 done
+```
+
+## Manual container setup:
+
+
+```bash
+docker run --rm -it --network host \
+    -v /home/kondziu/Workspace/style-analyzer/.git:/style-analyzer/.git \
+    -v /home/kondziu/Workspace/style-analyzer/lookout/core/server:/style-analyzer/lookout/core/server \
+    --entrypoint /bin/bash \
+    -v/home/kondziu/Workspace/style-analyzer/sdk:/style-analyzer/sdk \
+    -v/home/kondziu/Workspace/style-analyzer/reproductions:/style-analyzer/reproductions \
+    -v/home/kondziu/Workspace/style-analyzer/style-analyzer-query/output:/style-analyzer/queries \
+    -v/home/kondziu/Workspace/style-analyzer/database/:/style-analyzer/database \
+    -w /style-analyzer \
+    srcd/style-analyzer:latest
+```
+
+```bash
+docker run --rm -it --network host \
+    -v/home/kondziu/Workspace/style-analyzer/.git:/style-analyzer/.git \
+    -v/home/kondziu/Workspace/style-analyzer/lookout/core/server:/style-analyzer/lookout/core/server \
+    -v/home/kondziu/Workspace/style-analyzer/sdk:/style-analyzer/sdk \
+    -v/home/kondziu/Workspace/style-analyzer/reproductions:/style-analyzer/reproductions \
+    -v/home/kondziu/Workspace/style-analyzer/style-analyzer-query/output:/style-analyzer/selections/ \
+    -v/home/kondziu/Workspace/style-analyzer/database/:/style-analyzer/database \
+    -v/home/kondziu/Workspace/style-analyzer/scripts/:/style-analyzer/scripts \
+    --entrypoint "" \
+    -w /style-analyzer \
+    srcd/style-analyzer:latest \
+    scripts/run_experiment.sh
 ```
