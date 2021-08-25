@@ -33,7 +33,7 @@ REPRO_DIR <- "reproductions/"
 # They are used as names, they should not have / in them.
 random_projects <- paste0("random_projects_", c(0,2,3,6:9), "_", 10)
 random_projects_by_size <- paste0("random_projects_by_size_", c(0:2, 6:9), "_", 10)
-EXPERIMENTS <- c("original_reproduction", "original_10", random_projects, random_projects_by_size, "top_starred_projects")
+EXPERIMENTS <- c("original_reproduction", "original_10", random_projects, random_projects_by_size, "top_starred_projects", "quality_projects_10")
 
 # Convert to bash variables
 Sys.setenv(REPRO_DIRS = paste(paste0(REPRO_DIR, "/", EXPERIMENTS), collapse = " "))
@@ -53,12 +53,24 @@ do
   # Convert summary test report into CSV.
   scripts/extract_summary.awk \
       <"${REPRO_DIR}/summary-test_report.md" \
-      >"${REPRO_DIR}/summary.csv"
+      >"${REPRO_DIR}/summary.csv" \
+  || echo "Failed to generate summary.csv for ${REPRO_DIR}: this means the selection didn't finish processing." \
+          "It only matters if you want to generate the big table."
   
   # Extract unique label counts from individual reports.
   scripts/extract_number_of_labels.sh \
        "${REPRO_DIR}/" \
       >"${REPRO_DIR}/labels.csv" 
+      
+  # Extract support and full support unmbers for training data.
+  scripts/extract_training_samples.sh \
+       "${REPRO_DIR}/" \
+      >"${REPRO_DIR}/training_samples.csv" 
+      
+  # Extract support and full support unmbers for training data.
+  scripts/extract_test_precision.sh \
+       "${REPRO_DIR}/" \
+      >"${REPRO_DIR}/precision.csv" 
 done    
 ```
 
@@ -67,12 +79,12 @@ done
 url_to_repo <- function(url) str_replace_all(url, c("(^.*/)|([.]git$)"), "")
 
 # Common: all projects and their locs
-all_projects_path <- paste0(DJANCO_DIR, "javascript_projects.csv")
-project_locs_path <- paste0(DJANCO_DIR, "project_locs.csv")
+all_projects_path <- paste0(DJANCO_DIR, "info/javascript_projects.csv")
+project_locs_path <- paste0(DJANCO_DIR, "info/project_locs.csv")
   
 # Common: from small datatset containing only the projects from the paper
-project_locs_path_repro <- paste0(DJANCO_DIR, "repro_project_locs.csv")
-all_projects_path_repro <- paste0(DJANCO_DIR, "repro_javascript_projects.csv")
+project_locs_path_repro <- paste0(DJANCO_DIR, "info/repro_project_locs.csv")
+all_projects_path_repro <- paste0(DJANCO_DIR, "info/repro_javascript_projects.csv")
 
 # Load common data.
 all_projects <- read_csv(all_projects_path) %>% mutate(repo = url_to_repo(url))
@@ -92,38 +104,64 @@ prepare_data <- function(experiment) {
   predictions_path <- paste0(REPRO_DIR, experiment, "/predictions.csv")
   summary_path <- paste0(REPRO_DIR, experiment, "/summary.csv")
   labels_path <- paste0(REPRO_DIR, experiment, "/labels.csv")
+  samples_path <- paste0(REPRO_DIR, experiment, "/training_samples.csv")
+  precision_path <- paste0(REPRO_DIR, experiment, "/precision.csv")
 
   # CSVs
   predictions <- read_csv(predictions_path) # there is one in project_locs and this one has a different format
-  summary <- read_csv(summary_path) %>% mutate(repo = url_to_repo(repo))
   labels <- read_csv(labels_path) %>% mutate(repo = url_to_repo(repo))
+  samples <- read_csv(samples_path) %>% mutate(repo = url_to_repo(repo)) %>% rename(report_training_samples=support, report_full_training_samples=full_support)
+  precision <- read_csv(precision_path) %>% mutate(repo = url_to_repo(repo)) %>% rename(report_precision=precision)
+  
+  # Summary is optional, since we're concentrating on graphs not tables.
+  # If the whole selection didn't finish processing, the summary won't be generated, 
+  # but everything else will be.
+  finished_processing <- file.exists(summary_path);
+  summary <-
+    if (finished_processing) read_csv(summary_path) %>% mutate(repo = url_to_repo(repo))
+    else tibble(repo=character(0), precision=numeric(0), 
+                recall=numeric(0), full_recall=numeric(0), 
+                f1=numeric(0), full_f1=numeric(0), 
+                ppcr=integer(0), 
+                support=integer(0), full_support=integer(0), 
+                `Rules Number`=integer(0), `Average Rule Len`=numeric(0))
   
   # Collate results 
   collated <- predictions %>%
     left_join(project_locs, by=c("url", "repo")) %>%
     left_join(summary, by="repo") %>%
     left_join(labels, by="repo") %>%
-    filter(!is.na(precision))
+    left_join(samples, by="repo") %>%
+    left_join(precision, by="repo")
+   
     
   # Format the output
   collated %>%
-    select(-recall, -f1) %>%
+    select(-recall, -f1, -support, -precision) %>%
     mutate(pred_r=predictions/samples) %>%
     rename(recall=full_recall, 
+           precision=report_precision,
            f1=full_f1,
-           suppport=full_support,
+           support=report_training_samples,
            avg_rule_len=`Average Rule Len`,
            rules=`Rules Number`) %>%
     select(url, repo, precision, pred_r, 
            recall, f1, support, locs,
            labels, rules, avg_rule_len,  
            training_time) %>%
-    distinct
+    filter(!is.na(precision)) %>%
+    distinct 
 }
 
 # Prepare data for all experiments. Put the results in a list.
 experiment_data <- lapply(EXPERIMENTS, prepare_data)
 names(experiment_data) <- EXPERIMENTS
+
+experiment_data[["paper"]] <- tibble(
+  repo       = c("node", "webpack", "meteor", "react", "atom", "react-native", "jquery", "storybook", "freeCodeCamp", "express", "30-seconds-of-code", "evergreen", "citgm", "axios", "create-react-app", "redux", "reveal.js", "carlo", "telescope"),
+  precision  = c(0.965,  0.957,     0.9,      0.943,   0.955,   0.94,          0.972,    0.94,        0.928,           0.937,    0.951,                0.894,       0.936,    0.94,   0.895,              0.937,    0.897,      0.878,   0.806),
+  support    = c(374298, 358012,    337627,   304465,  265521,  264961,        197072,   161366,      114020,          78411,    67737,                38387,       21941,    21130,  16718,              14783,    9974,       5529,    731)
+)
 
 for (experiment in experiment_data) {
   print(experiment)
@@ -197,6 +235,27 @@ status_by_size <- status_table %>%
   
 status_by_size
 
+```
+
+## Making them big
+
+```{r}
+connect_selections <- function(selections, label) {
+  random_data <- NULL
+  for (random in random_projects) {
+    if (is.null(random_data)) {
+      random_data <- experiment_data[[random]] %>% mutate(selection = random)
+    } else {
+      random_data <- bind_rows(random_data, experiment_data[[random]] %>% mutate(selection = random))
+    }
+  }
+  experiment_data[[label]] <<- random_data %>% distinct
+  EXPERIMENTS <<- c(EXPERIMENTS, label)
+  experiment_data[[label]]
+}
+
+connect_selections(random_projects, "random_projects_all_10")
+connect_selections(random_projects_by_size, "random_projects_by_size_all_10")
 ```
 
 ## Metrics measured on the validation part of the dataset. 
@@ -288,9 +347,17 @@ make_paper_table("original_10")
 ```
 
 ```{r}
+make_paper_table("random_projects_all_10")
+```
+
+```{r}
 for (experiment in random_projects) {
   print(make_paper_table(experiment))
 }
+```
+
+```{r}
+make_paper_table("random_projects_by_size_all_10")
 ```
 
 ```{r}
@@ -310,28 +377,47 @@ for (experiment in EXPERIMENTS) {
 ```{r}
 min_precision = sapply(experiment_data, function(data) min(data$precision)) %>% min
 max_support = sapply(experiment_data, function(data) max(data$support)) %>% max
-make_precision_support_graph <- function (experiment, uniform_scales=TRUE, labels=F) {
+make_precision_support_graph <- function (experiment, uniform_scales=TRUE, labels=FALSE, color_by_selection=FALSE, log_scale=FALSE, only_top_n=NULL,  only_bottom_n=NULL) {
   data <- experiment_data[[experiment]]
-  plot <- ggplot(data, aes(x=precision, y=support)) +
-    geom_point(size=2)
+  if (!is.null(only_top_n)) {
+    data <- data %>% top_n(only_top_n)
+  }
+  if (!is.null(only_bottom_n)) {
+    data <- data %>% top_n(-only_bottom_n)
+  }
+  plot <- 
+  if (color_by_selection) {
+    ggplot(data, aes(x=precision, y=support, alpha=0.2, color=selection)) + geom_point(size=2)
+  } else {
+    ggplot(data, aes(x=precision, y=support, alpha=0.2)) + geom_point(size=2)
+  }
   if (labels) {
     plot <- plot + geom_text(aes(label=repo), position=position_nudge(y=-10000),  size=3)
   }
   
+  x_range <- if(uniform_scales) c(min_precision, 1) else NULL
+  y_range <- if(uniform_scales) c(0 - 10000, max_support) else NULL
+  
+  if (log_scale) {
+    plot <- plot + scale_y_log10(labels=label_number_si(), limits = y_range)
+  } else {
+    plot <- plot + scale_y_continuous(labels=label_number_si(), limits = y_range)
+  }
+  
   plot +
-    scale_x_continuous(labels=function(x) format(x, digits=2)) +
-    scale_y_continuous(labels=label_number_si()) +
+    scale_x_continuous(labels=function(x) format(x, digits=2), limits = x_range) +
     xlab("Precision") + 
     ylab("Samples in the training set") +
     ggtitle(paste0("Selection: ", experiment)) +
-    theme_bw()
-  
-  if (uniform_scales) {
-    plot + xlim(min_precision, 1) + ylim(0 - 10000, max_support) # -5000 to fit the stupid label
-  } else {
-    plot
-  }
+    theme_bw() + 
+    theme(legend.position = "none")
 }
+```
+
+## Reproduction vs original
+
+```{r}
+make_precision_support_graph("paper")
 ```
 
 ```{r}
@@ -342,6 +428,88 @@ make_precision_support_graph("original_reproduction")
 make_precision_support_graph("original_10")
 ```
 
+```{r}
+make_precision_support_graph("top_starred_projects")
+```
+
+```{r}
+comparison <- inner_join(experiment_data$paper, experiment_data$original_reproduction, by="repo")
+ggplot() + 
+  geom_segment(comparison, mapping=aes(x=precision.x, xend=precision.y, y=support.x, yend=support.y, alpha=0.2, color=repo), arrow=arrow()) + 
+  #geom_text(data=comparison, aes(x=precision.x, y=support.x, label=repo)) + 
+  theme_bw() +  
+  scale_x_continuous(labels=function(x) format(x, digits=2), limits = c(min_precision, 1)) +
+  scale_y_log10(labels=label_number_si(), limits =  c(0 - 10000, max_support)) +
+  ggtitle("Paper vs reproduction using input from artifact") +
+  xlab("Precision") +
+  ylab("Samples in training set") +
+  theme(legend.position="none")
+```
+
+```{r, fig.height=12, fig.width=12}
+ggplot() + 
+  geom_segment(comparison, mapping=aes(x=precision.x, xend=precision.y, y=support.x, yend=support.y, alpha=0.2, color=repo), arrow=arrow()) + 
+  geom_text(data=comparison, aes(x=precision.x, y=support.x, label=repo)) + 
+  theme_bw() +  
+  scale_x_continuous(labels=function(x) format(x, digits=2)) + #, limits = c(min_precision, 1)) +
+  scale_y_log10(labels=label_number_si()) + #limits =  c(0 - 10000, max_support)) +
+  ggtitle("Paper vs reproduction using input from artifact") + # (same, just bigger and not scaled like everything else)") +
+  xlab("Precision") +
+  ylab("Samples in training set") +
+  theme(legend.position="none")
+```
+
+How much more precision/support do we get for the reproduction:
+
+```{r}
+comparison %>% 
+  mutate(precision=precision.y,
+         precision_delta=precision.y-precision.x, 
+         precision_delta_perc=format(100*precision_delta/precision.x, digits=1),
+         support=support.y,
+         support_delta=support.y-support.x,
+         support_delta_perc=format(100*support_delta/support.x, digits=1)) %>% 
+  select(repo, precision, precision_delta, precision_delta_perc, support, support_delta,  support_delta_perc)
+```
+
+### Quality projects vs original
+
+```{r}
+make_precision_support_graph("original_10")
+```
+
+```{r}
+make_precision_support_graph("quality_projects_10", only_top_n=20)
+```
+
+```{r}
+make_precision_support_graph("quality_projects_10", only_bottom_n=20)
+```
+
+```{r}
+strip_and_label <- function(data, label) data %>% mutate(selection=label) %>% select(selection, repo, precision, support)
+
+comparison_data <- 
+  experiment_data[["original_10"]] %>% strip_and_label("original") %>%
+  bind_rows(experiment_data[["quality_projects_10"]] %>% top_n(20) %>% strip_and_label("quality_projects_1")) %>%
+  bind_rows(experiment_data[["quality_projects_10"]] %>% top_n(-20) %>% strip_and_label("quality_projects_2"))
+
+ggplot(comparison_data, aes(x=selection, y=support)) + geom_boxplot()
+```
+
+### Random samples
+
+```{r}
+make_precision_support_graph("original_reproduction")
+```
+
+```{r}
+make_precision_support_graph("original_10")
+```
+
+```{r}
+make_precision_support_graph("random_projects_all_10", color_by_selection = TRUE)
+```
 
 ```{r}
 for (experiment in random_projects) {
@@ -350,13 +518,13 @@ for (experiment in random_projects) {
 ```
 
 ```{r}
-for (experiment in random_projects_by_size) {
-  print(make_precision_support_graph(experiment))
-}
+make_precision_support_graph("random_projects_by_size_all_10", color_by_selection = TRUE)
 ```
 
 ```{r}
-make_precision_support_graph("top_starred_projects")
+for (experiment in random_projects_by_size) {
+  print(make_precision_support_graph(experiment))
+}
 ```
 
 # Notes
