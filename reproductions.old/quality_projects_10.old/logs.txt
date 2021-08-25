@@ -1,0 +1,1587 @@
+paramiko missing, opening SSH/SCP/SFTP paths will be disabled.  `pip install paramiko` to suppress
+WARNING:smart_open.smart_open_lib:this function is deprecated, use smart_open.open instead
+DEBUG:smart_open.smart_open_lib:{'transport_params': {}, 'ignore_ext': False, 'opener': None, 'closefd': True, 'newline': None, 'errors': None, 'encoding': None, 'buffering': -1, 'mode': 'r', 'uri': '/style-analyzer/database/output/quality_projects_10.csv'}
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/runpy.py", line 193, in _run_module_as_main
+    "__main__", mod_spec)
+  File "/usr/lib/python3.6/runpy.py", line 85, in _run_code
+    exec(code, run_globals)
+  File "/style-analyzer/lookout/style/format/__main__.py", line 7, in <module>
+    sys.exit(main())
+  File "/style-analyzer/lookout/style/format/cmdline_tools.py", line 256, in main
+    return handler(**vars(args))
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 295, in generate_quality_report
+    repositories = list(csv.DictReader(handle_input_arg(input)))
+  File "/usr/lib/python3.6/csv.py", line 111, in __next__
+    self.fieldnames
+  File "/usr/lib/python3.6/csv.py", line 98, in fieldnames
+    self._fieldnames = next(self.reader)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 224, in handle_input_arg
+    with smart_open(input_arg, "r") as f:
+  File "/usr/local/lib/python3.6/dist-packages/smart_open/smart_open_lib.py", line 400, in smart_open
+    return open(uri, mode, ignore_ext=ignore_extension, transport_params=transport_params, **scrubbed_kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/smart_open/smart_open_lib.py", line 300, in open
+    errors=errors,
+  File "/usr/local/lib/python3.6/dist-packages/smart_open/smart_open_lib.py", line 459, in _shortcut_open
+    return _builtin_open(parsed_uri.uri_path, mode, buffering=buffering, **open_kwargs)
+FileNotFoundError: [Errno 2] No such file or directory: '/style-analyzer/database/output/quality_projects_10.csv'
+paramiko missing, opening SSH/SCP/SFTP paths will be disabled.  `pip install paramiko` to suppress
+WARNING:smart_open.smart_open_lib:this function is deprecated, use smart_open.open instead
+DEBUG:smart_open.smart_open_lib:{'transport_params': {}, 'ignore_ext': False, 'opener': None, 'closefd': True, 'newline': None, 'errors': None, 'encoding': None, 'buffering': -1, 'mode': 'r', 'uri': '/style-analyzer/database/output/quality_projects_10.csv'}
+DEBUG:SQLAlchemyModelRepository:sqlite:////tmp/tmpn3orqip2/db.sqlite3 does not exist, creating
+WARNING:SQLAlchemyModelRepository:created a new database at sqlite:////tmp/tmpn3orqip2/db.sqlite3
+INFO:QualityAnalyzer:
+================================================================================
+= https://github.com/daureslaurent/listenserverc-.git                          =
+=  1 / 200                                                                      =
+= Now:  2021-08-23 15:22:33.574402                                             =
+= Left: None                                                                   =
+= Ends: None                                                                   =
+================================================================================
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): github.com:443
+DEBUG:urllib3.connectionpool:https://github.com:443 "GET /daureslaurent/listenserverc-.git/info/refs?service=git-upload-pack HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:https://github.com:443 "POST /daureslaurent/listenserverc-.git/git-upload-pack HTTP/1.1" 200 None
+Enumerating objects: 1805, done.
+Counting objects:   7% (1/13)Counting objects:  15% (2/13)Counting objects:  23% (3/13)Counting objects:  30% (4/13)Counting objects:  38% (5/13)Counting objects:  46% (6/13)Counting objects:  53% (7/13)Counting objects:  61% (8/13)Counting objects:  69% (9/13)Counting objects:  76% (10/13)Counting objects:  84% (11/13)Counting objects:  92% (12/13)Counting objects: 100% (13/13)Counting objects: 100% (13/13), done.
+Compressing objects:   7% (1/13)Compressing objects:  15% (2/13)Compressing objects:  23% (3/13)Compressing objects:  30% (4/13)Compressing objects:  38% (5/13)Compressing objects:  46% (6/13)Compressing objects:  53% (7/13)Compressing objects:  61% (8/13)Compressing objects:  69% (9/13)Compressing objects:  76% (10/13)Compressing objects:  84% (11/13)Compressing objects:  92% (12/13)Compressing objects: 100% (13/13)Compressing objects: 100% (13/13), done.
+Total 1805 (delta 4), reused 0 (delta 0), pack-reused 1792
+Checking out 1306eb5c17f7baa90a3ac6a59110c2ff90b62872
+INFO:EventListener:new PushEvent
+DEBUG:SQLAlchemyModelRepository:no models found for style.format.analyzer.FormatAnalyzer/1 with file:///tmp/top-repos-quality-repos-7q7ag0s6/listenserverc-.git
+INFO:AnalyzerManager:cache miss: style.format.analyzer.FormatAnalyzer
+DEBUG:AnalyzerManager:training style.format.analyzer.FormatAnalyzer
+INFO:DataService:Opened <grpc._channel.Channel object at 0x7f1722e00278>
+INFO:QualityReportAnalyzer:train 0.2.0 file:///tmp/top-repos-quality-repos-7q7ag0s6/listenserverc-.git 1306eb5c17f7baa90a3ac6a59110c2ff90b62872 {'javascript': {'feature_extractor': {'cutoff_label_support': 80, 'debug_parsing': False, 'left_features': ['length', 'diff_offset', 'diff_col', 'diff_line', 'internal_type', 'label', 'reserved', 'roles'], 'left_siblings_window': 5, 'no_labels_on_right': True, 'node_features': ['start_line', 'start_col'], 'parent_features': ['internal_type', 'roles'], 'parents_depth': 2, 'return_sibling_indices': False, 'right_features': ['length', 'internal_type', 'reserved', 'roles'], 'right_siblings_window': 5, 'select_features_number': 500}, 'line_length_limit': 500, 'lines_ratio_train_trigger': 0.2, 'lower_bound_instances': 500, 'optimizer': {'base_model_name_categories': ['sklearn.ensemble.RandomForestClassifier', 'sklearn.tree.DecisionTreeClassifier'], 'cv': 3, 'max_depth_categories': [None, 5, 10], 'max_features_categories': [None, 'auto'], 'min_samples_leaf_max': 120, 'min_samples_leaf_min': 90, 'min_samples_split_max': 240, 'min_samples_split_min': 180, 'n_iter': 50, 'n_jobs': -1}, 'overall_size_limit': 5242880, 'random_state': 42, 'test_dataset_ratio': 0.2, 'trainable_rules': {'attribute_similarity_threshold': 0.98, 'confidence_threshold': 0.8, 'n_estimators': 10, 'prune_attributes': True, 'prune_branches_algorithms': ['reduced-error'], 'prune_dataset_ratio': 0.2, 'top_down_greedy_budget': [False, 0.5]}}}
+INFO:QualityReportAnalyzer:effective train config for javascript:
+{'feature_extractor': {'cutoff_label_support': 80,
+                       'debug_parsing': False,
+                       'left_features': ['length', 'diff_offset', 'diff_col', 'diff_line', 'internal_type', 'label',
+                                         'reserved', 'roles'],
+                       'left_siblings_window': 5,
+                       'no_labels_on_right': True,
+                       'node_features': ['start_line', 'start_col'],
+                       'parent_features': ['internal_type', 'roles'],
+                       'parents_depth': 2,
+                       'return_sibling_indices': False,
+                       'right_features': ['length', 'internal_type', 'reserved', 'roles'],
+                       'right_siblings_window': 5,
+                       'select_features_number': 500},
+ 'line_length_limit': 500,
+ 'lines_ratio_train_trigger': 0.2,
+ 'lower_bound_instances': 500,
+ 'optimizer': {'base_model_name_categories': ['sklearn.ensemble.RandomForestClassifier',
+                                              'sklearn.tree.DecisionTreeClassifier'],
+               'cv': 3,
+               'max_depth_categories': [None, 5, 10],
+               'max_features_categories': [None, 'auto'],
+               'min_samples_leaf_max': 120,
+               'min_samples_leaf_min': 90,
+               'min_samples_split_max': 240,
+               'min_samples_split_min': 180,
+               'n_iter': 50,
+               'n_jobs': -1},
+ 'overall_size_limit': 5242880,
+ 'random_state': 42,
+ 'test_dataset_ratio': 0.2,
+ 'trainable_rules': {'attribute_similarity_threshold': 0.98,
+                     'confidence_threshold': 0.8,
+                     'n_estimators': 10,
+                     'prune_attributes': True,
+                     'prune_branches_algorithms': ['reduced-error'],
+                     'prune_dataset_ratio': 0.2,
+                     'top_down_greedy_budget': [False, 0.5]}}
+DEBUG:QualityReportAnalyzer:excluded 0/34 files by path
+DEBUG:QualityReportAnalyzer:excluded 0/34 files by max line length 500
+DEBUG:QualityReportAnalyzer:excluded 0/34 files by max overall size 5242880
+INFO:QualityReportAnalyzer:training on 34 javascript files
+DEBUG:FeaturesExtractor:Parsed 25604 vnodes
+DEBUG:FeaturesExtractor:Removed 24/34 labels by support 80
+DEBUG:FeaturesExtractor:12788 out of 25604 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (12788, 4185)
+DEBUG:FeaturesExtractor:Features shape after selection: (12788, 500)
+DEBUG:FeaturesExtractor:Parsed 5943 vnodes
+DEBUG:FeaturesExtractor:2987 out of 5943 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (2987, 500)
+DEBUG:QualityReportAnalyzer:Real test ratio is 0.189
+INFO:QualityReportAnalyzer:extracted 12788 samples to train, searching for the best hyperparameters
+DEBUG:Optimizer:patched joblib
+DEBUG:Optimizer:Iteration No: 001. Time taken: 0.7689. Function value obtained: -0.7316. Current minimum: -0.7316.
+DEBUG:Optimizer:Iteration No: 002. Time taken: 0.5863. Function value obtained: -0.7526. Current minimum: -0.7526.
+DEBUG:Optimizer:Iteration No: 003. Time taken: 0.4731. Function value obtained: -0.7916. Current minimum: -0.7916.
+DEBUG:Optimizer:Iteration No: 004. Time taken: 0.2050. Function value obtained: -0.7628. Current minimum: -0.7916.
+DEBUG:Optimizer:Iteration No: 005. Time taken: 0.2734. Function value obtained: -0.8112. Current minimum: -0.8112.
+DEBUG:Optimizer:Iteration No: 006. Time taken: 0.1436. Function value obtained: -0.6731. Current minimum: -0.8112.
+DEBUG:Optimizer:Iteration No: 007. Time taken: 0.0992. Function value obtained: -0.7638. Current minimum: -0.8112.
+DEBUG:Optimizer:Iteration No: 008. Time taken: 0.7540. Function value obtained: -0.8426. Current minimum: -0.8426.
+DEBUG:Optimizer:Iteration No: 009. Time taken: 0.2086. Function value obtained: -0.8398. Current minimum: -0.8426.
+DEBUG:Optimizer:Iteration No: 010. Time taken: 0.6309. Function value obtained: -0.7655. Current minimum: -0.8426.
+DEBUG:Optimizer:Iteration No: 011. Time taken: 0.6446. Function value obtained: -0.8520. Current minimum: -0.8520.
+DEBUG:Optimizer:Iteration No: 012. Time taken: 1.2031. Function value obtained: -0.8363. Current minimum: -0.8520.
+DEBUG:Optimizer:Iteration No: 013. Time taken: 0.7343. Function value obtained: -0.8434. Current minimum: -0.8520.
+DEBUG:Optimizer:Iteration No: 014. Time taken: 1.0585. Function value obtained: -0.7107. Current minimum: -0.8520.
+DEBUG:Optimizer:Iteration No: 015. Time taken: 0.6612. Function value obtained: -0.8520. Current minimum: -0.8520.
+DEBUG:Optimizer:Iteration No: 016. Time taken: 1.2583. Function value obtained: -0.8506. Current minimum: -0.8520.
+DEBUG:Optimizer:Iteration No: 017. Time taken: 0.6335. Function value obtained: -0.8524. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 018. Time taken: 0.5970. Function value obtained: -0.8520. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 019. Time taken: 0.7067. Function value obtained: -0.8524. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 020. Time taken: 0.6271. Function value obtained: -0.8524. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 021. Time taken: 0.6552. Function value obtained: -0.8524. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 022. Time taken: 1.1743. Function value obtained: -0.8442. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 023. Time taken: 0.6543. Function value obtained: -0.8524. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 024. Time taken: 0.6937. Function value obtained: -0.8434. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 025. Time taken: 0.6682. Function value obtained: -0.8524. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 026. Time taken: 1.3132. Function value obtained: -0.8370. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 027. Time taken: 0.6453. Function value obtained: -0.8432. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 028. Time taken: 1.7011. Function value obtained: -0.8504. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 029. Time taken: 1.0172. Function value obtained: -0.8520. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 030. Time taken: 1.3432. Function value obtained: -0.8506. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 031. Time taken: 0.6423. Function value obtained: -0.8524. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 032. Time taken: 0.8403. Function value obtained: -0.8524. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 033. Time taken: 0.7536. Function value obtained: -0.8524. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 034. Time taken: 0.7086. Function value obtained: -0.8524. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 035. Time taken: 1.4226. Function value obtained: -0.8449. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 036. Time taken: 0.6849. Function value obtained: -0.8520. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 037. Time taken: 1.2696. Function value obtained: -0.8440. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 038. Time taken: 1.4336. Function value obtained: -0.8504. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 039. Time taken: 0.8061. Function value obtained: -0.8524. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 040. Time taken: 1.2412. Function value obtained: -0.8370. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 041. Time taken: 0.7135. Function value obtained: -0.8450. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 042. Time taken: 0.7469. Function value obtained: -0.8524. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 043. Time taken: 1.0156. Function value obtained: -0.8434. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 044. Time taken: 0.8021. Function value obtained: -0.8520. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 045. Time taken: 1.2268. Function value obtained: -0.8452. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 046. Time taken: 1.4614. Function value obtained: -0.8506. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 047. Time taken: 0.8451. Function value obtained: -0.8520. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 048. Time taken: 0.7879. Function value obtained: -0.8524. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 049. Time taken: 0.7499. Function value obtained: -0.8520. Current minimum: -0.8524.
+DEBUG:Optimizer:Iteration No: 050. Time taken: 1.4756. Function value obtained: -0.8440. Current minimum: -0.8524.
+DEBUG:QualityReportAnalyzer:score of the best estimator found: 0.852437
+DEBUG:QualityReportAnalyzer:params of the best estimator found: {'base_model_name': 'sklearn.tree.DecisionTreeClassifier', 'max_depth': None, 'max_features': None, 'min_samples_split': 180, 'min_samples_leaf': 90}
+DEBUG:QualityReportAnalyzer:training the model with complete data
+DEBUG:TrainableRules:fitting rules with params {'attribute_similarity_threshold': 0.98, 'base_model_name': 'sklearn.tree.DecisionTreeClassifier', 'confidence_threshold': 0.8, 'max_depth': None, 'max_features': None, 'min_samples_leaf': 90, 'min_samples_split': 180, 'n_estimators': 10, 'prune_attributes': True, 'prune_branches_algorithms': ['reduced-error'], 'prune_dataset_ratio': 0.2, 'random_state': 42, 'top_down_greedy_budget': [False, 0.5]}
+DEBUG:TrainableRules:pruned 78/120 branches w/ reduced error pruning
+DEBUG:TrainableRules:merged 83/169 attributes
+DEBUG:TrainableRules:pruned 8/86 attributes (0/10 rules)
+DEBUG:Rules:compiling 10 rules
+DEBUG:QualityReportAnalyzer:feature importances from sklearn.tree.DecisionTreeClassifier:
+	parents.0.internal_type.VariableDeclarator              1.30989E-01
+	left.0.reserved.;                                       1.11333E-01
+	left.0.reserved.,                                       8.70312E-02
+	left.0.reserved.var                                     8.09002E-02
+	right.0.internal_type.StringLiteral                     8.08511E-02
+	left.0.roles.STRING                                     8.05949E-02
+	left.0.reserved.{                                       7.81418E-02
+	parents.0.roles.OPERATOR                                7.25483E-02
+	right.0.reserved.}                                      5.71658E-02
+	node.0.start_col                                        4.58988E-02
+	left.0.diff_col                                         3.59303E-02
+	left.1.roles.MAP                                        2.08268E-02
+	parents.0.roles.FILE                                    1.96796E-02
+	left.0.roles.EXPRESSION                                 1.72710E-02
+	left.0.reserved.function                                1.72523E-02
+	right.0.reserved.{                                      8.29138E-03
+	left.2.internal_type.Identifier                         7.85862E-03
+	right.0.reserved.)                                      7.33824E-03
+	parents.0.internal_type.BlockStatement                  6.51268E-03
+	left.1.label.<-space>                                   5.09957E-03
+	left.3.diff_col                                         4.55978E-03
+	parents.0.roles.STATEMENT                               4.04261E-03
+	node.0.start_line                                       3.44062E-03
+	right.0.reserved..                                      2.99813E-03
+	left.2.diff_col                                         1.92176E-03
+DEBUG:TrainableRules:pruned 8/78 categorical attributes (0/10 rules)
+DEBUG:Rules:compiling 10 rules
+INFO:QualityReportAnalyzer:obtained 10 rules, generating the classification report
+DEBUG:Rules:predicting 12788 samples using 10 rules
+DEBUG:Rules:No rule was triggered in 2780 cases.
+DEBUG:Rules:predicting 2987 samples using 10 rules
+DEBUG:Rules:No rule was triggered in 686 cases.
+INFO:QualityReportAnalyzer:trained {'code': None, 'created_at': '2021-08-23 15:22:34+0000', 'datasets': [], 'dependencies': [], 'description': 'Model bound to style.format.analyzer.FormatAnalyzer Lookout analyzer.', 'environment': {'packages': '', 'platform': 'Linux-5.4.0-81-generic-x86_64-with-Ubuntu-18.04-bionic', 'python': '3.6.7 (default, Oct 22 2018, 11:32:17) [GCC 8.2.0]'}, 'extra': None, 'license': 'ODbL-1.0', 'metrics': {}, 'model': 'style.format.analyzer.FormatAnalyzer', 'parent': None, 'references': [], 'series': None, 'size': '0 Bytes', 'tags': [], 'uuid': 'c869a95a-3b79-45fb-968b-738bf04509ed', 'vendor': 'source{d}', 'version': [1]}
+style.format.analyzer.FormatAnalyzer/[1] file:///tmp/top-repos-quality-repos-7q7ag0s6/listenserverc-.git 1306eb5c17f7baa90a3ac6a59110c2ff90b62872
+
+# javascript
+10 rules, avg.len. 7.0
+## train
+PPCR: 0.782609
+### report
+macro
+{'f1-score': 0.2722779844042223,
+ 'precision': 0.26805919336536654,
+ 'recall': 0.27674246003082714,
+ 'support': 10008}
+micro
+{'f1-score': 0.9320543565147882,
+ 'precision': 0.9320543565147882,
+ 'recall': 0.9320543565147882,
+ 'support': 10008}
+weighted
+{'f1-score': 0.9173287572291211,
+ 'precision': 0.9032603391672294,
+ 'recall': 0.9320543565147882,
+ 'support': 10008}
+### report_full
+macro
+{'f1-score': 0.23765106033062025,
+ 'precision': 0.26805919336536654,
+ 'recall': 0.21754154173094387,
+ 'support': 12788}
+micro
+{'f1-score': 0.8183891910861554,
+ 'precision': 0.9320543565147882,
+ 'recall': 0.7294338442289646,
+ 'support': 12788}
+weighted
+{'f1-score': 0.7576288542879226,
+ 'precision': 0.792851884555793,
+ 'recall': 0.7294338442289646,
+ 'support': 12788}
+## test
+PPCR: 0.770338
+### report
+macro
+{'f1-score': 0.25635467026890385,
+ 'precision': 0.24999612689985212,
+ 'recall': 0.26323884855027063,
+ 'support': 2301}
+micro
+{'f1-score': 0.9191655801825294,
+ 'precision': 0.9191655801825294,
+ 'recall': 0.9191655801825294,
+ 'support': 2301}
+weighted
+{'f1-score': 0.8979730302413712,
+ 'precision': 0.8779499142243342,
+ 'recall': 0.9191655801825294,
+ 'support': 2301}
+### report_full
+macro
+{'f1-score': 0.22441891198063738,
+ 'precision': 0.24999612689985212,
+ 'recall': 0.2055404871257597,
+ 'support': 2987}
+micro
+{'f1-score': 0.7999243570347957,
+ 'precision': 0.9191655801825294,
+ 'recall': 0.7080682959491128,
+ 'support': 2987}
+weighted
+{'f1-score': 0.7415170312685311,
+ 'precision': 0.7815866814592627,
+ 'recall': 0.7080682959491128,
+ 'support': 2987}
+DEBUG:SQLAlchemyModelRepository:set style.format.analyzer.FormatAnalyzer/1 with file:///tmp/top-repos-quality-repos-7q7ag0s6/listenserverc-.git
+INFO:EventListener:OK 53.260
+INFO:EventListener:new ReviewEvent
+INFO:AnalyzerManager:style.format.analyzer.FormatAnalyzer config: {'aggregate': True}
+INFO:generic:Reading /tmp/tmpn3orqip2/models/tmp/top-repos-quality-repos-7q7ag0s6/listenserverc-/style.format.analyzer.FormatAnalyzer_1.asdf (18.4 kB)...
+DEBUG:Rules:compiling 10 rules
+DEBUG:SQLAlchemyModelRepository:loaded style.format.analyzer.FormatAnalyzer/1 with file:///tmp/top-repos-quality-repos-7q7ag0s6/listenserverc-.git from /tmp/tmpn3orqip2/models/tmp/top-repos-quality-repos-7q7ag0s6/listenserverc-/style.format.analyzer.FormatAnalyzer_1.asdf
+INFO:AnalyzerManager:cache miss: style.format.analyzer.FormatAnalyzer
+DEBUG:AnalyzerManager:running style.format.analyzer.FormatAnalyzer
+DEBUG:Rules:Filtered rules by confidence >= 0.920: 10 -> 5
+DEBUG:Rules:compiling 5 rules
+DEBUG:Rules:Filtered rules by support >= 80: 5 -> 5
+DEBUG:Rules:compiling 5 rules
+DEBUG:QualityReportAnalyzer:excluded 0/19 files by path
+DEBUG:QualityReportAnalyzer:excluded 0/19 files by max line length 500
+DEBUG:QualityReportAnalyzer:excluded 0/19 files by max overall size 5242880
+DEBUG:QualityReportAnalyzer:api/utils/serverCmd.js None
+DEBUG:FeaturesExtractor:Parsed 1002 vnodes
+DEBUG:FeaturesExtractor:500 out of 1002 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (500, 500)
+DEBUG:Rules:predicting 500 samples using 5 rules
+DEBUG:Rules:No rule was triggered in 330 cases.
+DEBUG:Rules:compiling 5 rules
+DEBUG:CodeGenerator:Quotes cannot be changed to non-quote tokens.
+vnode: VirtualNode("'", y=∅, start=(11, 1, 12), end=(12, 1, 13), node=None, path="api/utils/serverCmd.js"), y_new: ∅ url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Quotes cannot be changed to non-quote tokens.\nvnode: VirtualNode("\'", y=∅, start=(11, 1, 12), end=(12, 1, 13), node=None, path="api/utils/serverCmd.js"), y_new: ∅',)
+INFO:UASTStabilityChecker:1 filtered out of 5 with changes
+DEBUG:QualityReportAnalyzer:api/utils/serverCmd.js 4 fixes
+DEBUG:QualityReportAnalyzer:api/converter/graphConverter.js None
+DEBUG:FeaturesExtractor:Parsed 2320 vnodes
+DEBUG:FeaturesExtractor:1151 out of 2320 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (1151, 500)
+DEBUG:Rules:predicting 1151 samples using 5 rules
+DEBUG:Rules:No rule was triggered in 721 cases.
+DEBUG:Rules:compiling 5 rules
+DEBUG:CodeGenerator:Quotes cannot be changed to non-quote tokens.
+vnode: VirtualNode("'", y=∅, start=(11, 1, 12), end=(12, 1, 13), node=None, path="api/converter/graphConverter.js"), y_new: ∅ url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Quotes cannot be changed to non-quote tokens.\nvnode: VirtualNode("\'", y=∅, start=(11, 1, 12), end=(12, 1, 13), node=None, path="api/converter/graphConverter.js"), y_new: ∅',)
+INFO:UASTStabilityChecker:1 filtered out of 2 with changes
+DEBUG:QualityReportAnalyzer:api/converter/graphConverter.js 1 fixes
+DEBUG:QualityReportAnalyzer:app.js None
+DEBUG:FeaturesExtractor:Parsed 1627 vnodes
+DEBUG:FeaturesExtractor:823 out of 1627 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (823, 500)
+DEBUG:Rules:predicting 823 samples using 5 rules
+DEBUG:Rules:No rule was triggered in 583 cases.
+DEBUG:Rules:compiling 5 rules
+INFO:UASTStabilityChecker:0 filtered out of 8 with changes
+DEBUG:QualityReportAnalyzer:app.js 8 fixes
+DEBUG:QualityReportAnalyzer:api/controllers/dataController.js None
+DEBUG:FeaturesExtractor:Parsed 2492 vnodes
+DEBUG:FeaturesExtractor:1238 out of 2492 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (1238, 500)
+DEBUG:Rules:predicting 1238 samples using 5 rules
+DEBUG:Rules:No rule was triggered in 810 cases.
+DEBUG:Rules:compiling 5 rules
+DEBUG:CodeGenerator:Quotes cannot be changed to non-quote tokens.
+vnode: VirtualNode("'", y=∅, start=(11, 1, 12), end=(12, 1, 13), node=None, path="api/controllers/dataController.js"), y_new: ∅ url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Quotes cannot be changed to non-quote tokens.\nvnode: VirtualNode("\'", y=∅, start=(11, 1, 12), end=(12, 1, 13), node=None, path="api/controllers/dataController.js"), y_new: ∅',)
+INFO:UASTStabilityChecker:1 filtered out of 2 with changes
+DEBUG:QualityReportAnalyzer:api/controllers/dataController.js 1 fixes
+DEBUG:QualityReportAnalyzer:web/controllers/graphControllers.js None
+DEBUG:FeaturesExtractor:Parsed 567 vnodes
+DEBUG:FeaturesExtractor:284 out of 567 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (284, 500)
+DEBUG:Rules:predicting 284 samples using 5 rules
+DEBUG:Rules:No rule was triggered in 180 cases.
+DEBUG:Rules:compiling 5 rules
+DEBUG:CodeGenerator:Quotes cannot be changed to non-quote tokens.
+vnode: VirtualNode("'", y=∅, start=(11, 1, 12), end=(12, 1, 13), node=None, path="web/controllers/graphControllers.js"), y_new: ∅ url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Quotes cannot be changed to non-quote tokens.\nvnode: VirtualNode("\'", y=∅, start=(11, 1, 12), end=(12, 1, 13), node=None, path="web/controllers/graphControllers.js"), y_new: ∅',)
+INFO:UASTStabilityChecker:1 filtered out of 3 with changes
+DEBUG:QualityReportAnalyzer:web/controllers/graphControllers.js 2 fixes
+DEBUG:QualityReportAnalyzer:test.js None
+DEBUG:FeaturesExtractor:Parsed 242 vnodes
+DEBUG:FeaturesExtractor:124 out of 242 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (124, 500)
+DEBUG:Rules:predicting 124 samples using 5 rules
+DEBUG:Rules:No rule was triggered in 86 cases.
+DEBUG:Rules:compiling 5 rules
+INFO:UASTStabilityChecker:0 filtered out of 4 with changes
+DEBUG:QualityReportAnalyzer:test.js 4 fixes
+DEBUG:QualityReportAnalyzer:api/models/serverModel.js None
+DEBUG:FeaturesExtractor:Parsed 165 vnodes
+DEBUG:FeaturesExtractor:83 out of 165 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (83, 500)
+DEBUG:Rules:predicting 83 samples using 5 rules
+DEBUG:Rules:No rule was triggered in 44 cases.
+DEBUG:Rules:compiling 5 rules
+DEBUG:CodeGenerator:Quotes cannot be changed to non-quote tokens.
+vnode: VirtualNode("'", y=∅, start=(11, 1, 12), end=(12, 1, 13), node=None, path="api/models/serverModel.js"), y_new: ∅ url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Quotes cannot be changed to non-quote tokens.\nvnode: VirtualNode("\'", y=∅, start=(11, 1, 12), end=(12, 1, 13), node=None, path="api/models/serverModel.js"), y_new: ∅',)
+INFO:UASTStabilityChecker:1 filtered out of 9 with changes
+DEBUG:QualityReportAnalyzer:api/models/serverModel.js 8 fixes
+DEBUG:QualityReportAnalyzer:testTCP.js None
+DEBUG:FeaturesExtractor:Parsed 564 vnodes
+DEBUG:FeaturesExtractor:280 out of 564 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (280, 500)
+DEBUG:Rules:predicting 280 samples using 5 rules
+DEBUG:Rules:No rule was triggered in 200 cases.
+DEBUG:Rules:compiling 5 rules
+INFO:UASTStabilityChecker:0 filtered out of 3 with changes
+DEBUG:QualityReportAnalyzer:testTCP.js 3 fixes
+DEBUG:QualityReportAnalyzer:api/converter/graphProcess.js None
+DEBUG:FeaturesExtractor:Parsed 964 vnodes
+DEBUG:FeaturesExtractor:479 out of 964 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (479, 500)
+DEBUG:Rules:predicting 479 samples using 5 rules
+DEBUG:Rules:No rule was triggered in 290 cases.
+DEBUG:Rules:compiling 5 rules
+DEBUG:CodeGenerator:Quotes cannot be changed to non-quote tokens.
+vnode: VirtualNode("'", y=∅, start=(11, 1, 12), end=(12, 1, 13), node=None, path="api/converter/graphProcess.js"), y_new: ∅ url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Quotes cannot be changed to non-quote tokens.\nvnode: VirtualNode("\'", y=∅, start=(11, 1, 12), end=(12, 1, 13), node=None, path="api/converter/graphProcess.js"), y_new: ∅',)
+INFO:UASTStabilityChecker:2 filtered out of 2 with changes
+DEBUG:QualityReportAnalyzer:api/converter/graphProcess.js 0 fixes
+DEBUG:QualityReportAnalyzer:api/utils/netCmd.js None
+DEBUG:FeaturesExtractor:Parsed 624 vnodes
+DEBUG:FeaturesExtractor:313 out of 624 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (313, 500)
+DEBUG:Rules:predicting 313 samples using 5 rules
+DEBUG:Rules:No rule was triggered in 200 cases.
+DEBUG:Rules:compiling 5 rules
+DEBUG:CodeGenerator:Quotes cannot be changed to non-quote tokens.
+vnode: VirtualNode("'", y=∅, start=(11, 1, 12), end=(12, 1, 13), node=None, path="api/utils/netCmd.js"), y_new: ∅ url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Quotes cannot be changed to non-quote tokens.\nvnode: VirtualNode("\'", y=∅, start=(11, 1, 12), end=(12, 1, 13), node=None, path="api/utils/netCmd.js"), y_new: ∅',)
+INFO:UASTStabilityChecker:1 filtered out of 1 with changes
+DEBUG:QualityReportAnalyzer:api/utils/netCmd.js 0 fixes
+DEBUG:QualityReportAnalyzer:api/config.js None
+DEBUG:FeaturesExtractor:Parsed 53 vnodes
+DEBUG:FeaturesExtractor:28 out of 53 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (28, 500)
+DEBUG:Rules:predicting 28 samples using 5 rules
+DEBUG:Rules:No rule was triggered in 15 cases.
+DEBUG:Rules:compiling 5 rules
+INFO:UASTStabilityChecker:0 filtered out of 1 with changes
+DEBUG:QualityReportAnalyzer:api/config.js 1 fixes
+DEBUG:QualityReportAnalyzer:api/converter/dataConverter.js None
+DEBUG:FeaturesExtractor:Parsed 1782 vnodes
+DEBUG:FeaturesExtractor:891 out of 1782 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (891, 500)
+DEBUG:Rules:predicting 891 samples using 5 rules
+DEBUG:Rules:No rule was triggered in 525 cases.
+DEBUG:Rules:compiling 5 rules
+DEBUG:CodeGenerator:Quotes cannot be changed to non-quote tokens.
+vnode: VirtualNode("'", y=∅, start=(11, 1, 12), end=(12, 1, 13), node=None, path="api/converter/dataConverter.js"), y_new: ∅ url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Quotes cannot be changed to non-quote tokens.\nvnode: VirtualNode("\'", y=∅, start=(11, 1, 12), end=(12, 1, 13), node=None, path="api/converter/dataConverter.js"), y_new: ∅',)
+INFO:UASTStabilityChecker:1 filtered out of 1 with changes
+DEBUG:QualityReportAnalyzer:api/converter/dataConverter.js 0 fixes
+DEBUG:QualityReportAnalyzer:web/routes/routeApi.js None
+DEBUG:FeaturesExtractor:Parsed 1627 vnodes
+DEBUG:FeaturesExtractor:813 out of 1627 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (813, 500)
+DEBUG:Rules:predicting 813 samples using 5 rules
+DEBUG:Rules:No rule was triggered in 548 cases.
+DEBUG:Rules:compiling 5 rules
+DEBUG:CodeGenerator:Quotes cannot be changed to non-quote tokens.
+vnode: VirtualNode("'", y=∅, start=(11, 1, 12), end=(12, 1, 13), node=None, path="web/routes/routeApi.js"), y_new: ∅ url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Quotes cannot be changed to non-quote tokens.\nvnode: VirtualNode("\'", y=∅, start=(11, 1, 12), end=(12, 1, 13), node=None, path="web/routes/routeApi.js"), y_new: ∅',)
+INFO:UASTStabilityChecker:1 filtered out of 2 with changes
+DEBUG:QualityReportAnalyzer:web/routes/routeApi.js 1 fixes
+DEBUG:QualityReportAnalyzer:api/models/dataModel.js None
+DEBUG:FeaturesExtractor:Parsed 173 vnodes
+DEBUG:FeaturesExtractor:87 out of 173 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (87, 500)
+DEBUG:Rules:predicting 87 samples using 5 rules
+DEBUG:Rules:No rule was triggered in 48 cases.
+DEBUG:Rules:compiling 5 rules
+DEBUG:CodeGenerator:Quotes cannot be changed to non-quote tokens.
+vnode: VirtualNode("'", y=∅, start=(11, 1, 12), end=(12, 1, 13), node=None, path="api/models/dataModel.js"), y_new: ∅ url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Quotes cannot be changed to non-quote tokens.\nvnode: VirtualNode("\'", y=∅, start=(11, 1, 12), end=(12, 1, 13), node=None, path="api/models/dataModel.js"), y_new: ∅',)
+INFO:UASTStabilityChecker:1 filtered out of 9 with changes
+DEBUG:QualityReportAnalyzer:api/models/dataModel.js 8 fixes
+DEBUG:QualityReportAnalyzer:api/models/ipModel.js None
+DEBUG:FeaturesExtractor:Parsed 125 vnodes
+DEBUG:FeaturesExtractor:63 out of 125 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (63, 500)
+DEBUG:Rules:predicting 63 samples using 5 rules
+DEBUG:Rules:No rule was triggered in 36 cases.
+DEBUG:Rules:compiling 5 rules
+DEBUG:CodeGenerator:Quotes cannot be changed to non-quote tokens.
+vnode: VirtualNode("'", y=∅, start=(11, 1, 12), end=(12, 1, 13), node=None, path="api/models/ipModel.js"), y_new: ∅ url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Quotes cannot be changed to non-quote tokens.\nvnode: VirtualNode("\'", y=∅, start=(11, 1, 12), end=(12, 1, 13), node=None, path="api/models/ipModel.js"), y_new: ∅',)
+INFO:UASTStabilityChecker:1 filtered out of 5 with changes
+DEBUG:QualityReportAnalyzer:api/models/ipModel.js 4 fixes
+DEBUG:QualityReportAnalyzer:web/view/js/chartsLoader.js None
+DEBUG:FeaturesExtractor:Parsed 1424 vnodes
+DEBUG:FeaturesExtractor:716 out of 1424 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (716, 500)
+DEBUG:Rules:predicting 716 samples using 5 rules
+DEBUG:Rules:No rule was triggered in 451 cases.
+DEBUG:Rules:compiling 5 rules
+INFO:UASTStabilityChecker:0 filtered out of 12 with changes
+DEBUG:QualityReportAnalyzer:web/view/js/chartsLoader.js 12 fixes
+DEBUG:QualityReportAnalyzer:web/web.js None
+DEBUG:FeaturesExtractor:Parsed 2143 vnodes
+DEBUG:FeaturesExtractor:1074 out of 2143 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (1074, 500)
+DEBUG:Rules:predicting 1074 samples using 5 rules
+DEBUG:Rules:No rule was triggered in 672 cases.
+DEBUG:Rules:compiling 5 rules
+DEBUG:CodeGenerator:Quotes cannot be changed to non-quote tokens.
+vnode: VirtualNode("'", y=∅, start=(11, 1, 12), end=(12, 1, 13), node=None, path="web/web.js"), y_new: ∅ url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Quotes cannot be changed to non-quote tokens.\nvnode: VirtualNode("\'", y=∅, start=(11, 1, 12), end=(12, 1, 13), node=None, path="web/web.js"), y_new: ∅',)
+INFO:UASTStabilityChecker:1 filtered out of 3 with changes
+DEBUG:QualityReportAnalyzer:web/web.js 1 fixes
+DEBUG:QualityReportAnalyzer:api/controllers/serverController.js None
+DEBUG:FeaturesExtractor:Parsed 1244 vnodes
+DEBUG:FeaturesExtractor:623 out of 1244 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (623, 500)
+DEBUG:Rules:predicting 623 samples using 5 rules
+DEBUG:Rules:No rule was triggered in 413 cases.
+DEBUG:Rules:compiling 5 rules
+DEBUG:CodeGenerator:Quotes cannot be changed to non-quote tokens.
+vnode: VirtualNode("'", y=∅, start=(11, 1, 12), end=(12, 1, 13), node=None, path="api/controllers/serverController.js"), y_new: ∅ url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Quotes cannot be changed to non-quote tokens.\nvnode: VirtualNode("\'", y=∅, start=(11, 1, 12), end=(12, 1, 13), node=None, path="api/controllers/serverController.js"), y_new: ∅',)
+INFO:UASTStabilityChecker:1 filtered out of 1 with changes
+DEBUG:QualityReportAnalyzer:api/controllers/serverController.js 0 fixes
+DEBUG:QualityReportAnalyzer:api/utils/utils.js None
+DEBUG:FeaturesExtractor:Parsed 2781 vnodes
+DEBUG:FeaturesExtractor:1394 out of 2781 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (1394, 500)
+DEBUG:Rules:predicting 1394 samples using 5 rules
+DEBUG:Rules:No rule was triggered in 905 cases.
+DEBUG:Rules:compiling 5 rules
+DEBUG:CodeGenerator:Quotes cannot be changed to non-quote tokens.
+vnode: VirtualNode("'", y=∅, start=(11, 1, 12), end=(12, 1, 13), node=None, path="api/utils/utils.js"), y_new: ∅ url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Quotes cannot be changed to non-quote tokens.\nvnode: VirtualNode("\'", y=∅, start=(11, 1, 12), end=(12, 1, 13), node=None, path="api/utils/utils.js"), y_new: ∅',)
+INFO:UASTStabilityChecker:1 filtered out of 5 with changes
+DEBUG:QualityReportAnalyzer:api/utils/utils.js 4 fixes
+DEBUG:Rules:Filtered rules by confidence >= 0.920: 10 -> 5
+DEBUG:Rules:compiling 5 rules
+DEBUG:Rules:Filtered rules by support >= 80: 5 -> 5
+DEBUG:Rules:compiling 5 rules
+/style-analyzer/lookout/style/format/benchmarks/general_report.py:356: FutureWarning: arrays to stack must be passed as a "sequence" type such as list or tuple. Support for non-sequence iterables such as generators is deprecated as of NumPy 1.16 and will raise an error in the future.
+  ys = numpy.hstack(fix.y for fix in fixes)
+/style-analyzer/lookout/style/format/benchmarks/general_report.py:357: FutureWarning: arrays to stack must be passed as a "sequence" type such as list or tuple. Support for non-sequence iterables such as generators is deprecated as of NumPy 1.16 and will raise an error in the future.
+  y_pred_pure = numpy.hstack(fix.y_pred_pure for fix in fixes)
+INFO:AnalyzerManager:style.format.analyzer.FormatAnalyzer: 3 comments
+INFO:EventListener:OK 10.024
+INFO:QualityAnalyzer:
+================================================================================
+= https://github.com/parallels/rq-dashboard.git                                =
+=  2 / 200                                                                      =
+= Now:  2021-08-23 15:23:37.645899                                             =
+= Left: 3:32:30.228699                                                         =
+= Ends: 2021-08-23 18:56:07.874598                                             =
+================================================================================
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): github.com:443
+DEBUG:urllib3.connectionpool:https://github.com:443 "GET /parallels/rq-dashboard.git/info/refs?service=git-upload-pack HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:https://github.com:443 "POST /parallels/rq-dashboard.git/git-upload-pack HTTP/1.1" 200 None
+Enumerating objects: 3270, done.
+Counting objects:   0% (1/158)Counting objects:   1% (2/158)Counting objects:   2% (4/158)Counting objects:   3% (5/158)Counting objects:   4% (7/158)Counting objects:   5% (8/158)Counting objects:   6% (10/158)Counting objects:   7% (12/158)Counting objects:   8% (13/158)Counting objects:   9% (15/158)Counting objects:  10% (16/158)Counting objects:  11% (18/158)Counting objects:  12% (19/158)Counting objects:  13% (21/158)Counting objects:  14% (23/158)Counting objects:  15% (24/158)Counting objects:  16% (26/158)Counting objects:  17% (27/158)Counting objects:  18% (29/158)Counting objects:  19% (31/158)Counting objects:  20% (32/158)Counting objects:  21% (34/158)Counting objects:  22% (35/158)Counting objects:  23% (37/158)Counting objects:  24% (38/158)Counting objects:  25% (40/158)Counting objects:  26% (42/158)Counting objects:  27% (43/158)Counting objects:  28% (45/158)Counting objects:  29% (46/158)Counting objects:  30% (48/158)Counting objects:  31% (49/158)Counting objects:  32% (51/158)Counting objects:  33% (53/158)Counting objects:  34% (54/158)Counting objects:  35% (56/158)Counting objects:  36% (57/158)Counting objects:  37% (59/158)Counting objects:  38% (61/158)Counting objects:  39% (62/158)Counting objects:  40% (64/158)Counting objects:  41% (65/158)Counting objects:  42% (67/158)Counting objects:  43% (68/158)Counting objects:  44% (70/158)Counting objects:  45% (72/158)Counting objects:  46% (73/158)Counting objects:  47% (75/158)Counting objects:  48% (76/158)Counting objects:  49% (78/158)Counting objects:  50% (79/158)Counting objects:  51% (81/158)Counting objects:  52% (83/158)Counting objects:  53% (84/158)Counting objects:  54% (86/158)Counting objects:  55% (87/158)Counting objects:  56% (89/158)Counting objects:  57% (91/158)Counting objects:  58% (92/158)Counting objects:  59% (94/158)Counting objects:  60% (95/158)Counting objects:  61% (97/158)Counting objects:  62% (98/158)Counting objects:  63% (100/158)Counting objects:  64% (102/158)Counting objects:  65% (103/158)Counting objects:  66% (105/158)Counting objects:  67% (106/158)Counting objects:  68% (108/158)Counting objects:  69% (110/158)Counting objects:  70% (111/158)Counting objects:  71% (113/158)Counting objects:  72% (114/158)Counting objects:  73% (116/158)Counting objects:  74% (117/158)Counting objects:  75% (119/158)Counting objects:  76% (121/158)Counting objects:  77% (122/158)Counting objects:  78% (124/158)Counting objects:  79% (125/158)Counting objects:  80% (127/158)Counting objects:  81% (128/158)Counting objects:  82% (130/158)Counting objects:  83% (132/158)Counting objects:  84% (133/158)Counting objects:  85% (135/158)Counting objects:  86% (136/158)Counting objects:  87% (138/158)Counting objects:  88% (140/158)Counting objects:  89% (141/158)Counting objects:  90% (143/158)Counting objects:  91% (144/158)Counting objects:  92% (146/158)Counting objects:  93% (147/158)Counting objects:  94% (149/158)Counting objects:  95% (151/158)Counting objects:  96% (152/158)Counting objects:  97% (154/158)Counting objects:  98% (155/158)Counting objects:  99% (157/158)Counting objects: 100% (158/158)Counting objects: 100% (158/158), done.
+Compressing objects:   0% (1/131)Compressing objects:   1% (2/131)Compressing objects:   2% (3/131)Compressing objects:   3% (4/131)Compressing objects:   4% (6/131)Compressing objects:   5% (7/131)Compressing objects:   6% (8/131)Compressing objects:   7% (10/131)Compressing objects:   8% (11/131)Compressing objects:   9% (12/131)Compressing objects:  10% (14/131)Compressing objects:  11% (15/131)Compressing objects:  12% (16/131)Compressing objects:  13% (18/131)Compressing objects:  14% (19/131)Compressing objects:  15% (20/131)Compressing objects:  16% (21/131)Compressing objects:  17% (23/131)Compressing objects:  18% (24/131)Compressing objects:  19% (25/131)Compressing objects:  20% (27/131)Compressing objects:  21% (28/131)Compressing objects:  22% (29/131)Compressing objects:  23% (31/131)Compressing objects:  24% (32/131)Compressing objects:  25% (33/131)Compressing objects:  26% (35/131)Compressing objects:  27% (36/131)Compressing objects:  28% (37/131)Compressing objects:  29% (38/131)Compressing objects:  30% (40/131)Compressing objects:  31% (41/131)Compressing objects:  32% (42/131)Compressing objects:  33% (44/131)Compressing objects:  34% (45/131)Compressing objects:  35% (46/131)Compressing objects:  36% (48/131)Compressing objects:  37% (49/131)Compressing objects:  38% (50/131)Compressing objects:  39% (52/131)Compressing objects:  40% (53/131)Compressing objects:  41% (54/131)Compressing objects:  42% (56/131)Compressing objects:  43% (57/131)Compressing objects:  44% (58/131)Compressing objects:  45% (59/131)Compressing objects:  46% (61/131)Compressing objects:  47% (62/131)Compressing objects:  48% (63/131)Compressing objects:  49% (65/131)Compressing objects:  50% (66/131)Compressing objects:  51% (67/131)Compressing objects:  52% (69/131)Compressing objects:  53% (70/131)Compressing objects:  54% (71/131)Compressing objects:  55% (73/131)Compressing objects:  56% (74/131)Compressing objects:  57% (75/131)Compressing objects:  58% (76/131)Compressing objects:  59% (78/131)Compressing objects:  60% (79/131)Compressing objects:  61% (80/131)Compressing objects:  62% (82/131)Compressing objects:  63% (83/131)Compressing objects:  64% (84/131)Compressing objects:  65% (86/131)Compressing objects:  66% (87/131)Compressing objects:  67% (88/131)Compressing objects:  68% (90/131)Compressing objects:  69% (91/131)Compressing objects:  70% (92/131)Compressing objects:  71% (94/131)Compressing objects:  72% (95/131)Compressing objects:  73% (96/131)Compressing objects:  74% (97/131)Compressing objects:  75% (99/131)Compressing objects:  76% (100/131)Compressing objects:  77% (101/131)Compressing objects:  78% (103/131)Compressing objects:  79% (104/131)Compressing objects:  80% (105/131)Compressing objects:  81% (107/131)Compressing objects:  82% (108/131)Compressing objects:  83% (109/131)Compressing objects:  84% (111/131)Compressing objects:  85% (112/131)Compressing objects:  86% (113/131)Compressing objects:  87% (114/131)Compressing objects:  88% (116/131)Compressing objects:  89% (117/131)Compressing objects:  90% (118/131)Compressing objects:  91% (120/131)Compressing objects:  92% (121/131)Compressing objects:  93% (122/131)Compressing objects:  94% (124/131)Compressing objects:  95% (125/131)Compressing objects:  96% (126/131)Compressing objects:  97% (128/131)Compressing objects:  98% (129/131)Compressing objects:  99% (130/131)Compressing objects: 100% (131/131)Compressing objects: 100% (131/131), done.
+Total 3270 (delta 82), reused 45 (delta 24), pack-reused 3112
+Checking out 3a3c91a910f7d82f16421c9dd29f6f1116df710a
+INFO:EventListener:new PushEvent
+DEBUG:SQLAlchemyModelRepository:no models found for style.format.analyzer.FormatAnalyzer/1 with file:///tmp/top-repos-quality-repos-1oe956u5/rq-dashboard.git
+INFO:AnalyzerManager:cache miss: style.format.analyzer.FormatAnalyzer
+DEBUG:AnalyzerManager:training style.format.analyzer.FormatAnalyzer
+INFO:QualityReportAnalyzer:train 0.2.0 file:///tmp/top-repos-quality-repos-1oe956u5/rq-dashboard.git 3a3c91a910f7d82f16421c9dd29f6f1116df710a {'javascript': {'feature_extractor': {'cutoff_label_support': 80, 'debug_parsing': False, 'left_features': ['length', 'diff_offset', 'diff_col', 'diff_line', 'internal_type', 'label', 'reserved', 'roles'], 'left_siblings_window': 5, 'no_labels_on_right': True, 'node_features': ['start_line', 'start_col'], 'parent_features': ['internal_type', 'roles'], 'parents_depth': 2, 'return_sibling_indices': False, 'right_features': ['length', 'internal_type', 'reserved', 'roles'], 'right_siblings_window': 5, 'select_features_number': 500}, 'line_length_limit': 500, 'lines_ratio_train_trigger': 0.2, 'lower_bound_instances': 500, 'optimizer': {'base_model_name_categories': ['sklearn.ensemble.RandomForestClassifier', 'sklearn.tree.DecisionTreeClassifier'], 'cv': 3, 'max_depth_categories': [None, 5, 10], 'max_features_categories': [None, 'auto'], 'min_samples_leaf_max': 120, 'min_samples_leaf_min': 90, 'min_samples_split_max': 240, 'min_samples_split_min': 180, 'n_iter': 50, 'n_jobs': -1}, 'overall_size_limit': 5242880, 'random_state': 42, 'test_dataset_ratio': 0.2, 'trainable_rules': {'attribute_similarity_threshold': 0.98, 'confidence_threshold': 0.8, 'n_estimators': 10, 'prune_attributes': True, 'prune_branches_algorithms': ['reduced-error'], 'prune_dataset_ratio': 0.2, 'top_down_greedy_budget': [False, 0.5]}}}
+INFO:QualityReportAnalyzer:effective train config for javascript:
+{'feature_extractor': {'cutoff_label_support': 80,
+                       'debug_parsing': False,
+                       'left_features': ['length', 'diff_offset', 'diff_col', 'diff_line', 'internal_type', 'label',
+                                         'reserved', 'roles'],
+                       'left_siblings_window': 5,
+                       'no_labels_on_right': True,
+                       'node_features': ['start_line', 'start_col'],
+                       'parent_features': ['internal_type', 'roles'],
+                       'parents_depth': 2,
+                       'return_sibling_indices': False,
+                       'right_features': ['length', 'internal_type', 'reserved', 'roles'],
+                       'right_siblings_window': 5,
+                       'select_features_number': 500},
+ 'line_length_limit': 500,
+ 'lines_ratio_train_trigger': 0.2,
+ 'lower_bound_instances': 500,
+ 'optimizer': {'base_model_name_categories': ['sklearn.ensemble.RandomForestClassifier',
+                                              'sklearn.tree.DecisionTreeClassifier'],
+               'cv': 3,
+               'max_depth_categories': [None, 5, 10],
+               'max_features_categories': [None, 'auto'],
+               'min_samples_leaf_max': 120,
+               'min_samples_leaf_min': 90,
+               'min_samples_split_max': 240,
+               'min_samples_split_min': 180,
+               'n_iter': 50,
+               'n_jobs': -1},
+ 'overall_size_limit': 5242880,
+ 'random_state': 42,
+ 'test_dataset_ratio': 0.2,
+ 'trainable_rules': {'attribute_similarity_threshold': 0.98,
+                     'confidence_threshold': 0.8,
+                     'n_estimators': 10,
+                     'prune_attributes': True,
+                     'prune_branches_algorithms': ['reduced-error'],
+                     'prune_dataset_ratio': 0.2,
+                     'top_down_greedy_budget': [False, 0.5]}}
+DEBUG:QualityReportAnalyzer:excluded 0/3 files by path
+DEBUG:QualityReportAnalyzer:excluded 0/3 files by max line length 500
+DEBUG:QualityReportAnalyzer:excluded 0/3 files by max overall size 5242880
+INFO:QualityReportAnalyzer:training on 3 javascript files
+DEBUG:FeaturesExtractor:Parsed 1300 vnodes
+DEBUG:FeaturesExtractor:Removed 5/7 labels by support 80
+DEBUG:FeaturesExtractor:491 out of 1300 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (491, 4185)
+DEBUG:FeaturesExtractor:Features shape after selection: (491, 500)
+DEBUG:FeaturesExtractor:Parsed 69241 vnodes
+DEBUG:FeaturesExtractor:28318 out of 69241 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (28318, 500)
+DEBUG:QualityReportAnalyzer:Real test ratio is 0.983
+WARNING:QualityReportAnalyzer:skipped 3 javascript files: too few samples (491/500)
+INFO:QualityReportAnalyzer:trained {'code': None, 'created_at': '2021-08-23 15:23:39+0000', 'datasets': [], 'dependencies': [], 'description': 'Model bound to style.format.analyzer.FormatAnalyzer Lookout analyzer.', 'environment': {'packages': '', 'platform': 'Linux-5.4.0-81-generic-x86_64-with-Ubuntu-18.04-bionic', 'python': '3.6.7 (default, Oct 22 2018, 11:32:17) [GCC 8.2.0]'}, 'extra': None, 'license': 'ODbL-1.0', 'metrics': {}, 'model': 'style.format.analyzer.FormatAnalyzer', 'parent': None, 'references': [], 'series': None, 'size': '0 Bytes', 'tags': [], 'uuid': 'beedb38c-7d0a-4b18-8761-4d6ad195020e', 'vendor': 'source{d}', 'version': [1]}
+style.format.analyzer.FormatAnalyzer/[1] file:///tmp/top-repos-quality-repos-1oe956u5/rq-dashboard.git 3a3c91a910f7d82f16421c9dd29f6f1116df710a
+DEBUG:SQLAlchemyModelRepository:set style.format.analyzer.FormatAnalyzer/1 with file:///tmp/top-repos-quality-repos-1oe956u5/rq-dashboard.git
+INFO:EventListener:OK 24.730
+INFO:EventListener:new ReviewEvent
+INFO:AnalyzerManager:style.format.analyzer.FormatAnalyzer config: {'aggregate': True}
+INFO:generic:Reading /tmp/tmpn3orqip2/models/tmp/top-repos-quality-repos-1oe956u5/rq-dashboard/style.format.analyzer.FormatAnalyzer_1.asdf (3.1 kB)...
+DEBUG:SQLAlchemyModelRepository:loaded style.format.analyzer.FormatAnalyzer/1 with file:///tmp/top-repos-quality-repos-1oe956u5/rq-dashboard.git from /tmp/tmpn3orqip2/models/tmp/top-repos-quality-repos-1oe956u5/rq-dashboard/style.format.analyzer.FormatAnalyzer_1.asdf
+INFO:AnalyzerManager:cache miss: style.format.analyzer.FormatAnalyzer
+DEBUG:AnalyzerManager:running style.format.analyzer.FormatAnalyzer
+WARNING:QualityReportAnalyzer:skipped 3 written in javascript. Rules for javascript do not exist in model
+WARNING:QualityReportAnalyzer:Train report generation failed. There are no fixes for style.format.analyzer.FormatAnalyzer/[1] file:///tmp/top-repos-quality-repos-1oe956u5/rq-dashboard.git 3a3c91a910f7d82f16421c9dd29f6f1116df710a
+ERROR:EventListener:FAIL 2.973
+Traceback (most recent call last):
+  File "/lookout-sdk-ml/lookout/core/event_listener.py", line 184, in wrapped_catch_them_all
+    return func(self, request, context)
+  File "/lookout-sdk-ml/lookout/core/event_listener.py", line 209, in wrapped_handle
+    return getattr(self.handlers, method_name)(request)
+  File "/lookout-sdk-ml/lookout/core/manager.py", line 81, in process_review_event
+    base_ptr, head_ptr, self._data_service)
+  File "/style-analyzer/lookout/style/format/benchmarks/general_report.py", line 270, in analyze
+    [fix for fix in self.run(ptr_from, data_service) if not fix.error], ""))
+  File "/style-analyzer/lookout/style/format/benchmarks/general_report.py", line 258, in convert_fixes_to_report_comments
+    yield generate_comment(filename=filepath, line=0, confidence=100, text=report)
+  File "/style-analyzer/lookout/style/format/utils.py", line 55, in generate_comment
+    comment.text = text
+TypeError: None has type NoneType, but expected one of: bytes, unicode
+ERROR:QualityAnalyzer:--------------------
+Failed to process https://github.com/parallels/rq-dashboard.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 137, in measure_quality
+    bblfsh=bblfsh, config_json=config)
+  File "/lookout-sdk-ml/lookout/core/helpers/analyzer_context_manager.py", line 87, in review
+    log_level=log_level, config_json=config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 101, in review
+    return self._run("review", fr, to, port, git_dir, bblfsh, log_level, config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 131, in _run
+    return subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/tmp/lookout-sdk-ml/lookout-sdk-v0.7.0', 'review', 'ipv4://localhost:28316', '--from', '570839ac24772c8c1d7b51a3e402dbf38570af52', '--to', '3a3c91a910f7d82f16421c9dd29f6f1116df710a', '--git-dir', '/tmp/top-repos-quality-repos-1oe956u5/rq-dashboard.git', '--log-format', 'json', '--log-level', 'warning', '--config-json', '{"style.format.analyzer.FormatAnalyzer": {"aggregate": true}}']' returned non-zero exit status 1.
+INFO:QualityAnalyzer:
+================================================================================
+= https://github.com/finos/perspective.git                                     =
+=  3 / 200                                                                      =
+= Now:  2021-08-23 15:24:06.760160                                             =
+= Left: 2:33:45.390438                                                         =
+= Ends: 2021-08-23 17:57:52.150598                                             =
+================================================================================
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): github.com:443
+DEBUG:urllib3.connectionpool:https://github.com:443 "GET /finos/perspective.git/info/refs?service=git-upload-pack HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:https://github.com:443 "POST /finos/perspective.git/git-upload-pack HTTP/1.1" 200 None
+Enumerating objects: 59119, done.
+Counting objects:   0% (1/5531)Counting objects:   1% (56/5531)Counting objects:   2% (111/5531)Counting objects:   3% (166/5531)Counting objects:   4% (222/5531)Counting objects:   5% (277/5531)Counting objects:   6% (332/5531)Counting objects:   7% (388/5531)Counting objects:   8% (443/5531)Counting objects:   9% (498/5531)Counting objects:  10% (554/5531)Counting objects:  11% (609/5531)Counting objects:  12% (664/5531)Counting objects:  13% (720/5531)Counting objects:  14% (775/5531)Counting objects:  15% (830/5531)Counting objects:  16% (885/5531)Counting objects:  17% (941/5531)Counting objects:  18% (996/5531)Counting objects:  19% (1051/5531)Counting objects:  20% (1107/5531)Counting objects:  21% (1162/5531)Counting objects:  22% (1217/5531)Counting objects:  23% (1273/5531)Counting objects:  24% (1328/5531)Counting objects:  25% (1383/5531)Counting objects:  26% (1439/5531)Counting objects:  27% (1494/5531)Counting objects:  28% (1549/5531)Counting objects:  29% (1604/5531)Counting objects:  30% (1660/5531)Counting objects:  31% (1715/5531)Counting objects:  32% (1770/5531)Counting objects:  33% (1826/5531)Counting objects:  34% (1881/5531)Counting objects:  35% (1936/5531)Counting objects:  36% (1992/5531)Counting objects:  37% (2047/5531)Counting objects:  38% (2102/5531)Counting objects:  39% (2158/5531)Counting objects:  40% (2213/5531)Counting objects:  41% (2268/5531)Counting objects:  42% (2324/5531)Counting objects:  43% (2379/5531)Counting objects:  44% (2434/5531)Counting objects:  45% (2489/5531)Counting objects:  46% (2545/5531)Counting objects:  47% (2600/5531)Counting objects:  48% (2655/5531)Counting objects:  49% (2711/5531)Counting objects:  50% (2766/5531)Counting objects:  51% (2821/5531)Counting objects:  52% (2877/5531)Counting objects:  53% (2932/5531)Counting objects:  54% (2987/5531)Counting objects:  55% (3043/5531)Counting objects:  56% (3098/5531)Counting objects:  57% (3153/5531)Counting objects:  58% (3208/5531)Counting objects:  59% (3264/5531)Counting objects:  60% (3319/5531)Counting objects:  61% (3374/5531)Counting objects:  62% (3430/5531)Counting objects:  63% (3485/5531)Counting objects:  64% (3540/5531)Counting objects:  65% (3596/5531)Counting objects:  66% (3651/5531)Counting objects:  67% (3706/5531)Counting objects:  68% (3762/5531)Counting objects:  69% (3817/5531)Counting objects:  70% (3872/5531)Counting objects:  71% (3928/5531)Counting objects:  72% (3983/5531)Counting objects:  73% (4038/5531)Counting objects:  74% (4093/5531)Counting objects:  75% (4149/5531)Counting objects:  76% (4204/5531)Counting objects:  77% (4259/5531)Counting objects:  78% (4315/5531)Counting objects:  79% (4370/5531)Counting objects:  80% (4425/5531)Counting objects:  81% (4481/5531)Counting objects:  82% (4536/5531)Counting objects:  83% (4591/5531)Counting objects:  84% (4647/5531)Counting objects:  85% (4702/5531)Counting objects:  86% (4757/5531)Counting objects:  87% (4812/5531)Counting objects:  88% (4868/5531)Counting objects:  89% (4923/5531)Counting objects:  90% (4978/5531)Counting objects:  91% (5034/5531)Counting objects:  92% (5089/5531)Counting objects:  93% (5144/5531)Counting objects:  94% (5200/5531)Counting objects:  95% (5255/5531)Counting objects:  96% (5310/5531)Counting objects:  97% (5366/5531)Counting objects:  98% (5421/5531)Counting objects:  99% (5476/5531)Counting objects: 100% (5531/5531)Counting objects: 100% (5531/5531), done.
+Compressing objects:   0% (1/2095)Compressing objects:   1% (21/2095)Compressing objects:   2% (42/2095)Compressing objects:   3% (63/2095)Compressing objects:   4% (84/2095)Compressing objects:   5% (105/2095)Compressing objects:   6% (126/2095)Compressing objects:   7% (147/2095)Compressing objects:   8% (168/2095)Compressing objects:   9% (189/2095)Compressing objects:  10% (210/2095)Compressing objects:  10% (221/2095)Compressing objects:  11% (231/2095)Compressing objects:  12% (252/2095)Compressing objects:  13% (273/2095)Compressing objects:  14% (294/2095)Compressing objects:  15% (315/2095)Compressing objects:  16% (336/2095)Compressing objects:  17% (357/2095)Compressing objects:  18% (378/2095)Compressing objects:  19% (399/2095)Compressing objects:  20% (419/2095)Compressing objects:  21% (440/2095)Compressing objects:  22% (461/2095)Compressing objects:  23% (482/2095)Compressing objects:  24% (503/2095)Compressing objects:  25% (524/2095)Compressing objects:  26% (545/2095)Compressing objects:  27% (566/2095)Compressing objects:  28% (587/2095)Compressing objects:  29% (608/2095)Compressing objects:  30% (629/2095)Compressing objects:  31% (650/2095)Compressing objects:  32% (671/2095)Compressing objects:  33% (692/2095)Compressing objects:  34% (713/2095)Compressing objects:  35% (734/2095)Compressing objects:  36% (755/2095)Compressing objects:  37% (776/2095)Compressing objects:  38% (797/2095)Compressing objects:  39% (818/2095)Compressing objects:  40% (838/2095)Compressing objects:  41% (859/2095)Compressing objects:  42% (880/2095)Compressing objects:  43% (901/2095)Compressing objects:  44% (922/2095)Compressing objects:  45% (943/2095)Compressing objects:  46% (964/2095)Compressing objects:  47% (985/2095)Compressing objects:  48% (1006/2095)Compressing objects:  49% (1027/2095)Compressing objects:  50% (1048/2095)Compressing objects:  51% (1069/2095)Compressing objects:  52% (1090/2095)Compressing objects:  53% (1111/2095)Compressing objects:  54% (1132/2095)Compressing objects:  55% (1153/2095)Compressing objects:  56% (1174/2095)Compressing objects:  57% (1195/2095)Compressing objects:  58% (1216/2095)Compressing objects:  59% (1237/2095)Compressing objects:  60% (1257/2095)Compressing objects:  61% (1278/2095)Compressing objects:  62% (1299/2095)Compressing objects:  63% (1320/2095)Compressing objects:  64% (1341/2095)Compressing objects:  65% (1362/2095)Compressing objects:  66% (1383/2095)Compressing objects:  67% (1404/2095)Compressing objects:  68% (1425/2095)Compressing objects:  69% (1446/2095)Compressing objects:  70% (1467/2095)Compressing objects:  71% (1488/2095)Compressing objects:  72% (1509/2095)Compressing objects:  73% (1530/2095)Compressing objects:  74% (1551/2095)Compressing objects:  75% (1572/2095)Compressing objects:  76% (1593/2095)Compressing objects:  77% (1614/2095)Compressing objects:  78% (1635/2095)Compressing objects:  79% (1656/2095)Compressing objects:  80% (1676/2095)Compressing objects:  81% (1697/2095)Compressing objects:  82% (1718/2095)Compressing objects:  83% (1739/2095)Compressing objects:  84% (1760/2095)Compressing objects:  85% (1781/2095)Compressing objects:  86% (1802/2095)Compressing objects:  87% (1823/2095)Compressing objects:  88% (1844/2095)Compressing objects:  89% (1865/2095)Compressing objects:  90% (1886/2095)Compressing objects:  91% (1907/2095)Compressing objects:  92% (1928/2095)Compressing objects:  93% (1949/2095)Compressing objects:  94% (1970/2095)Compressing objects:  95% (1991/2095)Compressing objects:  96% (2012/2095)Compressing objects:  97% (2033/2095)Compressing objects:  98% (2054/2095)Compressing objects:  99% (2075/2095)Compressing objects: 100% (2095/2095)Compressing objects: 100% (2095/2095), done.
+Total 59119 (delta 3288), reused 5071 (delta 3098), pack-reused 53588
+Checking out d65229cea046803d2adbdeb0ad4c8929df599c3a
+INFO:EventListener:new PushEvent
+DEBUG:SQLAlchemyModelRepository:no models found for style.format.analyzer.FormatAnalyzer/1 with file:///tmp/top-repos-quality-repos-cme79abw/perspective.git
+INFO:AnalyzerManager:cache miss: style.format.analyzer.FormatAnalyzer
+DEBUG:AnalyzerManager:training style.format.analyzer.FormatAnalyzer
+INFO:QualityReportAnalyzer:train 0.2.0 file:///tmp/top-repos-quality-repos-cme79abw/perspective.git ef1690e7a9474ccd93243fd80ca48010478166fb {'javascript': {'feature_extractor': {'cutoff_label_support': 80, 'debug_parsing': False, 'left_features': ['length', 'diff_offset', 'diff_col', 'diff_line', 'internal_type', 'label', 'reserved', 'roles'], 'left_siblings_window': 5, 'no_labels_on_right': True, 'node_features': ['start_line', 'start_col'], 'parent_features': ['internal_type', 'roles'], 'parents_depth': 2, 'return_sibling_indices': False, 'right_features': ['length', 'internal_type', 'reserved', 'roles'], 'right_siblings_window': 5, 'select_features_number': 500}, 'line_length_limit': 500, 'lines_ratio_train_trigger': 0.2, 'lower_bound_instances': 500, 'optimizer': {'base_model_name_categories': ['sklearn.ensemble.RandomForestClassifier', 'sklearn.tree.DecisionTreeClassifier'], 'cv': 3, 'max_depth_categories': [None, 5, 10], 'max_features_categories': [None, 'auto'], 'min_samples_leaf_max': 120, 'min_samples_leaf_min': 90, 'min_samples_split_max': 240, 'min_samples_split_min': 180, 'n_iter': 50, 'n_jobs': -1}, 'overall_size_limit': 5242880, 'random_state': 42, 'test_dataset_ratio': 0.2, 'trainable_rules': {'attribute_similarity_threshold': 0.98, 'confidence_threshold': 0.8, 'n_estimators': 10, 'prune_attributes': True, 'prune_branches_algorithms': ['reduced-error'], 'prune_dataset_ratio': 0.2, 'top_down_greedy_budget': [False, 0.5]}}}
+INFO:QualityReportAnalyzer:effective train config for javascript:
+{'feature_extractor': {'cutoff_label_support': 80,
+                       'debug_parsing': False,
+                       'left_features': ['length', 'diff_offset', 'diff_col', 'diff_line', 'internal_type', 'label',
+                                         'reserved', 'roles'],
+                       'left_siblings_window': 5,
+                       'no_labels_on_right': True,
+                       'node_features': ['start_line', 'start_col'],
+                       'parent_features': ['internal_type', 'roles'],
+                       'parents_depth': 2,
+                       'return_sibling_indices': False,
+                       'right_features': ['length', 'internal_type', 'reserved', 'roles'],
+                       'right_siblings_window': 5,
+                       'select_features_number': 500},
+ 'line_length_limit': 500,
+ 'lines_ratio_train_trigger': 0.2,
+ 'lower_bound_instances': 500,
+ 'optimizer': {'base_model_name_categories': ['sklearn.ensemble.RandomForestClassifier',
+                                              'sklearn.tree.DecisionTreeClassifier'],
+               'cv': 3,
+               'max_depth_categories': [None, 5, 10],
+               'max_features_categories': [None, 'auto'],
+               'min_samples_leaf_max': 120,
+               'min_samples_leaf_min': 90,
+               'min_samples_split_max': 240,
+               'min_samples_split_min': 180,
+               'n_iter': 50,
+               'n_jobs': -1},
+ 'overall_size_limit': 5242880,
+ 'random_state': 42,
+ 'test_dataset_ratio': 0.2,
+ 'trainable_rules': {'attribute_similarity_threshold': 0.98,
+                     'confidence_threshold': 0.8,
+                     'n_estimators': 10,
+                     'prune_attributes': True,
+                     'prune_branches_algorithms': ['reduced-error'],
+                     'prune_dataset_ratio': 0.2,
+                     'top_down_greedy_budget': [False, 0.5]}}
+DEBUG:QualityReportAnalyzer:excluded 0/329 files by path
+DEBUG:QualityReportAnalyzer:excluded 0/329 files by max line length 500
+DEBUG:QualityReportAnalyzer:excluded 0/329 files by max overall size 5242880
+INFO:QualityReportAnalyzer:training on 329 javascript files
+WARNING:FeaturesExtractor:could not parse file packages/perspective-viewer-d3fc/src/js/plugin/template.js with error 'missed some imaginary tokens: "];
+
+@"', skipping
+WARNING:FeaturesExtractor:could not parse file packages/perspective-viewer/src/js/autocomplete_widget.js with error 'missed some imaginary tokens: "
+@"', skipping
+WARNING:FeaturesExtractor:could not parse file packages/perspective-viewer/src/js/computed_expressions/widget.js with error 'missed some imaginary tokens: "
+@"', skipping
+WARNING:FeaturesExtractor:could not parse file packages/perspective-viewer/src/js/expression_editor.js with error 'missed some imaginary tokens: "
+@"', skipping
+WARNING:FeaturesExtractor:could not parse file packages/perspective-viewer/src/js/viewer.js with error 'missed some imaginary tokens: "
+@"', skipping
+DEBUG:FeaturesExtractor:Parsed 450338 vnodes
+DEBUG:FeaturesExtractor:Removed 10/19 labels by support 80
+DEBUG:FeaturesExtractor:228512 out of 450338 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (228512, 4185)
+DEBUG:FeaturesExtractor:Features shape after selection: (228512, 500)
+WARNING:FeaturesExtractor:could not parse file packages/perspective-viewer/src/js/row.js with error 'missed some imaginary tokens: "
+@"', skipping
+WARNING:FeaturesExtractor:could not parse file packages/perspective-workspace/src/js/index.js with error 'missed some imaginary tokens: "
+@"', skipping
+DEBUG:FeaturesExtractor:Parsed 121383 vnodes
+DEBUG:FeaturesExtractor:61572 out of 121383 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (61572, 500)
+DEBUG:QualityReportAnalyzer:Real test ratio is 0.212
+INFO:QualityReportAnalyzer:extracted 228512 samples to train, searching for the best hyperparameters
+DEBUG:Optimizer:patched joblib
+DEBUG:Optimizer:Iteration No: 001. Time taken: 0.9788. Function value obtained: -0.8702. Current minimum: -0.8702.
+DEBUG:Optimizer:Iteration No: 002. Time taken: 13.7904. Function value obtained: -0.7575. Current minimum: -0.8702.
+DEBUG:Optimizer:Iteration No: 003. Time taken: 2.5875. Function value obtained: -0.8668. Current minimum: -0.8702.
+DEBUG:Optimizer:Iteration No: 004. Time taken: 2.0437. Function value obtained: -0.7610. Current minimum: -0.8702.
+DEBUG:Optimizer:Iteration No: 005. Time taken: 5.6945. Function value obtained: -0.9403. Current minimum: -0.9403.
+DEBUG:Optimizer:Iteration No: 006. Time taken: 0.4701. Function value obtained: -0.6339. Current minimum: -0.9403.
+DEBUG:Optimizer:Iteration No: 007. Time taken: 1.8642. Function value obtained: -0.7610. Current minimum: -0.9403.
+DEBUG:Optimizer:Iteration No: 008. Time taken: 75.5360. Function value obtained: -0.9385. Current minimum: -0.9403.
+DEBUG:Optimizer:Iteration No: 009. Time taken: 4.0233. Function value obtained: -0.8967. Current minimum: -0.9403.
+DEBUG:Optimizer:Iteration No: 010. Time taken: 2.2909. Function value obtained: -0.7610. Current minimum: -0.9403.
+DEBUG:Optimizer:Iteration No: 011. Time taken: 5.9328. Function value obtained: -0.9400. Current minimum: -0.9403.
+DEBUG:Optimizer:Iteration No: 012. Time taken: 28.8606. Function value obtained: -0.8961. Current minimum: -0.9403.
+DEBUG:Optimizer:Iteration No: 013. Time taken: 10.8782. Function value obtained: -0.9480. Current minimum: -0.9480.
+DEBUG:Optimizer:Iteration No: 014. Time taken: 10.9720. Function value obtained: -0.9478. Current minimum: -0.9480.
+DEBUG:Optimizer:Iteration No: 015. Time taken: 11.5588. Function value obtained: -0.9481. Current minimum: -0.9481.
+DEBUG:Optimizer:Iteration No: 016. Time taken: 12.8106. Function value obtained: -0.9478. Current minimum: -0.9481.
+DEBUG:Optimizer:Iteration No: 017. Time taken: 11.6892. Function value obtained: -0.9478. Current minimum: -0.9481.
+DEBUG:Optimizer:Iteration No: 018. Time taken: 82.1618. Function value obtained: -0.9468. Current minimum: -0.9481.
+DEBUG:Optimizer:Iteration No: 019. Time taken: 12.8924. Function value obtained: -0.9480. Current minimum: -0.9481.
+DEBUG:Optimizer:Iteration No: 020. Time taken: 5.6853. Function value obtained: -0.9352. Current minimum: -0.9481.
+DEBUG:Optimizer:Iteration No: 021. Time taken: 4.5241. Function value obtained: -0.8970. Current minimum: -0.9481.
+DEBUG:Optimizer:Iteration No: 022. Time taken: 11.6536. Function value obtained: -0.9481. Current minimum: -0.9481.
+DEBUG:Optimizer:Iteration No: 023. Time taken: 84.0126. Function value obtained: -0.9482. Current minimum: -0.9482.
+DEBUG:Optimizer:Iteration No: 024. Time taken: 73.0051. Function value obtained: -0.9383. Current minimum: -0.9482.
+DEBUG:Optimizer:Iteration No: 025. Time taken: 10.9982. Function value obtained: -0.9480. Current minimum: -0.9482.
+DEBUG:Optimizer:Iteration No: 026. Time taken: 11.1013. Function value obtained: -0.9482. Current minimum: -0.9482.
+DEBUG:Optimizer:Iteration No: 027. Time taken: 10.5933. Function value obtained: -0.9473. Current minimum: -0.9482.
+DEBUG:Optimizer:Iteration No: 028. Time taken: 11.2297. Function value obtained: -0.9481. Current minimum: -0.9482.
+DEBUG:Optimizer:Iteration No: 029. Time taken: 11.3008. Function value obtained: -0.9481. Current minimum: -0.9482.
+DEBUG:Optimizer:Iteration No: 030. Time taken: 12.6162. Function value obtained: -0.9480. Current minimum: -0.9482.
+DEBUG:Optimizer:Iteration No: 031. Time taken: 84.8450. Function value obtained: -0.9482. Current minimum: -0.9482.
+DEBUG:Optimizer:Iteration No: 032. Time taken: 14.2235. Function value obtained: -0.9481. Current minimum: -0.9482.
+DEBUG:Optimizer:Iteration No: 033. Time taken: 12.5459. Function value obtained: -0.9481. Current minimum: -0.9482.
+DEBUG:Optimizer:Iteration No: 034. Time taken: 11.9489. Function value obtained: -0.9481. Current minimum: -0.9482.
+DEBUG:Optimizer:Iteration No: 035. Time taken: 11.9617. Function value obtained: -0.9481. Current minimum: -0.9482.
+DEBUG:Optimizer:Iteration No: 036. Time taken: 12.3406. Function value obtained: -0.9481. Current minimum: -0.9482.
+DEBUG:Optimizer:Iteration No: 037. Time taken: 77.9808. Function value obtained: -0.9468. Current minimum: -0.9482.
+DEBUG:Optimizer:Iteration No: 038. Time taken: 11.7552. Function value obtained: -0.9474. Current minimum: -0.9482.
+DEBUG:Optimizer:Iteration No: 039. Time taken: 11.8322. Function value obtained: -0.9481. Current minimum: -0.9482.
+DEBUG:Optimizer:Iteration No: 040. Time taken: 1.9809. Function value obtained: -0.7198. Current minimum: -0.9482.
+DEBUG:Optimizer:Iteration No: 041. Time taken: 5.3506. Function value obtained: -0.9391. Current minimum: -0.9482.
+DEBUG:Optimizer:Iteration No: 042. Time taken: 11.2855. Function value obtained: -0.9481. Current minimum: -0.9482.
+DEBUG:Optimizer:Iteration No: 043. Time taken: 10.8120. Function value obtained: -0.9473. Current minimum: -0.9482.
+DEBUG:Optimizer:Iteration No: 044. Time taken: 77.9440. Function value obtained: -0.9468. Current minimum: -0.9482.
+DEBUG:Optimizer:Iteration No: 045. Time taken: 73.9099. Function value obtained: -0.9383. Current minimum: -0.9482.
+DEBUG:Optimizer:Iteration No: 046. Time taken: 83.0720. Function value obtained: -0.9482. Current minimum: -0.9482.
+DEBUG:Optimizer:Iteration No: 047. Time taken: 11.5292. Function value obtained: -0.9478. Current minimum: -0.9482.
+DEBUG:Optimizer:Iteration No: 048. Time taken: 12.1774. Function value obtained: -0.9480. Current minimum: -0.9482.
+DEBUG:Optimizer:Iteration No: 049. Time taken: 12.3388. Function value obtained: -0.9481. Current minimum: -0.9482.
+DEBUG:Optimizer:Iteration No: 050. Time taken: 5.6723. Function value obtained: -0.9352. Current minimum: -0.9482.
+DEBUG:QualityReportAnalyzer:score of the best estimator found: 0.948160
+DEBUG:QualityReportAnalyzer:params of the best estimator found: {'base_model_name': 'sklearn.ensemble.RandomForestClassifier', 'max_depth': None, 'max_features': None, 'min_samples_split': 182, 'min_samples_leaf': 90}
+DEBUG:QualityReportAnalyzer:training the model with complete data
+DEBUG:TrainableRules:fitting rules with params {'attribute_similarity_threshold': 0.98, 'base_model_name': 'sklearn.ensemble.RandomForestClassifier', 'confidence_threshold': 0.8, 'max_depth': None, 'max_features': None, 'min_samples_leaf': 90, 'min_samples_split': 182, 'n_estimators': 10, 'prune_attributes': True, 'prune_branches_algorithms': ['reduced-error'], 'prune_dataset_ratio': 0.2, 'random_state': 42, 'top_down_greedy_budget': [False, 0.5]}
+DEBUG:TrainableRules:pruned 4946/6738 branches with reduced error pruning
+DEBUG:TrainableRules:merged 3922/11425 attributes
+DEBUG:TrainableRules:attributes pruning status: 100/601
+DEBUG:TrainableRules:attributes pruning status: 200/601
+DEBUG:TrainableRules:attributes pruning status: 300/601
+DEBUG:TrainableRules:attributes pruning status: 400/601
+DEBUG:TrainableRules:attributes pruning status: 500/601
+DEBUG:TrainableRules:attributes pruning status: 600/601
+DEBUG:TrainableRules:pruned 3478/7503 attributes (279/601 rules)
+DEBUG:Rules:compiling 322 rules
+DEBUG:QualityReportAnalyzer:feature importances from sklearn.ensemble.RandomForestClassifier:
+	left.0.reserved.,                                       9.70956E-02
+	left.0.internal_type.StringLiteral                      9.40732E-02
+	right.0.internal_type.StringLiteral                     8.61041E-02
+	left.0.reserved.;                                       7.72981E-02
+	left.0.reserved.:                                       6.62841E-02
+	parents.0.roles.OPERATOR                                5.15822E-02
+	left.0.reserved.{                                       4.72871E-02
+	right.0.reserved.}                                      4.46170E-02
+	left.0.diff_col                                         4.26040E-02
+	parents.0.internal_type.VariableDeclarator              4.03642E-02
+	left.0.reserved.const                                   3.83059E-02
+	right.0.reserved.{                                      3.33482E-02
+	parents.1.internal_type.VariableDeclaration             2.72246E-02
+	right.0.length                                          2.25878E-02
+	right.0.reserved.=                                      2.11215E-02
+	left.0.reserved.if                                      1.34565E-02
+	right.1.roles.MAP                                       1.23972E-02
+	left.1.reserved.=                                       1.10059E-02
+	node.0.start_col                                        1.06134E-02
+	left.0.reserved.}                                       9.52499E-03
+	parents.0.internal_type.ObjectExpression                8.88447E-03
+	left.0.roles.EXPRESSION                                 8.59733E-03
+	parents.0.internal_type.ConditionalExpression           7.15352E-03
+	left.0.reserved.(                                       5.82336E-03
+	right.0.roles.KEY                                       5.74103E-03
+DEBUG:TrainableRules:pruned 461/4025 categorical attributes (6/322 rules)
+DEBUG:Rules:compiling 316 rules
+INFO:QualityReportAnalyzer:obtained 316 rules, generating the classification report
+DEBUG:Rules:predicting 228512 samples using 316 rules
+DEBUG:Rules:No rule was triggered in 2846 cases.
+DEBUG:Rules:predicting 61572 samples using 316 rules
+DEBUG:Rules:No rule was triggered in 849 cases.
+INFO:QualityReportAnalyzer:trained {'code': None, 'created_at': '2021-08-23 15:24:19+0000', 'datasets': [], 'dependencies': [], 'description': 'Model bound to style.format.analyzer.FormatAnalyzer Lookout analyzer.', 'environment': {'packages': '', 'platform': 'Linux-5.4.0-81-generic-x86_64-with-Ubuntu-18.04-bionic', 'python': '3.6.7 (default, Oct 22 2018, 11:32:17) [GCC 8.2.0]'}, 'extra': None, 'license': 'ODbL-1.0', 'metrics': {}, 'model': 'style.format.analyzer.FormatAnalyzer', 'parent': None, 'references': [], 'series': None, 'size': '0 Bytes', 'tags': [], 'uuid': 'e30a5270-7978-473a-9a72-4f2a578e6ba4', 'vendor': 'source{d}', 'version': [1]}
+style.format.analyzer.FormatAnalyzer/[1] file:///tmp/top-repos-quality-repos-cme79abw/perspective.git ef1690e7a9474ccd93243fd80ca48010478166fb
+
+# javascript
+316 rules, avg.len. 10.9
+## train
+PPCR: 0.987546
+### report
+macro
+{'f1-score': 0.6997970868979464,
+ 'precision': 0.7181269449850584,
+ 'recall': 0.6871582193336133,
+ 'support': 225666}
+micro
+{'f1-score': 0.9605345953754664,
+ 'precision': 0.9605345953754664,
+ 'recall': 0.9605345953754664,
+ 'support': 225666}
+weighted
+{'f1-score': 0.9587171902203223,
+ 'precision': 0.9576789492532382,
+ 'recall': 0.9605345953754664,
+ 'support': 225666}
+### report_full
+macro
+{'f1-score': 0.6813510638519752,
+ 'precision': 0.7181269449850584,
+ 'recall': 0.6586168770741804,
+ 'support': 228512}
+micro
+{'f1-score': 0.9545156304356441,
+ 'precision': 0.9605345953754664,
+ 'recall': 0.9485716286234421,
+ 'support': 228512}
+weighted
+{'f1-score': 0.9515362733563483,
+ 'precision': 0.9568714605600699,
+ 'recall': 0.9485716286234421,
+ 'support': 228512}
+## test
+PPCR: 0.986211
+### report
+macro
+{'f1-score': 0.6798034969117821,
+ 'precision': 0.691545368920595,
+ 'recall': 0.6743874395593722,
+ 'support': 60723}
+micro
+{'f1-score': 0.9566885694053324,
+ 'precision': 0.9566885694053324,
+ 'recall': 0.9566885694053324,
+ 'support': 60723}
+weighted
+{'f1-score': 0.9554205160420939,
+ 'precision': 0.9551407323694964,
+ 'recall': 0.9566885694053324,
+ 'support': 60723}
+### report_full
+macro
+{'f1-score': 0.6611610993017335,
+ 'precision': 0.691545368920595,
+ 'recall': 0.6411771707688673,
+ 'support': 61572}
+micro
+{'f1-score': 0.9500470174577865,
+ 'precision': 0.9566885694053324,
+ 'recall': 0.9434970441109596,
+ 'support': 61572}
+weighted
+{'f1-score': 0.9476345291971109,
+ 'precision': 0.9533834573940352,
+ 'recall': 0.9434970441109596,
+ 'support': 61572}
+DEBUG:SQLAlchemyModelRepository:set style.format.analyzer.FormatAnalyzer/1 with file:///tmp/top-repos-quality-repos-cme79abw/perspective.git
+INFO:EventListener:OK 1734.485
+INFO:EventListener:new ReviewEvent
+INFO:AnalyzerManager:style.format.analyzer.FormatAnalyzer config: {'aggregate': True}
+INFO:generic:Reading /tmp/tmpn3orqip2/models/tmp/top-repos-quality-repos-cme79abw/perspective/style.format.analyzer.FormatAnalyzer_1.asdf (24.3 kB)...
+DEBUG:Rules:compiling 316 rules
+DEBUG:SQLAlchemyModelRepository:loaded style.format.analyzer.FormatAnalyzer/1 with file:///tmp/top-repos-quality-repos-cme79abw/perspective.git from /tmp/tmpn3orqip2/models/tmp/top-repos-quality-repos-cme79abw/perspective/style.format.analyzer.FormatAnalyzer_1.asdf
+INFO:AnalyzerManager:cache miss: style.format.analyzer.FormatAnalyzer
+DEBUG:AnalyzerManager:running style.format.analyzer.FormatAnalyzer
+DEBUG:Rules:Filtered rules by confidence >= 0.920: 316 -> 204
+DEBUG:Rules:compiling 204 rules
+DEBUG:Rules:Filtered rules by support >= 80: 204 -> 204
+DEBUG:Rules:compiling 204 rules
+DEBUG:QualityReportAnalyzer:excluded 0/354 files by path
+DEBUG:QualityReportAnalyzer:excluded 0/354 files by max line length 500
+DEBUG:QualityReportAnalyzer:excluded 0/354 files by max overall size 5242880
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-d3fc/test/js/unit/data/treeData.spec.js None
+DEBUG:FeaturesExtractor:Parsed 349 vnodes
+DEBUG:FeaturesExtractor:176 out of 349 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (176, 500)
+DEBUG:Rules:predicting 176 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 6 cases.
+DEBUG:Rules:compiling 204 rules
+INFO:UASTStabilityChecker:0 filtered out of 7 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-d3fc/test/js/unit/data/treeData.spec.js 3 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-d3fc/src/js/charts/ohlc.js None
+DEBUG:FeaturesExtractor:Parsed 165 vnodes
+DEBUG:FeaturesExtractor:88 out of 165 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (88, 500)
+DEBUG:Rules:predicting 88 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 8 cases.
+DEBUG:Rules:compiling 204 rules
+INFO:UASTStabilityChecker:1 filtered out of 1 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-d3fc/src/js/charts/ohlc.js 0 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-highcharts/test/js/treemap.spec.js None
+DEBUG:FeaturesExtractor:Parsed 397 vnodes
+DEBUG:FeaturesExtractor:202 out of 397 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (202, 500)
+DEBUG:Rules:predicting 202 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 14 cases.
+DEBUG:Rules:compiling 204 rules
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode('\n        ', y=", start=(514, 16, 19), end=(523, 17, 9), node=None, path="packages/perspective-viewer-highcharts/test/js/treemap.spec.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\'\\n        \', y=", start=(514, 16, 19), end=(523, 17, 9), node=None, path="packages/perspective-viewer-highcharts/test/js/treemap.spec.js"), y_new: "',)
+INFO:UASTStabilityChecker:5 filtered out of 8 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-highcharts/test/js/treemap.spec.js 3 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective/test/js/sort.js None
+DEBUG:FeaturesExtractor:Parsed 5682 vnodes
+DEBUG:FeaturesExtractor:2917 out of 5682 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (2917, 500)
+DEBUG:Rules:predicting 2917 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 145 cases.
+DEBUG:Rules:compiling 204 rules
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode('\n                    ', y=", start=(8743, 217, 41), end=(8764, 218, 21), node=None, path="packages/perspective/test/js/sort.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\'\\n                    \', y=", start=(8743, 217, 41), end=(8764, 218, 21), node=None, path="packages/perspective/test/js/sort.js"), y_new: "',)
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode('\n                    ', y=", start=(9560, 240, 41), end=(9581, 241, 21), node=None, path="packages/perspective/test/js/sort.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\'\\n                    \', y=", start=(9560, 240, 41), end=(9581, 241, 21), node=None, path="packages/perspective/test/js/sort.js"), y_new: "',)
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode('\n                    ', y=", start=(10480, 265, 41), end=(10501, 266, 21), node=None, path="packages/perspective/test/js/sort.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\'\\n                    \', y=", start=(10480, 265, 41), end=(10501, 266, 21), node=None, path="packages/perspective/test/js/sort.js"), y_new: "',)
+INFO:UASTStabilityChecker:3 filtered out of 44 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective/test/js/sort.js 40 fixes
+DEBUG:QualityReportAnalyzer:examples/webpack/src/index.js None
+DEBUG:FeaturesExtractor:Parsed 241 vnodes
+DEBUG:FeaturesExtractor:124 out of 241 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (124, 500)
+DEBUG:Rules:predicting 124 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 11 cases.
+DEBUG:Rules:compiling 204 rules
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode(' ', y=", start=(354, 12, 7), end=(355, 12, 8), node=None, path="examples/webpack/src/index.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\' \', y=", start=(354, 12, 7), end=(355, 12, 8), node=None, path="examples/webpack/src/index.js"), y_new: "',)
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode(' ', y=", start=(390, 13, 7), end=(391, 13, 8), node=None, path="examples/webpack/src/index.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\' \', y=", start=(390, 13, 7), end=(391, 13, 8), node=None, path="examples/webpack/src/index.js"), y_new: "',)
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode(' ', y=", start=(435, 14, 7), end=(436, 14, 8), node=None, path="examples/webpack/src/index.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\' \', y=", start=(435, 14, 7), end=(436, 14, 8), node=None, path="examples/webpack/src/index.js"), y_new: "',)
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode(' ', y=", start=(477, 16, 7), end=(478, 16, 8), node=None, path="examples/webpack/src/index.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\' \', y=", start=(477, 16, 7), end=(478, 16, 8), node=None, path="examples/webpack/src/index.js"), y_new: "',)
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode(' ', y=", start=(536, 18, 7), end=(537, 18, 8), node=None, path="examples/webpack/src/index.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\' \', y=", start=(536, 18, 7), end=(537, 18, 8), node=None, path="examples/webpack/src/index.js"), y_new: "',)
+INFO:UASTStabilityChecker:6 filtered out of 9 with changes
+DEBUG:QualityReportAnalyzer:examples/webpack/src/index.js 3 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-jupyterlab/src/config/plugin.config.js None
+DEBUG:FeaturesExtractor:Parsed 397 vnodes
+DEBUG:FeaturesExtractor:205 out of 397 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (205, 500)
+DEBUG:Rules:predicting 205 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 15 cases.
+DEBUG:Rules:compiling 204 rules
+INFO:UASTStabilityChecker:0 filtered out of 3 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-jupyterlab/src/config/plugin.config.js 2 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-workspace/src/js/workspace/menu.js None
+DEBUG:FeaturesExtractor:Parsed 256 vnodes
+DEBUG:FeaturesExtractor:130 out of 256 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (130, 500)
+DEBUG:Rules:predicting 130 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 8 cases.
+DEBUG:Rules:compiling 204 rules
+WARNING:UASTStabilityChecker:skipped file packages/perspective-workspace/src/js/workspace/menu.js, due to errors in parsing the whole content
+INFO:UASTStabilityChecker:2 filtered out of 6 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-workspace/src/js/workspace/menu.js 4 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-test/src/js/paths.js None
+DEBUG:FeaturesExtractor:Parsed 213 vnodes
+DEBUG:FeaturesExtractor:112 out of 213 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (112, 500)
+DEBUG:Rules:predicting 112 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 8 cases.
+DEBUG:Rules:compiling 204 rules
+INFO:UASTStabilityChecker:0 filtered out of 7 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-test/src/js/paths.js 2 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-highcharts/src/js/sunburst.js None
+DEBUG:FeaturesExtractor:Parsed 28 vnodes
+DEBUG:FeaturesExtractor:15 out of 28 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (15, 500)
+DEBUG:Rules:predicting 15 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 3 cases.
+DEBUG:Rules:compiling 204 rules
+INFO:UASTStabilityChecker:1 filtered out of 1 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-highcharts/src/js/sunburst.js 0 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective/src/js/config/index.js None
+DEBUG:FeaturesExtractor:Parsed 795 vnodes
+DEBUG:FeaturesExtractor:400 out of 795 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (400, 500)
+DEBUG:Rules:predicting 400 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 16 cases.
+DEBUG:Rules:compiling 204 rules
+INFO:UASTStabilityChecker:3 filtered out of 17 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective/src/js/config/index.js 11 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-bench/bench/versions.js None
+DEBUG:FeaturesExtractor:Parsed 622 vnodes
+DEBUG:FeaturesExtractor:333 out of 622 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (333, 500)
+DEBUG:Rules:predicting 333 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 20 cases.
+DEBUG:Rules:compiling 204 rules
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(1078, 40, 157), end=(1078, 40, 157), node=None, path="packages/perspective-bench/bench/versions.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(1078, 40, 157), end=(1078, 40, 157), node=None, path="packages/perspective-bench/bench/versions.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(1078, 40, 157), end=(1078, 40, 157), node=None, path="packages/perspective-bench/bench/versions.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(1078, 40, 157), end=(1078, 40, 157), node=None, path="packages/perspective-bench/bench/versions.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(1078, 40, 157), end=(1078, 40, 157), node=None, path="packages/perspective-bench/bench/versions.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(1078, 40, 157), end=(1078, 40, 157), node=None, path="packages/perspective-bench/bench/versions.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(1078, 40, 157), end=(1078, 40, 157), node=None, path="packages/perspective-bench/bench/versions.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(1078, 40, 157), end=(1078, 40, 157), node=None, path="packages/perspective-bench/bench/versions.js") and y_old (9,)
+INFO:UASTStabilityChecker:3 filtered out of 12 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-bench/bench/versions.js 6 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-webpack-plugin/src/js/switch-inline-loader.js None
+DEBUG:FeaturesExtractor:Parsed 159 vnodes
+DEBUG:FeaturesExtractor:81 out of 159 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (81, 500)
+DEBUG:Rules:predicting 81 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 5 cases.
+DEBUG:Rules:compiling 204 rules
+INFO:UASTStabilityChecker:0 filtered out of 0 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-webpack-plugin/src/js/switch-inline-loader.js 0 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-d3fc/src/js/legend/scrollableLegend.js None
+DEBUG:FeaturesExtractor:Parsed 1519 vnodes
+DEBUG:FeaturesExtractor:768 out of 1519 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (768, 500)
+DEBUG:Rules:predicting 768 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 57 cases.
+DEBUG:Rules:compiling 204 rules
+INFO:UASTStabilityChecker:2 filtered out of 36 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-d3fc/src/js/legend/scrollableLegend.js 26 fixes
+DEBUG:QualityReportAnalyzer:examples/simple/server.js None
+DEBUG:FeaturesExtractor:Parsed 51 vnodes
+DEBUG:FeaturesExtractor:26 out of 51 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (26, 500)
+DEBUG:Rules:predicting 26 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 3 cases.
+DEBUG:Rules:compiling 204 rules
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(398, 11, 41), end=(398, 11, 41), node=None, path="examples/simple/server.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(398, 11, 41), end=(398, 11, 41), node=None, path="examples/simple/server.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(398, 11, 41), end=(398, 11, 41), node=None, path="examples/simple/server.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(398, 11, 41), end=(398, 11, 41), node=None, path="examples/simple/server.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(398, 11, 41), end=(398, 11, 41), node=None, path="examples/simple/server.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(398, 11, 41), end=(398, 11, 41), node=None, path="examples/simple/server.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(398, 11, 41), end=(398, 11, 41), node=None, path="examples/simple/server.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(398, 11, 41), end=(398, 11, 41), node=None, path="examples/simple/server.js") and y_old (9,)
+INFO:UASTStabilityChecker:0 filtered out of 3 with changes
+DEBUG:QualityReportAnalyzer:examples/simple/server.js 2 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-test/src/js/globalSetup.js None
+DEBUG:FeaturesExtractor:Parsed 177 vnodes
+DEBUG:FeaturesExtractor:92 out of 177 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (92, 500)
+DEBUG:Rules:predicting 92 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 4 cases.
+DEBUG:Rules:compiling 204 rules
+INFO:UASTStabilityChecker:2 filtered out of 6 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-test/src/js/globalSetup.js 4 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer/src/config/cjs.config.js None
+DEBUG:FeaturesExtractor:Parsed 145 vnodes
+DEBUG:FeaturesExtractor:75 out of 145 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (75, 500)
+DEBUG:Rules:predicting 75 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 4 cases.
+DEBUG:Rules:compiling 204 rules
+INFO:UASTStabilityChecker:0 filtered out of 2 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer/src/config/cjs.config.js 2 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-hypergrid/test/js/editing.spec.js None
+DEBUG:FeaturesExtractor:Parsed 1544 vnodes
+DEBUG:FeaturesExtractor:779 out of 1544 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (779, 500)
+DEBUG:Rules:predicting 779 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 67 cases.
+DEBUG:Rules:compiling 204 rules
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode('\n        ', y=", start=(473, 16, 19), end=(482, 17, 9), node=None, path="packages/perspective-viewer-hypergrid/test/js/editing.spec.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\'\\n        \', y=", start=(473, 16, 19), end=(482, 17, 9), node=None, path="packages/perspective-viewer-hypergrid/test/js/editing.spec.js"), y_new: "',)
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode('\n        ', y=", start=(1140, 32, 19), end=(1149, 33, 9), node=None, path="packages/perspective-viewer-hypergrid/test/js/editing.spec.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\'\\n        \', y=", start=(1140, 32, 19), end=(1149, 33, 9), node=None, path="packages/perspective-viewer-hypergrid/test/js/editing.spec.js"), y_new: "',)
+INFO:UASTStabilityChecker:4 filtered out of 11 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-hypergrid/test/js/editing.spec.js 7 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-cli/src/js/index.js None
+DEBUG:FeaturesExtractor:Parsed 1232 vnodes
+DEBUG:FeaturesExtractor:624 out of 1232 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (624, 500)
+DEBUG:Rules:predicting 624 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 22 cases.
+DEBUG:Rules:compiling 204 rules
+INFO:UASTStabilityChecker:4 filtered out of 31 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-cli/src/js/index.js 25 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-d3fc/src/js/series/colorStyles.js None
+DEBUG:FeaturesExtractor:Parsed 886 vnodes
+DEBUG:FeaturesExtractor:446 out of 886 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (446, 500)
+DEBUG:Rules:predicting 446 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 24 cases.
+DEBUG:Rules:compiling 204 rules
+INFO:UASTStabilityChecker:2 filtered out of 7 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-d3fc/src/js/series/colorStyles.js 3 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-test/src/js/index.js None
+DEBUG:FeaturesExtractor:Parsed 6515 vnodes
+DEBUG:FeaturesExtractor:3276 out of 6515 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (3276, 500)
+DEBUG:Rules:predicting 3276 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 165 cases.
+DEBUG:Rules:compiling 204 rules
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode(' ', y=", start=(1028, 33, 18), end=(1029, 33, 19), node=None, path="packages/perspective-test/src/js/index.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\' \', y=", start=(1028, 33, 18), end=(1029, 33, 19), node=None, path="packages/perspective-test/src/js/index.js"), y_new: "',)
+INFO:UASTStabilityChecker:4 filtered out of 133 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-test/src/js/index.js 105 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-workspace/test/js/integration/restore.spec.js None
+DEBUG:FeaturesExtractor:Parsed 1468 vnodes
+DEBUG:FeaturesExtractor:754 out of 1468 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (754, 500)
+DEBUG:Rules:predicting 754 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 45 cases.
+DEBUG:Rules:compiling 204 rules
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode('\n        ', y=", start=(728, 23, 19), end=(737, 24, 9), node=None, path="packages/perspective-workspace/test/js/integration/restore.spec.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\'\\n        \', y=", start=(728, 23, 19), end=(737, 24, 9), node=None, path="packages/perspective-workspace/test/js/integration/restore.spec.js"), y_new: "',)
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode('\n                ', y=", start=(792, 26, 26), end=(809, 27, 17), node=None, path="packages/perspective-workspace/test/js/integration/restore.spec.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\'\\n                \', y=", start=(792, 26, 26), end=(809, 27, 17), node=None, path="packages/perspective-workspace/test/js/integration/restore.spec.js"), y_new: "',)
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode('\n                ', y=", start=(1804, 53, 26), end=(1821, 54, 17), node=None, path="packages/perspective-workspace/test/js/integration/restore.spec.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\'\\n                \', y=", start=(1804, 53, 26), end=(1821, 54, 17), node=None, path="packages/perspective-workspace/test/js/integration/restore.spec.js"), y_new: "',)
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode('\n                ', y=", start=(2689, 76, 26), end=(2706, 77, 17), node=None, path="packages/perspective-workspace/test/js/integration/restore.spec.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\'\\n                \', y=", start=(2689, 76, 26), end=(2706, 77, 17), node=None, path="packages/perspective-workspace/test/js/integration/restore.spec.js"), y_new: "',)
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode('\n                ', y=", start=(3938, 107, 26), end=(3955, 108, 17), node=None, path="packages/perspective-workspace/test/js/integration/restore.spec.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\'\\n                \', y=", start=(3938, 107, 26), end=(3955, 108, 17), node=None, path="packages/perspective-workspace/test/js/integration/restore.spec.js"), y_new: "',)
+INFO:UASTStabilityChecker:10 filtered out of 43 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-workspace/test/js/integration/restore.spec.js 20 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-hypergrid/test/js/selection.spec.js None
+DEBUG:FeaturesExtractor:Parsed 2058 vnodes
+DEBUG:FeaturesExtractor:1035 out of 2058 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (1035, 500)
+DEBUG:Rules:predicting 1035 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 71 cases.
+DEBUG:Rules:compiling 204 rules
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode('\n        ', y=", start=(430, 14, 19), end=(439, 15, 9), node=None, path="packages/perspective-viewer-hypergrid/test/js/selection.spec.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\'\\n        \', y=", start=(430, 14, 19), end=(439, 15, 9), node=None, path="packages/perspective-viewer-hypergrid/test/js/selection.spec.js"), y_new: "',)
+INFO:UASTStabilityChecker:15 filtered out of 25 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-hypergrid/test/js/selection.spec.js 6 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-bench/perspective-bench None
+DEBUG:FeaturesExtractor:Parsed 39 vnodes
+DEBUG:FeaturesExtractor:20 out of 39 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (20, 500)
+DEBUG:Rules:predicting 20 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 2 cases.
+DEBUG:Rules:compiling 204 rules
+INFO:UASTStabilityChecker:0 filtered out of 2 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-bench/perspective-bench 1 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective/src/config/perspective.config.js None
+DEBUG:FeaturesExtractor:Parsed 195 vnodes
+DEBUG:FeaturesExtractor:101 out of 195 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (101, 500)
+DEBUG:Rules:predicting 101 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 7 cases.
+DEBUG:Rules:compiling 204 rules
+INFO:UASTStabilityChecker:0 filtered out of 3 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective/src/config/perspective.config.js 3 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-d3fc/src/js/axis/minBandwidth.js None
+DEBUG:FeaturesExtractor:Parsed 192 vnodes
+DEBUG:FeaturesExtractor:97 out of 192 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (97, 500)
+DEBUG:Rules:predicting 97 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 7 cases.
+DEBUG:Rules:compiling 204 rules
+INFO:UASTStabilityChecker:0 filtered out of 2 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-d3fc/src/js/axis/minBandwidth.js 2 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-d3fc/src/js/plugin/plugin.js None
+DEBUG:FeaturesExtractor:Parsed 1611 vnodes
+DEBUG:FeaturesExtractor:810 out of 1611 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (810, 500)
+DEBUG:Rules:predicting 810 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 41 cases.
+DEBUG:Rules:compiling 204 rules
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode(' ', y=", start=(433, 12, 7), end=(434, 12, 8), node=None, path="packages/perspective-viewer-d3fc/src/js/plugin/plugin.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\' \', y=", start=(433, 12, 7), end=(434, 12, 8), node=None, path="packages/perspective-viewer-d3fc/src/js/plugin/plugin.js"), y_new: "',)
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode(' ', y=", start=(462, 13, 7), end=(463, 13, 8), node=None, path="packages/perspective-viewer-d3fc/src/js/plugin/plugin.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\' \', y=", start=(462, 13, 7), end=(463, 13, 8), node=None, path="packages/perspective-viewer-d3fc/src/js/plugin/plugin.js"), y_new: "',)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(2289, 65, 85), end=(2289, 65, 85), node=None, path="packages/perspective-viewer-d3fc/src/js/plugin/plugin.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(2289, 65, 85), end=(2289, 65, 85), node=None, path="packages/perspective-viewer-d3fc/src/js/plugin/plugin.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(2289, 65, 85), end=(2289, 65, 85), node=None, path="packages/perspective-viewer-d3fc/src/js/plugin/plugin.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(2289, 65, 85), end=(2289, 65, 85), node=None, path="packages/perspective-viewer-d3fc/src/js/plugin/plugin.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(2289, 65, 85), end=(2289, 65, 85), node=None, path="packages/perspective-viewer-d3fc/src/js/plugin/plugin.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(2289, 65, 85), end=(2289, 65, 85), node=None, path="packages/perspective-viewer-d3fc/src/js/plugin/plugin.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(2289, 65, 85), end=(2289, 65, 85), node=None, path="packages/perspective-viewer-d3fc/src/js/plugin/plugin.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(2289, 65, 85), end=(2289, 65, 85), node=None, path="packages/perspective-viewer-d3fc/src/js/plugin/plugin.js") and y_old (9,)
+WARNING:UASTStabilityChecker:skipped file packages/perspective-viewer-d3fc/src/js/plugin/plugin.js, due to errors in parsing the whole content
+INFO:UASTStabilityChecker:3 filtered out of 34 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-d3fc/src/js/plugin/plugin.js 19 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective/test/js/constructors.js None
+DEBUG:FeaturesExtractor:Parsed 13926 vnodes
+DEBUG:FeaturesExtractor:7091 out of 13926 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (7091, 500)
+DEBUG:Rules:predicting 7091 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 565 cases.
+DEBUG:Rules:compiling 204 rules
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode('\n        ', y=", start=(2844, 131, 18), end=(2853, 132, 9), node=None, path="packages/perspective/test/js/constructors.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\'\\n        \', y=", start=(2844, 131, 18), end=(2853, 132, 9), node=None, path="packages/perspective/test/js/constructors.js"), y_new: "',)
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode('\n        ', y=", start=(3550, 164, 18), end=(3559, 165, 9), node=None, path="packages/perspective/test/js/constructors.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\'\\n        \', y=", start=(3550, 164, 18), end=(3559, 165, 9), node=None, path="packages/perspective/test/js/constructors.js"), y_new: "',)
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode('\n        ', y=", start=(4240, 197, 18), end=(4249, 198, 9), node=None, path="packages/perspective/test/js/constructors.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\'\\n        \', y=", start=(4240, 197, 18), end=(4249, 198, 9), node=None, path="packages/perspective/test/js/constructors.js"), y_new: "',)
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode('\n        ', y=", start=(4946, 230, 18), end=(4955, 231, 9), node=None, path="packages/perspective/test/js/constructors.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\'\\n        \', y=", start=(4946, 230, 18), end=(4955, 231, 9), node=None, path="packages/perspective/test/js/constructors.js"), y_new: "',)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(5927, 277, 23), end=(5927, 277, 23), node=None, path="packages/perspective/test/js/constructors.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(5927, 277, 23), end=(5927, 277, 23), node=None, path="packages/perspective/test/js/constructors.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(5927, 277, 23), end=(5927, 277, 23), node=None, path="packages/perspective/test/js/constructors.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(5927, 277, 23), end=(5927, 277, 23), node=None, path="packages/perspective/test/js/constructors.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(5927, 277, 23), end=(5927, 277, 23), node=None, path="packages/perspective/test/js/constructors.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(5927, 277, 23), end=(5927, 277, 23), node=None, path="packages/perspective/test/js/constructors.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(5927, 277, 23), end=(5927, 277, 23), node=None, path="packages/perspective/test/js/constructors.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(5927, 277, 23), end=(5927, 277, 23), node=None, path="packages/perspective/test/js/constructors.js") and y_old (9,)
+INFO:UASTStabilityChecker:11 filtered out of 126 with changes
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(5927, 277, 23), end=(5927, 277, 23), node=None, path="packages/perspective/test/js/constructors.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(5927, 277, 23), end=(5927, 277, 23), node=None, path="packages/perspective/test/js/constructors.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(5927, 277, 23), end=(5927, 277, 23), node=None, path="packages/perspective/test/js/constructors.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(5927, 277, 23), end=(5927, 277, 23), node=None, path="packages/perspective/test/js/constructors.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(5927, 277, 23), end=(5927, 277, 23), node=None, path="packages/perspective/test/js/constructors.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(5927, 277, 23), end=(5927, 277, 23), node=None, path="packages/perspective/test/js/constructors.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(5927, 277, 23), end=(5927, 277, 23), node=None, path="packages/perspective/test/js/constructors.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(5927, 277, 23), end=(5927, 277, 23), node=None, path="packages/perspective/test/js/constructors.js") and y_old (9,)
+DEBUG:QualityReportAnalyzer:packages/perspective/test/js/constructors.js 87 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective/test/js/computed/updates.js None
+DEBUG:FeaturesExtractor:Parsed 14810 vnodes
+DEBUG:FeaturesExtractor:7515 out of 14810 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (7515, 500)
+DEBUG:Rules:predicting 7515 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 535 cases.
+DEBUG:Rules:compiling 204 rules
+INFO:UASTStabilityChecker:0 filtered out of 137 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective/test/js/computed/updates.js 86 fixes
+DEBUG:QualityReportAnalyzer:scripts/clean.js None
+DEBUG:FeaturesExtractor:Parsed 594 vnodes
+DEBUG:FeaturesExtractor:304 out of 594 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (304, 500)
+DEBUG:Rules:predicting 304 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 12 cases.
+DEBUG:Rules:compiling 204 rules
+WARNING:UASTStabilityChecker:skipped file scripts/clean.js, due to errors in parsing the whole content
+INFO:UASTStabilityChecker:0 filtered out of 12 with changes
+DEBUG:QualityReportAnalyzer:scripts/clean.js 10 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-bench/src/js/bench.js None
+DEBUG:FeaturesExtractor:Parsed 1960 vnodes
+DEBUG:FeaturesExtractor:986 out of 1960 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (986, 500)
+DEBUG:Rules:predicting 986 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 62 cases.
+DEBUG:Rules:compiling 204 rules
+INFO:UASTStabilityChecker:2 filtered out of 23 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-bench/src/js/bench.js 18 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective/src/js/api/view_api.js None
+DEBUG:FeaturesExtractor:Parsed 741 vnodes
+DEBUG:FeaturesExtractor:375 out of 741 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (375, 500)
+DEBUG:Rules:predicting 375 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 31 cases.
+DEBUG:Rules:compiling 204 rules
+INFO:UASTStabilityChecker:2 filtered out of 5 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective/src/js/api/view_api.js 3 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective/src/js/config/settings.js None
+DEBUG:FeaturesExtractor:Parsed 397 vnodes
+DEBUG:FeaturesExtractor:213 out of 397 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (213, 500)
+DEBUG:Rules:predicting 213 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 6 cases.
+DEBUG:Rules:compiling 204 rules
+INFO:UASTStabilityChecker:0 filtered out of 3 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective/src/js/config/settings.js 3 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-hypergrid/babel.config.js None
+DEBUG:FeaturesExtractor:Parsed 165 vnodes
+DEBUG:FeaturesExtractor:89 out of 165 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (89, 500)
+DEBUG:Rules:predicting 89 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 5 cases.
+DEBUG:Rules:compiling 204 rules
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode('\n            ', y=", start=(43, 3, 10), end=(56, 4, 13), node=None, path="packages/perspective-viewer-hypergrid/babel.config.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\'\\n            \', y=", start=(43, 3, 10), end=(56, 4, 13), node=None, path="packages/perspective-viewer-hypergrid/babel.config.js"), y_new: "',)
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode('\n        ', y=", start=(433, 18, 15), end=(442, 19, 9), node=None, path="packages/perspective-viewer-hypergrid/babel.config.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\'\\n        \', y=", start=(433, 18, 15), end=(442, 19, 9), node=None, path="packages/perspective-viewer-hypergrid/babel.config.js"), y_new: "',)
+INFO:UASTStabilityChecker:2 filtered out of 8 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-hypergrid/babel.config.js 5 fixes
+DEBUG:QualityReportAnalyzer:examples/webpack/webpack.config.js None
+DEBUG:FeaturesExtractor:Parsed 281 vnodes
+DEBUG:FeaturesExtractor:147 out of 281 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (147, 500)
+DEBUG:Rules:predicting 147 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 9 cases.
+DEBUG:Rules:compiling 204 rules
+INFO:UASTStabilityChecker:0 filtered out of 4 with changes
+DEBUG:QualityReportAnalyzer:examples/webpack/webpack.config.js 4 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js None
+DEBUG:FeaturesExtractor:Parsed 4586 vnodes
+DEBUG:FeaturesExtractor:2315 out of 4586 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (2315, 500)
+DEBUG:Rules:predicting 2315 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 131 cases.
+DEBUG:Rules:compiling 204 rules
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4047, 82, 57), end=(4047, 82, 57), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4047, 82, 57), end=(4047, 82, 57), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4047, 82, 57), end=(4047, 82, 57), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4047, 82, 57), end=(4047, 82, 57), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4047, 82, 57), end=(4047, 82, 57), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4047, 82, 57), end=(4047, 82, 57), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4047, 82, 57), end=(4047, 82, 57), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4047, 82, 57), end=(4047, 82, 57), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4640, 94, 65), end=(4640, 94, 65), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4640, 94, 65), end=(4640, 94, 65), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4640, 94, 65), end=(4640, 94, 65), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4640, 94, 65), end=(4640, 94, 65), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4640, 94, 65), end=(4640, 94, 65), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4640, 94, 65), end=(4640, 94, 65), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4640, 94, 65), end=(4640, 94, 65), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4640, 94, 65), end=(4640, 94, 65), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4960, 100, 81), end=(4960, 100, 81), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4960, 100, 81), end=(4960, 100, 81), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4960, 100, 81), end=(4960, 100, 81), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4960, 100, 81), end=(4960, 100, 81), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4960, 100, 81), end=(4960, 100, 81), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4960, 100, 81), end=(4960, 100, 81), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4960, 100, 81), end=(4960, 100, 81), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4960, 100, 81), end=(4960, 100, 81), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(8626, 167, 79), end=(8626, 167, 79), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(8626, 167, 79), end=(8626, 167, 79), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(8626, 167, 79), end=(8626, 167, 79), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(8626, 167, 79), end=(8626, 167, 79), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(8626, 167, 79), end=(8626, 167, 79), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(8626, 167, 79), end=(8626, 167, 79), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(8626, 167, 79), end=(8626, 167, 79), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(8626, 167, 79), end=(8626, 167, 79), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+INFO:UASTStabilityChecker:2 filtered out of 110 with changes
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4640, 94, 65), end=(4640, 94, 65), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4640, 94, 65), end=(4640, 94, 65), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4640, 94, 65), end=(4640, 94, 65), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4640, 94, 65), end=(4640, 94, 65), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4640, 94, 65), end=(4640, 94, 65), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4640, 94, 65), end=(4640, 94, 65), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4640, 94, 65), end=(4640, 94, 65), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4640, 94, 65), end=(4640, 94, 65), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4653, 94, 78), end=(4653, 94, 78), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4653, 94, 78), end=(4653, 94, 78), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4653, 94, 78), end=(4653, 94, 78), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4653, 94, 78), end=(4653, 94, 78), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4653, 94, 78), end=(4653, 94, 78), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4653, 94, 78), end=(4653, 94, 78), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4653, 94, 78), end=(4653, 94, 78), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4653, 94, 78), end=(4653, 94, 78), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4960, 100, 81), end=(4960, 100, 81), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4960, 100, 81), end=(4960, 100, 81), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4960, 100, 81), end=(4960, 100, 81), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4960, 100, 81), end=(4960, 100, 81), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4960, 100, 81), end=(4960, 100, 81), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4960, 100, 81), end=(4960, 100, 81), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4960, 100, 81), end=(4960, 100, 81), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(4960, 100, 81), end=(4960, 100, 81), node=None, path="packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js") and y_old (9,)
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-d3fc/src/js/legend/styling/resizableComponent.js 77 fixes
+DEBUG:QualityReportAnalyzer:examples/webpack-cross-origin/webpack.config.js None
+DEBUG:FeaturesExtractor:Parsed 375 vnodes
+DEBUG:FeaturesExtractor:200 out of 375 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (200, 500)
+DEBUG:Rules:predicting 200 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 10 cases.
+DEBUG:Rules:compiling 204 rules
+INFO:UASTStabilityChecker:0 filtered out of 8 with changes
+DEBUG:QualityReportAnalyzer:examples/webpack-cross-origin/webpack.config.js 8 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-workspace/test/js/unit/workspace.spec.js None
+DEBUG:FeaturesExtractor:Parsed 1047 vnodes
+DEBUG:FeaturesExtractor:534 out of 1047 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (534, 500)
+DEBUG:Rules:predicting 534 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 44 cases.
+DEBUG:Rules:compiling 204 rules
+INFO:UASTStabilityChecker:0 filtered out of 20 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-workspace/test/js/unit/workspace.spec.js 7 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-d3fc/src/js/axis/valueFormatter.js None
+DEBUG:FeaturesExtractor:Parsed 138 vnodes
+DEBUG:FeaturesExtractor:70 out of 138 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (70, 500)
+DEBUG:Rules:predicting 70 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 4 cases.
+DEBUG:Rules:compiling 204 rules
+INFO:UASTStabilityChecker:1 filtered out of 7 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-d3fc/src/js/axis/valueFormatter.js 1 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-d3fc/src/js/tooltip/tooltip.js None
+DEBUG:FeaturesExtractor:Parsed 1844 vnodes
+DEBUG:FeaturesExtractor:927 out of 1844 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (927, 500)
+DEBUG:Rules:predicting 927 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 47 cases.
+DEBUG:Rules:compiling 204 rules
+WARNING:UASTStabilityChecker:skipped file packages/perspective-viewer-d3fc/src/js/tooltip/tooltip.js, due to errors in parsing the whole content
+INFO:UASTStabilityChecker:1 filtered out of 32 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-d3fc/src/js/tooltip/tooltip.js 30 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective/test/js/to_format_viewport.spec.js None
+DEBUG:FeaturesExtractor:Parsed 3224 vnodes
+DEBUG:FeaturesExtractor:1623 out of 3224 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (1623, 500)
+DEBUG:Rules:predicting 1623 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 88 cases.
+DEBUG:Rules:compiling 204 rules
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode('\n                ', y=", start=(6227, 151, 35), end=(6244, 152, 17), node=None, path="packages/perspective/test/js/to_format_viewport.spec.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\'\\n                \', y=", start=(6227, 151, 35), end=(6244, 152, 17), node=None, path="packages/perspective/test/js/to_format_viewport.spec.js"), y_new: "',)
+INFO:UASTStabilityChecker:1 filtered out of 24 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective/test/js/to_format_viewport.spec.js 12 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-d3fc/src/js/charts/charts.js None
+DEBUG:FeaturesExtractor:Parsed 190 vnodes
+DEBUG:FeaturesExtractor:101 out of 190 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (101, 500)
+DEBUG:Rules:predicting 101 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 5 cases.
+DEBUG:Rules:compiling 204 rules
+INFO:UASTStabilityChecker:11 filtered out of 11 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-d3fc/src/js/charts/charts.js 0 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-workspace/src/js/workspace/tabbarrenderer.js None
+DEBUG:FeaturesExtractor:Parsed 468 vnodes
+DEBUG:FeaturesExtractor:239 out of 468 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (239, 500)
+DEBUG:Rules:predicting 239 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 18 cases.
+DEBUG:Rules:compiling 204 rules
+WARNING:UASTStabilityChecker:skipped file packages/perspective-workspace/src/js/workspace/tabbarrenderer.js, due to errors in parsing the whole content
+INFO:UASTStabilityChecker:2 filtered out of 11 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-workspace/src/js/workspace/tabbarrenderer.js 8 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-d3fc/src/js/axis/domainMatchOrigins.js None
+DEBUG:FeaturesExtractor:Parsed 341 vnodes
+DEBUG:FeaturesExtractor:171 out of 341 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (171, 500)
+DEBUG:Rules:predicting 171 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 6 cases.
+DEBUG:Rules:compiling 204 rules
+INFO:UASTStabilityChecker:1 filtered out of 12 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-d3fc/src/js/axis/domainMatchOrigins.js 6 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective/src/js/api/dispatch.js None
+DEBUG:FeaturesExtractor:Parsed 896 vnodes
+DEBUG:FeaturesExtractor:451 out of 896 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (451, 500)
+DEBUG:Rules:predicting 451 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 30 cases.
+DEBUG:Rules:compiling 204 rules
+INFO:UASTStabilityChecker:5 filtered out of 14 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective/src/js/api/dispatch.js 9 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-d3fc/test/js/integration/scatter.spec.js None
+DEBUG:FeaturesExtractor:Parsed 1416 vnodes
+DEBUG:FeaturesExtractor:722 out of 1416 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (722, 500)
+DEBUG:Rules:predicting 722 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 46 cases.
+DEBUG:Rules:compiling 204 rules
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(591, 16, 73), end=(591, 16, 73), node=None, path="packages/perspective-viewer-d3fc/test/js/integration/scatter.spec.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(591, 16, 73), end=(591, 16, 73), node=None, path="packages/perspective-viewer-d3fc/test/js/integration/scatter.spec.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(591, 16, 73), end=(591, 16, 73), node=None, path="packages/perspective-viewer-d3fc/test/js/integration/scatter.spec.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(591, 16, 73), end=(591, 16, 73), node=None, path="packages/perspective-viewer-d3fc/test/js/integration/scatter.spec.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(591, 16, 73), end=(591, 16, 73), node=None, path="packages/perspective-viewer-d3fc/test/js/integration/scatter.spec.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(591, 16, 73), end=(591, 16, 73), node=None, path="packages/perspective-viewer-d3fc/test/js/integration/scatter.spec.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(591, 16, 73), end=(591, 16, 73), node=None, path="packages/perspective-viewer-d3fc/test/js/integration/scatter.spec.js") and y_old (9,)
+WARNING:CodeGenerator:There is no indentation characters left to decrease for vnode VirtualNode('', y=⏎␣⁻␣⁻␣⁻␣⁻, start=(591, 16, 73), end=(591, 16, 73), node=None, path="packages/perspective-viewer-d3fc/test/js/integration/scatter.spec.js") and y_old (9,)
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode('\n        ', y=", start=(644, 19, 19), end=(653, 20, 9), node=None, path="packages/perspective-viewer-d3fc/test/js/integration/scatter.spec.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\'\\n        \', y=", start=(644, 19, 19), end=(653, 20, 9), node=None, path="packages/perspective-viewer-d3fc/test/js/integration/scatter.spec.js"), y_new: "',)
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode('\n                ', y=", start=(747, 24, 26), end=(764, 25, 17), node=None, path="packages/perspective-viewer-d3fc/test/js/integration/scatter.spec.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\'\\n                \', y=", start=(747, 24, 26), end=(764, 25, 17), node=None, path="packages/perspective-viewer-d3fc/test/js/integration/scatter.spec.js"), y_new: "',)
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode('\n                ', y=", start=(2150, 50, 26), end=(2167, 51, 17), node=None, path="packages/perspective-viewer-d3fc/test/js/integration/scatter.spec.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\'\\n                \', y=", start=(2150, 50, 26), end=(2167, 51, 17), node=None, path="packages/perspective-viewer-d3fc/test/js/integration/scatter.spec.js"), y_new: "',)
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode('\n                ', y=", start=(3560, 76, 26), end=(3577, 77, 17), node=None, path="packages/perspective-viewer-d3fc/test/js/integration/scatter.spec.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\'\\n                \', y=", start=(3560, 76, 26), end=(3577, 77, 17), node=None, path="packages/perspective-viewer-d3fc/test/js/integration/scatter.spec.js"), y_new: "',)
+INFO:UASTStabilityChecker:13 filtered out of 37 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-d3fc/test/js/integration/scatter.spec.js 23 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective/babel.config.js None
+DEBUG:FeaturesExtractor:Parsed 165 vnodes
+DEBUG:FeaturesExtractor:89 out of 165 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (89, 500)
+DEBUG:Rules:predicting 89 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 5 cases.
+DEBUG:Rules:compiling 204 rules
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode('\n            ', y=", start=(43, 3, 10), end=(56, 4, 13), node=None, path="packages/perspective/babel.config.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\'\\n            \', y=", start=(43, 3, 10), end=(56, 4, 13), node=None, path="packages/perspective/babel.config.js"), y_new: "',)
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode('\n        ', y=", start=(433, 18, 15), end=(442, 19, 9), node=None, path="packages/perspective/babel.config.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\'\\n        \', y=", start=(433, 18, 15), end=(442, 19, 9), node=None, path="packages/perspective/babel.config.js"), y_new: "',)
+INFO:UASTStabilityChecker:2 filtered out of 8 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective/babel.config.js 5 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-d3fc/src/js/data/treeData.js None
+DEBUG:FeaturesExtractor:Parsed 1686 vnodes
+DEBUG:FeaturesExtractor:844 out of 1686 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (844, 500)
+DEBUG:Rules:predicting 844 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 37 cases.
+DEBUG:Rules:compiling 204 rules
+WARNING:UASTStabilityChecker:skipped file packages/perspective-viewer-d3fc/src/js/data/treeData.js, due to errors in parsing the whole content
+INFO:UASTStabilityChecker:0 filtered out of 32 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-d3fc/src/js/data/treeData.js 23 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-d3fc/src/config/cjs.config.js None
+DEBUG:FeaturesExtractor:Parsed 154 vnodes
+DEBUG:FeaturesExtractor:80 out of 154 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (80, 500)
+DEBUG:Rules:predicting 80 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 4 cases.
+DEBUG:Rules:compiling 204 rules
+INFO:UASTStabilityChecker:0 filtered out of 2 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-d3fc/src/config/cjs.config.js 2 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective/src/js/config/constants.js None
+DEBUG:FeaturesExtractor:Parsed 1101 vnodes
+DEBUG:FeaturesExtractor:595 out of 1101 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (595, 500)
+DEBUG:Rules:predicting 595 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 17 cases.
+DEBUG:Rules:compiling 204 rules
+DEBUG:CodeGenerator:Non-Quote tokens cannot be changed to quote tokens.
+vnode: VirtualNode('\n    ', y=", start=(846, 25, 28), end=(851, 26, 5), node=None, path="packages/perspective/src/js/config/constants.js"), y_new: " url: <N/A>, commit: <N/A>. Set skip_errors=True to skip faulty suggestions.
+DEBUG:UASTStabilityChecker:Code generator can't generate code: ('Non-Quote tokens cannot be changed to quote tokens.\nvnode: VirtualNode(\'\\n    \', y=", start=(846, 25, 28), end=(851, 26, 5), node=None, path="packages/perspective/src/js/config/constants.js"), y_new: "',)
+INFO:UASTStabilityChecker:1 filtered out of 41 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective/src/js/config/constants.js 40 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective/src/js/websocket.js None
+DEBUG:FeaturesExtractor:Parsed 2304 vnodes
+DEBUG:FeaturesExtractor:1156 out of 2304 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (1156, 500)
+DEBUG:Rules:predicting 1156 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 74 cases.
+DEBUG:Rules:compiling 204 rules
+INFO:UASTStabilityChecker:6 filtered out of 24 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective/src/js/websocket.js 16 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-d3fc/src/js/index/bar.js None
+DEBUG:FeaturesExtractor:Parsed 32 vnodes
+DEBUG:FeaturesExtractor:17 out of 32 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (17, 500)
+DEBUG:Rules:predicting 17 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 3 cases.
+DEBUG:Rules:compiling 204 rules
+INFO:UASTStabilityChecker:0 filtered out of 0 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-d3fc/src/js/index/bar.js 0 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-highcharts/src/js/xy_line.js None
+DEBUG:FeaturesExtractor:Parsed 28 vnodes
+DEBUG:FeaturesExtractor:15 out of 28 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (15, 500)
+DEBUG:Rules:predicting 15 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 3 cases.
+DEBUG:Rules:compiling 204 rules
+INFO:UASTStabilityChecker:1 filtered out of 1 with changes
+DEBUG:QualityReportAnalyzer:packages/perspective-viewer-highcharts/src/js/xy_line.js 0 fixes
+DEBUG:QualityReportAnalyzer:packages/perspective-test/src/js/reporter.js None
+DEBUG:FeaturesExtractor:Parsed 932 vnodes
+DEBUG:FeaturesExtractor:470 out of 932 are labeled and saved after filtering
+DEBUG:FeaturesExtractor:Features shape: (470, 500)
+DEBUG:Rules:predicting 470 samples using 204 rules
+DEBUG:Rules:No rule was triggered in 32 cases.

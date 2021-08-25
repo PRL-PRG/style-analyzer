@@ -1,0 +1,172 @@
+--------------------
+Failed to process https://github.com/splunk/splunk-app-examples.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 135, in measure_quality
+    (restarts, repository))
+RuntimeError: Run out of 3 attempts. Failed to train proper model for https://github.com/splunk/splunk-app-examples.git.
+--------------------
+Failed to process https://github.com/nayaradesousa/first-steps.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 137, in measure_quality
+    bblfsh=bblfsh, config_json=config)
+  File "/lookout-sdk-ml/lookout/core/helpers/analyzer_context_manager.py", line 87, in review
+    log_level=log_level, config_json=config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 101, in review
+    return self._run("review", fr, to, port, git_dir, bblfsh, log_level, config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 131, in _run
+    return subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/tmp/lookout-sdk-ml/lookout-sdk-v0.7.0', 'review', 'ipv4://localhost:4487', '--from', 'd53e1d25799ba043d9eac3bca437bb0cc58d9c69', '--to', 'd53e1d25799ba043d9eac3bca437bb0cc58d9c69', '--git-dir', '/tmp/top-repos-quality-repos-7eiu5kwh/first-steps.git', '--log-format', 'json', '--log-level', 'warning', '--config-json', '{"style.format.analyzer.FormatAnalyzer": {"aggregate": true}}']' returned non-zero exit status 1.
+--------------------
+Failed to process https://github.com/redstone-scratch/asap-api.github.io.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 135, in measure_quality
+    (restarts, repository))
+RuntimeError: Run out of 3 attempts. Failed to train proper model for https://github.com/redstone-scratch/asap-api.github.io.git.
+--------------------
+Failed to process https://github.com/hack4impact-upenn/asylum-connect-catalog.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 135, in measure_quality
+    (restarts, repository))
+RuntimeError: Run out of 3 attempts. Failed to train proper model for https://github.com/hack4impact-upenn/asylum-connect-catalog.git.
+--------------------
+Failed to process https://github.com/tundrafizz/chat-log-website.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 135, in measure_quality
+    (restarts, repository))
+RuntimeError: Run out of 3 attempts. Failed to train proper model for https://github.com/tundrafizz/chat-log-website.git.
+--------------------
+Failed to process https://github.com/letrommil/cqsolver.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 123, in measure_quality
+    git_dir = ensure_repo(repository, tmpdirname)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 54, in ensure_repo
+    porcelain.clone(repository, git_dir)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/porcelain.py", line 353, in clone
+    depth=depth, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/porcelain.py", line 1121, in fetch
+    depth=depth)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/client.py", line 398, in fetch
+    progress=progress, depth=depth)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/client.py", line 1644, in fetch_pack
+    b"git-upload-pack", url)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/client.py", line 1532, in _discover_references
+    resp, read = self._http_request(url, headers, allow_compression=True)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/client.py", line 1510, in _http_request
+    (resp.status, url))
+dulwich.errors.GitProtocolError: unexpected http resp 401 for https://github.com/letrommil/cqsolver.git/info/refs?service=git-upload-pack
+--------------------
+Failed to process https://github.com/collins-kariuki/taaara.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 137, in measure_quality
+    bblfsh=bblfsh, config_json=config)
+  File "/lookout-sdk-ml/lookout/core/helpers/analyzer_context_manager.py", line 87, in review
+    log_level=log_level, config_json=config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 101, in review
+    return self._run("review", fr, to, port, git_dir, bblfsh, log_level, config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 131, in _run
+    return subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/tmp/lookout-sdk-ml/lookout-sdk-v0.7.0', 'review', 'ipv4://localhost:4487', '--from', 'b8d43c7cb8d051edb601c00cbe206745c2001f0a', '--to', '21f269a6850f66f04ce0bc27e366f7e8c8ef1f81', '--git-dir', '/tmp/top-repos-quality-repos-tgnap0ls/taaara.git', '--log-format', 'json', '--log-level', 'warning', '--config-json', '{"style.format.analyzer.FormatAnalyzer": {"aggregate": true}}']' returned non-zero exit status 1.
+--------------------
+Failed to process https://github.com/splunk/splunk-app-examples.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 135, in measure_quality
+    (restarts, repository))
+RuntimeError: Run out of 3 attempts. Failed to train proper model for https://github.com/splunk/splunk-app-examples.git.
+--------------------
+Failed to process https://github.com/nayaradesousa/first-steps.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 137, in measure_quality
+    bblfsh=bblfsh, config_json=config)
+  File "/lookout-sdk-ml/lookout/core/helpers/analyzer_context_manager.py", line 87, in review
+    log_level=log_level, config_json=config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 101, in review
+    return self._run("review", fr, to, port, git_dir, bblfsh, log_level, config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 131, in _run
+    return subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/tmp/lookout-sdk-ml/lookout-sdk-v0.7.0', 'review', 'ipv4://localhost:4639', '--from', 'd53e1d25799ba043d9eac3bca437bb0cc58d9c69', '--to', 'd53e1d25799ba043d9eac3bca437bb0cc58d9c69', '--git-dir', '/tmp/top-repos-quality-repos-htlr568d/first-steps.git', '--log-format', 'json', '--log-level', 'warning', '--config-json', '{"style.format.analyzer.FormatAnalyzer": {"aggregate": true}}']' returned non-zero exit status 1.
+--------------------
+Failed to process https://github.com/redstone-scratch/asap-api.github.io.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 135, in measure_quality
+    (restarts, repository))
+RuntimeError: Run out of 3 attempts. Failed to train proper model for https://github.com/redstone-scratch/asap-api.github.io.git.
+--------------------
+Failed to process https://github.com/hack4impact-upenn/asylum-connect-catalog.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 135, in measure_quality
+    (restarts, repository))
+RuntimeError: Run out of 3 attempts. Failed to train proper model for https://github.com/hack4impact-upenn/asylum-connect-catalog.git.
+--------------------
+Failed to process https://github.com/tundrafizz/chat-log-website.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 135, in measure_quality
+    (restarts, repository))
+RuntimeError: Run out of 3 attempts. Failed to train proper model for https://github.com/tundrafizz/chat-log-website.git.
+--------------------
+Failed to process https://github.com/letrommil/cqsolver.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 123, in measure_quality
+    git_dir = ensure_repo(repository, tmpdirname)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 54, in ensure_repo
+    porcelain.clone(repository, git_dir)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/porcelain.py", line 353, in clone
+    depth=depth, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/porcelain.py", line 1121, in fetch
+    depth=depth)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/client.py", line 398, in fetch
+    progress=progress, depth=depth)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/client.py", line 1644, in fetch_pack
+    b"git-upload-pack", url)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/client.py", line 1532, in _discover_references
+    resp, read = self._http_request(url, headers, allow_compression=True)
+  File "/usr/local/lib/python3.6/dist-packages/dulwich/client.py", line 1510, in _http_request
+    (resp.status, url))
+dulwich.errors.GitProtocolError: unexpected http resp 401 for https://github.com/letrommil/cqsolver.git/info/refs?service=git-upload-pack
+--------------------
+Failed to process https://github.com/collins-kariuki/taaara.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 137, in measure_quality
+    bblfsh=bblfsh, config_json=config)
+  File "/lookout-sdk-ml/lookout/core/helpers/analyzer_context_manager.py", line 87, in review
+    log_level=log_level, config_json=config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 101, in review
+    return self._run("review", fr, to, port, git_dir, bblfsh, log_level, config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 131, in _run
+    return subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/tmp/lookout-sdk-ml/lookout-sdk-v0.7.0', 'review', 'ipv4://localhost:4639', '--from', 'b8d43c7cb8d051edb601c00cbe206745c2001f0a', '--to', '21f269a6850f66f04ce0bc27e366f7e8c8ef1f81', '--git-dir', '/tmp/top-repos-quality-repos-jkvoiysg/taaara.git', '--log-format', 'json', '--log-level', 'warning', '--config-json', '{"style.format.analyzer.FormatAnalyzer": {"aggregate": true}}']' returned non-zero exit status 1.

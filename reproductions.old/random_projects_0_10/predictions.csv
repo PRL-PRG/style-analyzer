@@ -1,0 +1,20 @@
+repo, url, training_samples, samples, predictions, uncovered, prediction_rate, training_time, review_time
+exp-res, https://github.com/stc/exp-res.git, 978386, 976701, 851912, 124789, 0.872234, 18982, 5787
+instagram-helper, https://github.com/pishangujeniya/instagram-helper.git, 1897, 3659, 692, 2967, 0.189123, 26, 3
+datascientist, https://github.com/matsobanemokomane/datascientist.git, 3477, 2276, 2276, 0, 1, 38, 
+poseidon-system-integration, https://github.com/riveriahorizon/poseidon-system-integration.git, 24078, 24078, 13568, 10510, 0.563502, 69, 73
+minecraft-server, https://github.com/iomatix/minecraft-server.git, 74053, 74053, 63738, 10315, 0.860708, 358, 357
+python-js-dolly-cam-app, https://github.com/deeboss/python-js-dolly-cam-app.git, 10555, 9488, 1408, 8080, 0.148398, 54, 8
+zecwallet, https://github.com/zcashfoundation/zecwallet.git, 31129, 28732, 19711, 9021, 0.68603, 200, 121
+movies, https://github.com/marcelo-vp/movies.git, 2992, 2613, 256, 2357, 0.0979717, 168, 96
+du, https://github.com/adam966/du.git, 3521, 3369, 1374, 1995, 0.407836, 138, 71
+reach--, https://github.com/jah1603/reach--.git, 18978, 16107, 12197, 3910, 0.757248, 87, 96
+experimental, https://github.com/orri93/experimental.git, 17305, 16723, 9954, 6769, 0.595228, 74, 26
+rustc-pr-tracking, https://github.com/rust-lang/rustc-pr-tracking.git, 859, 859, 243, 616, 0.282887, 23, 
+detect-avoid, https://github.com/mojojojo99/detect-avoid.git, 512693, 517431, 422668, 94763, 0.816859, 4462, 3767
+travelroute, https://github.com/x48zhu/travelroute.git, 5197, 5197, 2588, 2609, 0.49798, 66, 103
+roverserver, https://github.com/rcroverdrone/roverserver.git, 6218, 6231, 1671, 4560, 0.268175, 117, 77
+sidoine.org, https://github.com/bobman38/sidoine.org.git, 3880, 3880, 1474, 2406, 0.379897, 168, 138
+event-admin, https://github.com/bitcamp/event-admin.git, 4902, 4902, 1127, 3775, 0.229906, 122, 99
+tiny-tools, https://github.com/xrandx/tiny-tools.git, 66838, 66838, 34477, 32361, 0.515829, 144, 1653
+wt-training-angular2, https://github.com/wishtack-training/wt-training-angular2.git, 4225, 3757, 1696, 2061, 0.451424, 151, 59
