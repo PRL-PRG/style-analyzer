@@ -15,12 +15,10 @@ use djanco::objects::ProjectId;
 
 use djanco::time::Duration;
 use djanco_ext::*;
-//use itertools::Itertools;
 
-// use itertools;
-
-const SELECTED_PROJECTS: usize = 20;
-const SEEDS: [u128; 10] = [1,2,3,5,7,11,13,17,19,23];
+const SELECTIONS: usize = 10;
+const SELECTED_PROJECTS: usize = 25;
+const SEEDS: [u128; 10] = [1,2,3,5,7,11,13,17,19,23]; // one seed per selection
 
 // Base commit is going to be a commit this many percent commits in the past.
 //
@@ -52,16 +50,20 @@ pub fn project_locs(database: &Database, _log: &Log, output: &Path) -> Result<()
     .into_csv_with_headers_in_dir(vec!["url", "locs"], output, "project_locs.csv")
 }
 
-#[djanco(May, 2021, subsets(JavaScript))] pub fn random_projects_0(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects(database, log, output, 0) }
-#[djanco(May, 2021, subsets(JavaScript))] pub fn random_projects_1(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects(database, log, output, 1) }
-#[djanco(May, 2021, subsets(JavaScript))] pub fn random_projects_2(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects(database, log, output, 2) }
-#[djanco(May, 2021, subsets(JavaScript))] pub fn random_projects_3(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects(database, log, output, 3) }
-#[djanco(May, 2021, subsets(JavaScript))] pub fn random_projects_4(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects(database, log, output, 4) }
-#[djanco(May, 2021, subsets(JavaScript))] pub fn random_projects_5(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects(database, log, output, 5) }
-#[djanco(May, 2021, subsets(JavaScript))] pub fn random_projects_6(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects(database, log, output, 6) }
-#[djanco(May, 2021, subsets(JavaScript))] pub fn random_projects_7(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects(database, log, output, 7) }
-#[djanco(May, 2021, subsets(JavaScript))] pub fn random_projects_8(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects(database, log, output, 8) }
-#[djanco(May, 2021, subsets(JavaScript))] pub fn random_projects_9(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects(database, log, output, 9) }
+#[macro_export]
+macro_rules! one_per_selection {
+    {$function:ident ($database:ident, $log:ident, $output:ident)} => {{
+        for i in 0..SELECTIONS {
+            random_projects($database, $log, $output, i)?;
+        }
+        Ok(())
+    }}
+}
+
+#[djanco(May, 2021, subsets(JavaScript))] 
+pub fn select_random_projects(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { 
+    one_per_selection!{ random_projects(database, log, output) }
+}
 
 pub fn random_projects(database: &Database, _log: &Log, output: &Path, seed_index: usize) -> Result<(), std::io::Error>  {
     database.projects()
@@ -73,24 +75,8 @@ pub fn random_projects(database: &Database, _log: &Log, output: &Path, seed_inde
         .into_csv_with_headers_in_dir(vec!["url", "to", "from"], output, format!("random_projects_{}_{}.csv", seed_index, BASE_COMMIT_OFFSET_RATIO))
 }
 
-#[djanco(May, 2021, subsets(JavaScript))] pub fn random_projects_by_size_0(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects_by_size(database, log, output, 0) }
-#[djanco(May, 2021, subsets(JavaScript))] pub fn random_projects_by_size_1(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects_by_size(database, log, output, 1) }
-#[djanco(May, 2021, subsets(JavaScript))] pub fn random_projects_by_size_2(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects_by_size(database, log, output, 2) }
-#[djanco(May, 2021, subsets(JavaScript))] pub fn random_projects_by_size_3(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects_by_size(database, log, output, 3) }
-#[djanco(May, 2021, subsets(JavaScript))] pub fn random_projects_by_size_4(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects_by_size(database, log, output, 4) }
-#[djanco(May, 2021, subsets(JavaScript))] pub fn random_projects_by_size_5(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects_by_size(database, log, output, 5) }
-#[djanco(May, 2021, subsets(JavaScript))] pub fn random_projects_by_size_6(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects_by_size(database, log, output, 6) }
-#[djanco(May, 2021, subsets(JavaScript))] pub fn random_projects_by_size_7(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects_by_size(database, log, output, 7) }
-#[djanco(May, 2021, subsets(JavaScript))] pub fn random_projects_by_size_8(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects_by_size(database, log, output, 8) }
-#[djanco(May, 2021, subsets(JavaScript))] pub fn random_projects_by_size_9(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { random_projects_by_size(database, log, output, 9) }
-
-#[djanco(May, 2021, subsets(JavaScript))] 
-pub fn all_specs(database: &Database, _log: &Log, output: &Path) -> Result<(), std::io::Error> {
-    database.projects()
-        .filter_by(Equal(project::Substore, Store::Large(store::Language::JavaScript)))
-        .filter_by(AnyIn(project::Languages, vec![Language::JavaScript]))
-        .flat_map(project_spec)
-        .into_csv_with_headers_in_dir(vec!["url", "to", "from"], output, format!("all_project_specs_{}.csv", BASE_COMMIT_OFFSET_RATIO))
+#[djanco(May, 2021, subsets(JavaScript))] pub fn select_random_projects_by_size(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { 
+    one_per_selection!{ random_projects_by_size(database, log, output) }
 }
 
 pub fn random_projects_by_size(database: &Database, _log: &Log, output: &Path, seed_index: usize) -> Result<(), std::io::Error>  {
@@ -111,6 +97,15 @@ pub fn random_projects_by_size(database: &Database, _log: &Log, output: &Path, s
         .into_csv_with_headers_in_dir(vec!["url", "to", "from"], output, format!("random_projects_by_size_{}_{}.csv", seed_index, BASE_COMMIT_OFFSET_RATIO))
 }
 
+//#[djanco(May, 2021, subsets(JavaScript))] 
+pub fn all_specs(database: &Database, _log: &Log, output: &Path) -> Result<(), std::io::Error> {
+    database.projects()
+        .filter_by(Equal(project::Substore, Store::Large(store::Language::JavaScript)))
+        .filter_by(AnyIn(project::Languages, vec![Language::JavaScript]))
+        .flat_map(project_spec)
+        .into_csv_with_headers_in_dir(vec!["url", "to", "from"], output, format!("all_project_specs_{}.csv", BASE_COMMIT_OFFSET_RATIO))
+}
+
 #[djanco(May, 2021, subsets(JavaScript))]
 pub fn top_starred(database: &Database, _log: &Log, output: &Path) -> Result<(), std::io::Error>  {
     database.projects()
@@ -122,89 +117,43 @@ pub fn top_starred(database: &Database, _log: &Log, output: &Path) -> Result<(),
         .flat_map(project_spec)
         .into_csv_with_headers_in_dir(vec!["url", "to", "from"], output, "top_starred_projects.csv")
 }
-
-// Putting it in a separate module, to avoid name conflicts with Itertools x.x
-pub mod quality_projects {
-    use std::path::Path;
-
-    use djanco::*;
-    use djanco::database::*;
-    use djanco::log::*;
-    use djanco::csv::*;
-    
-    use djanco::objects::Language;
-    
-    use djanco::time::Duration;
-    use djanco_ext::*;
-    use itertools::Itertools;
-
-    use crate::BASE_COMMIT_OFFSET_RATIO;
-    use crate::SEEDS;
-    use crate::SELECTED_PROJECTS;
-    use crate::is_project_spec;
-    use crate::project_spec;
-
-    #[djanco(May, 2021, subsets(JavaScript))]
-    pub fn quality_projects(database: &Database, _log: &Log, output: &Path) -> Result<(), std::io::Error>  {
-        let all = database.projects()
-            .filter_by(Equal(project::Substore, Store::Large(store::Language::JavaScript)))
-            // Contains at least 80% JavaScript code
-            .filter(|project| {
-                project.language_composition().map_or(false, |languages| {
-                    languages.into_iter()
-                        .any(|(language, propotion)| {
-                            language == Language::JavaScript && propotion >= 80
-                        })
-                })
-            })
-            // Contains at least 5KLOC in the head tree.
-            .filter_by(AtLeast(project::Locs, 5_000))
-            // The spanm between first and last commit is at least 1 year
-            .filter_by(AtLeast(project::Age, Duration::from_months(12)))
-            // Contains at least 100 commits total
-            .filter_by(AtLeast(Count(project::Commits), 100))        
-            // Has at least 2 users
-            .filter_by(AtLeast(Count(project::Users), 2))
-            // Only pick projects for which we can generate a base and head commit        
-            .filter(is_project_spec)
-            // Sample N projects at random (we're just going to do one selection, so take first seed)
-            // Instead fo doing 10 selections of N, I'll do one selection of 10 * N
-            .sample(Random(10 * SELECTED_PROJECTS, Seed(SEEDS[0]))) 
-            // Extract: url, head commit aka to, base commit aka from
-            .flat_map(project_spec);
-
-        // Now split the selection into N-sized chunks and output each one in a separate directory.       
-
-        for (i, chunk) in all.chunks(SELECTED_PROJECTS).into_iter().enumerate() {
-            let file = format!("quality_projects_{}_{}.csv", i, BASE_COMMIT_OFFSET_RATIO);
-            let header = vec!["url", "to", "from"];
-            chunk.into_csv_with_headers_in_dir(header, output, file)?;
-        }       
-        
-        Ok(())
-    }
+ 
+#[djanco(May, 2021, subsets(JavaScript))]
+pub fn select_quality_projects(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  {
+    one_per_selection!{ quality_projects(database, log, output) }
 }
 
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_0(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 0) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_1(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 1) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_2(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 2) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_3(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 3) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_4(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 4) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_5(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 5) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_6(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 6) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_7(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 7) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_8(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 8) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_9(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 9) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_10(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 10) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_11(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 11) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_12(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 12) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_13(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 13) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_14(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 14) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_15(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 15) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_16(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 16) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_17(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 17) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_18(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 18) }
-// #[djanco(May, 2021, subsets(JavaScript))] pub fn debug_19(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { debug(database, log, output, 19) }
+pub fn quality_projects(database: &Database, _log: &Log, output: &Path, seed_index: usize) -> Result<(), std::io::Error>  {
+    database.projects()
+        .filter_by(Equal(project::Substore, Store::Large(store::Language::JavaScript)))
+        // Contains at least 80% JavaScript code
+        .filter(|project| {
+            project.language_composition().map_or(false, |languages| {
+                languages.into_iter()
+                    .any(|(language, propotion)| {
+                        language == Language::JavaScript && propotion >= 80
+                    })
+            })
+        })
+        // Contains at least 5KLOC in the head tree.
+        .filter_by(AtLeast(project::Locs, 5_000))
+        // The spanm between first and last commit is at least 1 year
+        .filter_by(AtLeast(project::Age, Duration::from_months(12)))
+        // Contains at least 100 commits total
+        .filter_by(AtLeast(Count(project::Commits), 100))        
+        // Has at least 2 users
+        .filter_by(AtLeast(Count(project::Users), 2))
+        // Only pick projects for which we can generate a base and head commit        
+        .filter(is_project_spec)
+        // Sample N projects at random (we're just going to do one selection, so take first seed)
+        // Instead fo doing 10 selections of N, I'll do one selection of 10 * N
+        .sample(Random(10 * SELECTED_PROJECTS, Seed(SEEDS[seed_index]))) 
+        // Extract: url, head commit aka to, base commit aka from
+        .flat_map(project_spec)
+        .into_csv_with_headers_in_dir(vec!["url", "to", "from"], 
+            output, 
+            format!("quality_projects_{}_{}.csv", seed_index, BASE_COMMIT_OFFSET_RATIO))
+}
 
 pub fn debug(database: &Database, _log: &Log, output: &Path, project_id: usize) -> Result<(), std::io::Error>  {
     database.projects()
