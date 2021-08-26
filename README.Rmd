@@ -1,11 +1,77 @@
 ---
-title: "style-analyzer: The missing artifact"
+title: "style-analyzer: reproduction artifact"
 output: html_document
+author: Konrad Siek
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+# Setup
+
+```bash
+sudo apt update
+
+# I don't know if we actually need these, probably not.
+sudo apt install python3 python3-pip
+pip3 install pip install git+git://github.com/snowballstem/pystemmer
+pip3 install bblfsh
+
+# Docker
+sudo curl -sSL https://get.docker.com/ | sh
+sudo chmod 666 /var/run/docker.sock
+
+# Rust and djanco
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+cargo install --git https://github.com/PRL-PRG/cargo-djanco
+
+# Start bblfsh
+make bblfsh-start
+```
+
+# Generate selections
+
+```bash
+cd style-selection-query
+
+# Prepare the query
+cargo djanco
+
+# Run for reproduction dataset
+cargo run --bin djanco --release -- --output-path output/repro \
+ --dataset-path /data/parasite/style-analyzer-merged/ \
+ --cache-path /data/parasite/style-analyzer-merged-cache/
+
+# Run for big dataset
+cargo run --bin djanco --release -- \
+  --output-path output --dataset-path /mnt/data/parasite/style-analyzer-merged/ \
+  --cache-path /data/parasite/style-analyzer-merged-cache/
+
+# Combine
+cp output/repro/info/javascript_projects.csv \
+   output/selections/repro_javascript_projects.csv
+cp output/repro/info/project_locs.csv \
+   output/selections/repro_project_locs.csv
+
+cd ..
+```
+
+# Process selections
+
+```bash
+make run-experiment
+```
+
+(To run just one or a few selections: `make run-experiment selections="x y z"`)
+
+Probably fix the access flags for the `reproductions` dir
+
+```bash
+sudo chmod -R a+rw reproductions
+```
+
+# Experiment
 
 ```{R}
 library(readr)

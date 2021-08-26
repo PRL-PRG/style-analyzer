@@ -98,7 +98,7 @@ The package requires PyStemmer 1.3, which looks like is not maintained right now
 pip3 install pip install git+git://github.com/snowballstem/pystemmer
 sudo apt install --reinstall python3
 pip3 install bblfsh
-pip3 install jinja
+pip3 install jinja # x.x
 ```
 
 Misc tools (superset):
