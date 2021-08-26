@@ -52,6 +52,7 @@ run-experiment:
 		-v $(current_dir)/reproductions:/style-analyzer/reproductions \
 		-v $(current_dir)/style-analyzer-query/output:/style-analyzer/selections \
 		-v $(current_dir)/scripts/:/style-analyzer/scripts \
+		-v $(current_dir)/database/:/style-analyzer/database \
 		-w /style-analyzer \
 		srcd/style-analyzer:latest \
 		scripts/run_experiment.sh $(selections)

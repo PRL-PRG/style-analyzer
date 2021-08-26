@@ -8,6 +8,8 @@ else
     SELECTIONS="$@"
 fi
 
+echo -e "server: 0.0.0.0:9930\ndb: sqlite:///database/lookout.sqlite\nfs: /tmp\n" > my_config.yml
+
 time for selection in $SELECTIONS
 do
    QUALITY_REPORT_REPOS="$(pwd)/selections/selections/$selection.csv"
@@ -18,6 +20,7 @@ do
 
    echo "STARTING ${selection}"
 
+    #-c my_config.yml \ why doesn't this work?
    time python3 -m lookout.style.format \
       --log-level DEBUG quality-report \
       -o ${QUALITY_REPORT_DIR} \
