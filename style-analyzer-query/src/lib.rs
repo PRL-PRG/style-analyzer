@@ -87,7 +87,7 @@ pub fn random_projects(database: &Database, _log: &Log, output: &Path, seed_inde
     one_per_selection!{ random_projects_by_size(database, log, output) }
 }
 
-pub fn random_projects_by_size(database: &Database, _log: &Log, output: &Path, seed_index: usize) -> Result<(), std::io::Error>  {
+pub fn random_projects_by_size(database: &Database, _log: &Log, output: &Path, seed_index: usize) -> Result<(), std::io::Error> {
     database.projects()
         //.filter_by(Equal(project::Substore, Store::Large(store::Language::JavaScript)))
         .filter_by(AnyIn(project::Languages, vec![Language::JavaScript]))
