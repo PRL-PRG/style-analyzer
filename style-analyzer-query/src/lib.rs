@@ -1,17 +1,15 @@
 use std::path::Path;
 
 use djanco::*;
-use djanco::attrib::sort::Direction;
+
 use djanco::database::*;
 use djanco::log::*;
 use djanco::csv::*;
 
-use djanco::objects::CommitId;
 use djanco::objects::Head;
 use djanco::objects::ItemWithData;
 use djanco::objects::Language;
 use djanco::objects::Project;
-use djanco::objects::ProjectId;
 
 use djanco::time::Duration;
 use djanco_ext::*;
@@ -80,7 +78,7 @@ pub fn random_projects(database: &Database, _log: &Log, output: &Path, seed_inde
         .filter(is_project_spec)
         .sample(Random(SELECTED_PROJECTS, Seed(SEEDS[seed_index])))
         .flat_map(project_spec)
-        .into_csv_with_headers_in_dir(vec!["url", "to", "from"], output, format!("selections/random_projects_{}_{}.csv", seed_index, BASE_COMMIT_OFFSET_RATIO))
+        .into_csv_with_headers_in_dir(vec!["url", "to", "from"], output, format!("selections/random_projects_{}.csv", seed_index))
 }
 
 #[djanco(May, 2021, subsets(Generic))] pub fn select_random_projects_by_size(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { 
@@ -102,7 +100,7 @@ pub fn random_projects_by_size(database: &Database, _log: &Log, output: &Path, s
                                                                     "medium" -> 1000),
                                                                     "small")))
         .flat_map(project_spec)
-        .into_csv_with_headers_in_dir(vec!["url", "to", "from"], output, format!("selections/random_projects_by_size_{}_{}.csv", seed_index, BASE_COMMIT_OFFSET_RATIO))
+        .into_csv_with_headers_in_dir(vec!["url", "to", "from"], output, format!("selections/random_projects_by_size_{}.csv", seed_index))
 }
 
 //#[djanco(May, 2021, subsets(Generic))] 
@@ -111,19 +109,38 @@ pub fn all_specs(database: &Database, _log: &Log, output: &Path) -> Result<(), s
         //.filter_by(Equal(project::Substore, Store::Large(store::Language::JavaScript)))
         .filter_by(AnyIn(project::Languages, vec![Language::JavaScript]))
         .flat_map(project_spec)
-        .into_csv_with_headers_in_dir(vec!["url", "to", "from"], output, format!("selections/all_project_specs_{}.csv", BASE_COMMIT_OFFSET_RATIO))
+        .into_csv_with_headers_in_dir(vec!["url", "to", "from"], output, "selections/all_project_specs.csv")
 }
 
 #[djanco(May, 2021, subsets(Generic))]
 pub fn select_top_starred(database: &Database, _log: &Log, output: &Path) -> Result<(), std::io::Error>  {
-    database.projects()
+    let mut top_starred = database.projects()
         //.filter_by(Equal(project::Substore, Store::Large(store::Language::JavaScript)))
         .filter_by(AnyIn(project::Languages, vec![Language::JavaScript]))
         .sort_by(project::Stars)
         .filter(is_project_spec)
-        .sample(Top(SELECTED_PROJECTS))
-        .flat_map(project_spec)
-        .into_csv_with_headers_in_dir(vec!["url", "to", "from"], output, "selections/top_starred_projects.csv")
+        .sample(Top(SELECTIONS * SELECTED_PROJECTS))
+        //.flat_map(project_spec)
+        .collect::<Vec<ItemWithData<Project>>>();
+
+    for seed_index in 0..SELECTIONS {
+        // Select N projects from the pool of top-starred projects
+        let selection = top_starred.clone().into_iter()
+            .sample(Random(SELECTED_PROJECTS, Seed(SEEDS[seed_index])))
+            .collect::<Vec<ItemWithData<Project>>>();
+        
+        // Remove the N selected projects from the pool of top-starred projects
+        top_starred
+            .retain(|project| !selection.contains(project));
+
+        // 
+        selection.into_iter()
+            .into_csv_with_headers_in_dir(
+                vec!["url", "to", "from"], output, 
+                format!("selections/top_starred_projects_{}.csv", seed_index))?
+    }
+        
+    todo!()
 }
  
 #[djanco(May, 2021, subsets(Generic))]
@@ -153,27 +170,28 @@ pub fn quality_projects(database: &Database, _log: &Log, output: &Path, seed_ind
         .filter_by(AtLeast(Count(project::Users), 2))
         // Only pick projects for which we can generate a base and head commit        
         .filter(is_project_spec)
-        // Sample N projects at random (we're just going to do one selection, so take first seed)
-        // Instead fo doing 10 selections of N, I'll do one selection of 10 * N
+        // Sample N projects at random (we're just going to do one selection, so take first seed)        
         .sample(Random(10 * SELECTED_PROJECTS, Seed(SEEDS[seed_index]))) 
+        // No good reason, but I forgot to remove the `10 * ` above, and in the graphs I took the top N projects to correct down to N, so I'll leave it like this for verisimilitude
+        .sample(Top(SELECTED_PROJECTS))
         // Extract: url, head commit aka to, base commit aka from
         .flat_map(project_spec)
         .into_csv_with_headers_in_dir(vec!["url", "to", "from"], 
             output, 
-            format!("selections/quality_projects_{}_{}.csv", seed_index, BASE_COMMIT_OFFSET_RATIO))
+            format!("selections/quality_projects_{}.csv", seed_index))
 }
 
 // Helper functions:
 type ProjectURL = String;
 type CommitHash = String;
 
-fn is_project_spec<'a>(project: &ItemWithData<'a, Project>) -> bool {
+pub fn is_project_spec<'a>(project: &ItemWithData<'a, Project>) -> bool {
     _project_spec(project).is_some()
 }
-fn project_spec<'a>(project: ItemWithData<'a, Project>) -> Option<(ProjectURL, CommitHash, CommitHash)> {
+pub fn project_spec<'a>(project: ItemWithData<'a, Project>) -> Option<(ProjectURL, CommitHash, CommitHash)> {
     _project_spec(&project)
 }
-fn _project_spec<'a>(project: &ItemWithData<'a, Project>) -> Option<(ProjectURL, CommitHash, CommitHash)> {
+pub fn _project_spec<'a>(project: &ItemWithData<'a, Project>) -> Option<(ProjectURL, CommitHash, CommitHash)> {
     let url = project.url();
     
     let default_branch = project.default_branch();
@@ -206,23 +224,25 @@ fn _project_spec<'a>(project: &ItemWithData<'a, Project>) -> Option<(ProjectURL,
         eprintln!("WARNING: More than one ({}) branch {} found in project {} ({:?}), continuing.", 
                   default_branch_head.len(), default_branch, project.id(), url);
     }
-    let default_branch_head = default_branch_head[0].clone();
-
-    let head_commit = default_branch_head.commit_with_data();
-    if head_commit.is_none() {
-        eprintln!("WARNING: Head commit inaccessible from branch {} in project {} ({:?}), skipping.", 
-                  default_branch, project.id(), url);
-        return None;
-    }
-    let head_commit = head_commit.unwrap();
+    let default_branch_head = default_branch_head[0].clone();   
     
-    let head_commit_hash = head_commit.hash();
-    if head_commit_hash.is_none() {
-        eprintln!("WARNING: Head commit hash unavaiable for head commit {} from branch {} in project {} ({:?}), skipping.", 
-                  head_commit.id(), default_branch, project.id(), url);
-        return None;
-    }
-    let head_commit_hash = head_commit_hash.unwrap();
+    let head_commit_hash = default_branch_head.hash();    
+    // Now getting it dfirectly from head.
+    // let head_commit = default_branch_head.commit_with_data();
+    // if head_commit.is_none() {
+    //     eprintln!("WARNING: Head commit inaccessible from branch {} in project {} ({:?}), skipping.", 
+    //               default_branch, project.id(), url);
+    //     return None;
+    // }
+    // let head_commit = head_commit.unwrap();
+    //
+    // let head_commit_hash = head_commit.hash();
+    // if head_commit_hash.is_none() {
+    //     eprintln!("WARNING: Head commit hash unavaiable for head commit {} from branch {} in project {} ({:?}), skipping.", 
+    //               head_commit.id(), default_branch, project.id(), url);
+    //     return None;
+    // }
+    // let head_commit_hash = head_commit_hash.unwrap();
 
     let mut commits = default_branch_head.commits_with_data();
 
