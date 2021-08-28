@@ -15,7 +15,7 @@ use djanco::time::Duration;
 use djanco_ext::*;
 
 const SELECTIONS: usize = 10;
-const SELECTED_PROJECTS: usize = 25;
+const SELECTED_PROJECTS: usize = 30;
 const SEEDS: [u128; 10] = [1,2,3,5,7,11,13,17,19,23]; // one seed per selection
 
 // Base commit is going to be a commit this many percent commits in the past.
@@ -75,10 +75,11 @@ pub fn random_projects(database: &Database, _log: &Log, output: &Path, seed_inde
     database.projects()
         //.filter_by(Equal(project::Substore, Store::Large(store::Language::JavaScript)))
         .filter_by(AnyIn(project::Languages, vec![Language::JavaScript]))
-        .filter(is_project_spec)
+        //.filter(is_project_spec)
         .sample(Random(SELECTED_PROJECTS, Seed(SEEDS[seed_index])))
-        .flat_map(project_spec)
-        .into_csv_with_headers_in_dir(vec!["url", "to", "from"], output, format!("selections/random_projects_{}.csv", seed_index))
+        //.flat_map(project_spec)
+        .map_into(project::URL)
+        .into_csv_with_headers_in_dir(vec!["url"], output, format!("selections/random_projects_{}.csv", seed_index))
 }
 
 #[djanco(May, 2021, subsets(Generic))] pub fn select_random_projects_by_size(database: &Database, log: &Log, output: &Path) -> Result<(), std::io::Error>  { 
@@ -89,7 +90,7 @@ pub fn random_projects_by_size(database: &Database, _log: &Log, output: &Path, s
     database.projects()
         //.filter_by(Equal(project::Substore, Store::Large(store::Language::JavaScript)))
         .filter_by(AnyIn(project::Languages, vec![Language::JavaScript]))
-        .filter(is_project_spec)
+        //.filter(is_project_spec)
         .sample(Stratified(project::Locs, 
                                   Strata!("very large" -> Random(SELECTED_PROJECTS/4, Seed(SEEDS[seed_index])), 
                                           "large" -> Random(SELECTED_PROJECTS/4, Seed(SEEDS[seed_index])), 
@@ -99,8 +100,9 @@ pub fn random_projects_by_size(database: &Database, _log: &Log, output: &Path, s
                                                                     "large" -> 10_000,
                                                                     "medium" -> 1000),
                                                                     "small")))
-        .flat_map(project_spec)
-        .into_csv_with_headers_in_dir(vec!["url", "to", "from"], output, format!("selections/random_projects_by_size_{}.csv", seed_index))
+        //.flat_map(project_spec)
+        .map_into(project::URL)
+        .into_csv_with_headers_in_dir(vec!["url"], output, format!("selections/random_projects_by_size_{}.csv", seed_index))
 }
 
 //#[djanco(May, 2021, subsets(Generic))] 
@@ -118,7 +120,7 @@ pub fn select_top_starred(database: &Database, _log: &Log, output: &Path) -> Res
         //.filter_by(Equal(project::Substore, Store::Large(store::Language::JavaScript)))
         .filter_by(AnyIn(project::Languages, vec![Language::JavaScript]))
         .sort_by(project::Stars)
-        .filter(is_project_spec)
+        //.filter(is_project_spec)
         .sample(Top(SELECTIONS * SELECTED_PROJECTS))
         //.flat_map(project_spec)
         .collect::<Vec<ItemWithData<Project>>>();
@@ -133,14 +135,15 @@ pub fn select_top_starred(database: &Database, _log: &Log, output: &Path) -> Res
         top_starred
             .retain(|project| !selection.contains(project));
 
-        // 
+        // Write out selection. 
         selection.into_iter()
+            .map_into(project::URL)
             .into_csv_with_headers_in_dir(
-                vec!["url", "to", "from"], output, 
+                vec!["url"], output, 
                 format!("selections/top_starred_projects_{}.csv", seed_index))?
     }
-        
-    todo!()
+
+    Ok(())
 }
  
 #[djanco(May, 2021, subsets(Generic))]
@@ -169,14 +172,13 @@ pub fn quality_projects(database: &Database, _log: &Log, output: &Path, seed_ind
         // Has at least 2 users
         .filter_by(AtLeast(Count(project::Users), 2))
         // Only pick projects for which we can generate a base and head commit        
-        .filter(is_project_spec)
+        //.filter(is_project_spec)
         // Sample N projects at random (we're just going to do one selection, so take first seed)        
-        .sample(Random(10 * SELECTED_PROJECTS, Seed(SEEDS[seed_index]))) 
-        // No good reason, but I forgot to remove the `10 * ` above, and in the graphs I took the top N projects to correct down to N, so I'll leave it like this for verisimilitude
-        .sample(Top(SELECTED_PROJECTS))
+        .sample(Random(SELECTED_PROJECTS, Seed(SEEDS[seed_index]))) 
         // Extract: url, head commit aka to, base commit aka from
-        .flat_map(project_spec)
-        .into_csv_with_headers_in_dir(vec!["url", "to", "from"], 
+        //.flat_map(project_spec)
+        .map_into(project::URL)
+        .into_csv_with_headers_in_dir(vec!["url"], 
             output, 
             format!("selections/quality_projects_{}.csv", seed_index))
 }
