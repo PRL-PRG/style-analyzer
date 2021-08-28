@@ -1315,9 +1315,12 @@ name = "style-analyzer-query"
 version = "0.1.0"
 dependencies = [
  "clap 3.0.0-beta.4",
+ "csv",
  "djanco",
  "djanco_ext",
  "itertools",
+ "regex",
+ "serde",
 ]
 
 [[package]]

@@ -1,4 +1,11 @@
+use std::collections::HashMap;
+use std::collections::HashSet;
 use std::path::Path;
+use std::path::PathBuf;
+
+use regex;
+use ::csv as csv_reader;
+use serde::Deserialize;
 
 use djanco::*;
 
@@ -13,6 +20,7 @@ use djanco::objects::Project;
 
 use djanco::time::Duration;
 use djanco_ext::*;
+use regex::Regex;
 
 const SELECTIONS: usize = 10;
 const SELECTED_PROJECTS: usize = 30;
@@ -181,6 +189,82 @@ pub fn quality_projects(database: &Database, _log: &Log, output: &Path, seed_ind
         .into_csv_with_headers_in_dir(vec!["url"], 
             output, 
             format!("selections/quality_projects_{}.csv", seed_index))
+}
+
+#[derive(Deserialize, Debug, PartialEq, Eq, std::hash::Hash)]
+struct Url { url: String }
+
+#[djanco(May, 2021, subsets(Generic))]
+pub fn xxx_generate_project_spec_form_selections(database: &Database, _log: &Log, output: &Path) -> Result<(), std::io::Error>  {
+    let mut selections_dir = PathBuf::from(output);
+    selections_dir.push("selections");
+    
+    let mut project_selection_assignments: HashMap<Url, Vec<String>> = HashMap::new();
+
+    let extension = Regex::new(".csv$").unwrap();
+    let selections = std::fs::read_dir(&selections_dir)?;
+    for selection in selections {
+        let selection = selection?;
+        let selection_path = selection.path();
+        let selection_file = selection.file_name().to_str().unwrap().to_owned();            
+        let selection_name = extension.replace(&selection_file, "").to_string();
+        
+        // if selection_name.as_str() == "all" { continue }
+        // if !extension.is_match(selection_file) { continue }
+
+        let mut csv = csv_reader::Reader::from_path(selection_path)?;
+        
+        for row in csv.deserialize() {
+            let project_url: Url = row?;
+
+            //println!("Adding {} to {:?}", selection_name, project_url);
+            project_selection_assignments.entry(project_url)
+                .and_modify(|vector| vector.push(selection_name.clone()))
+                .or_insert(vec![selection_name.clone()]);
+        }
+    }
+
+    // let project_urls = project_selection_assignments.iter()
+    //     .map(|(url, _)| url.url.as_str().to_owned())
+    //     .collect::<HashSet<String>>();
+
+    //database.clone().projects().for_each(|x| println!("{}", x.url()));
+
+    let project_specs = database.projects().into_iter()
+        //.filter(|project| project_urls.contains(project.url()))
+        .map(|p| { println!(">> {}", p.url()); p })
+        .flat_map(project_spec)
+        .map(|p| { println!(">> {:?}", p); p })
+        .map(|(url, to, from)| (url.clone(), (url, to, from)))
+        .collect::<HashMap<String, (String, String, String)>>();
+
+    let mut selection_specs: HashMap<String, Vec<(String, String, String)>> = HashMap::new();
+    for (url, selections) in project_selection_assignments {
+        //println!("{:?} -> {:?}", url, selections);
+        let project_spec = project_specs.get(&url.url);
+        if project_spec.is_none() {
+            //println!("No spec for project {}, skipping. (Should appear in selections: {})", url.url, selections.join(", "));
+            continue
+        }
+        //println!("!");
+        let project_spec = project_spec.unwrap().clone();
+
+        for selection in selections {
+            selection_specs.entry(selection)
+                .and_modify(|vector| vector.push(project_spec.clone()))
+                .or_insert(vec![project_spec.clone()]);
+        }
+    }
+
+    for (selection, project_specs) in selection_specs {
+        //println!("SELECTION: {}", selection);
+        project_specs.into_iter().into_csv_with_headers_in_dir(
+            vec!["url, to, from"], 
+            &output, 
+            format!("specs/{}.csv", selection))?
+    }
+
+    Ok(())
 }
 
 // Helper functions:
