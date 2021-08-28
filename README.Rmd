@@ -1,11 +1,77 @@
 ---
-title: "style-analyzer: The missing artifact"
+title: "style-analyzer: reproduction artifact"
 output: html_document
+author: Konrad Siek
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+# Setup
+
+```bash
+sudo apt update
+
+# I don't know if we actually need these, probably not.
+sudo apt install python3 python3-pip
+pip3 install pip install git+git://github.com/snowballstem/pystemmer
+pip3 install bblfsh
+
+# Docker
+sudo curl -sSL https://get.docker.com/ | sh
+sudo chmod 666 /var/run/docker.sock
+
+# Rust and djanco
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+cargo install --git https://github.com/PRL-PRG/cargo-djanco
+
+# Start bblfsh
+make bblfsh-start
+```
+
+# Generate selections
+
+```bash
+cd style-selection-query
+
+# Prepare the query
+cargo djanco
+
+# Run for reproduction dataset
+cargo run --bin djanco --release -- --output-path output/repro \
+ --dataset-path /data/parasite/style-analyzer-merged/ \
+ --cache-path /data/parasite/style-analyzer-merged-cache/
+
+# Run for big dataset
+cargo run --bin djanco --release -- \
+  --output-path output --dataset-path /mnt/data/parasite/style-analyzer-merged/ \
+  --cache-path /data/parasite/style-analyzer-merged-cache/
+
+# Combine
+cp output/repro/info/javascript_projects.csv \
+   output/selections/repro_javascript_projects.csv
+cp output/repro/info/project_locs.csv \
+   output/selections/repro_project_locs.csv
+
+cd ..
+```
+
+# Process selections
+
+```bash
+make run-experiment
+```
+
+(To run just one or a few selections: `make run-experiment selections="x y z"`)
+
+Probably fix the access flags for the `reproductions` dir
+
+```bash
+sudo chmod -R a+rw reproductions
+```
+
+# Experiment
 
 ```{R}
 library(readr)
@@ -16,7 +82,9 @@ library(ggplot2)
 library(scales)
 library(cowplot)
 library(gridExtra)
+library(ggridges)
 library(ggpubr)
+library(tidyr)
 ```
 
 ```{r}
@@ -33,7 +101,8 @@ REPRO_DIR <- "reproductions/"
 # They are used as names, they should not have / in them.
 random_projects <- paste0("random_projects_", c(0,2,3,6:9), "_", 10)
 random_projects_by_size <- paste0("random_projects_by_size_", c(0:2, 6:9), "_", 10)
-EXPERIMENTS <- c("original_reproduction", "original_10", random_projects, random_projects_by_size, "top_starred_projects", "quality_projects_10")
+quality_projects <- paste0("quality_projects_", 10) # 7:9, "_"
+EXPERIMENTS <- c("original_reproduction", "original_10", random_projects, random_projects_by_size, "top_starred_projects", quality_projects)
 
 # Convert to bash variables
 Sys.setenv(REPRO_DIRS = paste(paste0(REPRO_DIR, "/", EXPERIMENTS), collapse = " "))
@@ -380,10 +449,12 @@ max_support = sapply(experiment_data, function(data) max(data$support)) %>% max
 make_precision_support_graph <- function (experiment, uniform_scales=TRUE, labels=FALSE, color_by_selection=FALSE, log_scale=FALSE, only_top_n=NULL,  only_bottom_n=NULL) {
   data <- experiment_data[[experiment]]
   if (!is.null(only_top_n)) {
-    data <- data %>% top_n(only_top_n)
+    data <- data %>% mutate(i=1:n()) %>% top_n(only_top_n, i)
+    print(data)
   }
   if (!is.null(only_bottom_n)) {
-    data <- data %>% top_n(-only_bottom_n)
+    data <- data %>% mutate(i=1:n()) %>% top_n(-only_bottom_n, i)
+    print(data)
   }
   plot <- 
   if (color_by_selection) {
@@ -486,15 +557,73 @@ make_precision_support_graph("quality_projects_10", only_top_n=20)
 make_precision_support_graph("quality_projects_10", only_bottom_n=20)
 ```
 
-```{r}
+```{r, fig.width=10, fig.height=10}
+grid.arrange(widths=c(1,1), make_precision_support_graph("original_10") + xlab(NULL), 
+                            make_precision_support_graph("top_starred_projects") + xlab(NULL) + ylab(NULL), 
+                            make_precision_support_graph("quality_projects_10", only_top_n=20), 
+                            make_precision_support_graph("quality_projects_10", only_bottom_n=20) + ylab(NULL))
+```
+
+```{r, fig.width=12, fig.height=5}
 strip_and_label <- function(data, label) data %>% mutate(selection=label) %>% select(selection, repo, precision, support)
 
 comparison_data <- 
   experiment_data[["original_10"]] %>% strip_and_label("original") %>%
-  bind_rows(experiment_data[["quality_projects_10"]] %>% top_n(20) %>% strip_and_label("quality_projects_1")) %>%
-  bind_rows(experiment_data[["quality_projects_10"]] %>% top_n(-20) %>% strip_and_label("quality_projects_2"))
+  bind_rows(experiment_data[["top_starred_projects"]] %>% strip_and_label("top_starred_projects")) %>%
+  bind_rows(experiment_data[["quality_projects_10"]] %>% mutate(i=1:n()) %>% top_n(20, i) %>% strip_and_label("quality_projects_1")) %>%
+  bind_rows(experiment_data[["quality_projects_10"]] %>% mutate(i=1:n()) %>% top_n(-20, i) %>% strip_and_label("quality_projects_2"))
 
-ggplot(comparison_data, aes(x=selection, y=support)) + geom_boxplot()
+support_comparison <- ggplot(comparison_data, aes(x=selection, y=support, color=selection)) + geom_boxplot() + xlab("Selection") + ylab("Support") + scale_y_continuous(labels=label_number_si()) + theme_bw()+ theme(legend.position="none") 
+precision_comparison <- ggplot(comparison_data, aes(x=selection, y=precision, color=selection)) + geom_boxplot() + xlab("Selection") + ylab("Precision") + theme_bw()+ theme(legend.position="none") + scale_y_continuous(limits=c(0.75,1))
+
+grid.arrange(widths=c(1,1), support_comparison, precision_comparison)
+```
+
+```{r}
+selected_urls <- experiment_data$original_10 %>% pull(url)
+data <- all_projects %>% filter(url %in% selected_urls) %>% select(users, stars, size, forks, url, repo) %>% gather("column", "value", users, stars, size, forks, -url, -repo) 
+ggplot(data, aes(x = value, y = column, color = "blue", fill = "blue")) +
+  geom_density_ridges(stat = "binline", bins = 50, draw_baseline = FALSE, aes(scale = 0.9), alpha = 0.5) + 
+  theme_ridges() + 
+  theme(legend.position = "bottom") +
+  ylab(NULL) + xlab(NULL)
+
+# compare_selection_to_dataset = function(java, python, js, java_sel, python_sel, js_sel, columns, selection_name) {
+#   f = function(dataset, selection, columns, color, selection_name) {
+#     dataset = dataset %>% select(c(id, columns))
+#     dataset = melt(dataset, "id")
+#     dataset$kind = "Dataset"
+#     selection = selection %>% select(c(id, columns))
+#     selection = melt(selection, "id")
+#     selection$kind = selection_name
+#     x = rbind(dataset, selection)
+#     x$kind = factor(x$kind, levels = c("Dataset", selection_name))
+#     ggplot(x, aes(x = value, y = variable, color = kind, fill = kind, height = ..ndensity..)) +
+#       geom_density_ridges(stat = "binline", bins = 50, draw_baseline = FALSE, aes(scale = 0.9), alpha = 0.5) +
+#       theme_ridges() + 
+#       theme(legend.position = "bottom") +
+#       ylab("") + xlab("") +
+#       scale_x_continuous(breaks = c(1, 10, 100, 1e3, 1e4, 1e5, 1e6, 1e7, 1e8), labels = c("1","10", "100", "1k", "10k", "100k", "1m", "10m", "100m"), trans = "pseudo_log") +
+#       scale_fill_manual(values = c("gray", color), name = "") +
+#       scale_color_manual(values = c("gray", color), name = "")
+#   }
+#   java = f(java, java_sel, columns, "red", selection_name)
+#   python = f(python, python_sel, columns, "blue", selection_name) + 
+#       theme(axis.title.y=element_blank(),
+#           axis.text.y=element_blank(),
+#           axis.ticks.y=element_blank())      
+#   js = f(js, js_sel, columns, "#008000", selection_name) +
+#       theme(axis.title.y=element_blank(),
+#           axis.text.y=element_blank(),
+#           axis.ticks.y=element_blank())      
+#   java + python + js +
+#       plot_layout(ncol =3, nrow = 1, widths = c(6, 6,6), heights = c(6)) +
+#       ggtitle(paste0("Comparison of ",selection_name," to entire dataset for Java, Python and JavaScript"))
+# }
+# 
+# g = compare_selection_to_dataset(java, python, js, java_stars, python_stars, js_stars, columns, "Top 1k Stars")
+# ggsave("figs/lang_stars_attributes.pdf", plot = g)
+# g
 ```
 
 ### Random samples
