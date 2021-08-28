@@ -259,7 +259,7 @@ pub fn xxx_generate_project_spec_form_selections(database: &Database, _log: &Log
     for (selection, project_specs) in selection_specs {
         //println!("SELECTION: {}", selection);
         project_specs.into_iter().into_csv_with_headers_in_dir(
-            vec!["url, to, from"], 
+            vec!["url","to","from"], 
             &output, 
             format!("specs/{}.csv", selection))?
     }
