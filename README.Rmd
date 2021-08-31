@@ -89,6 +89,9 @@ library(digest)
 ```
 
 ```{r}
+# This is where figures are generated into
+FIGS="figs/"
+
 # This is where the results of style-analyzer-query live.
 # Must have a / at the end.
 DJANCO_DIR <- "style-analyzer-query/output/"
@@ -491,6 +494,7 @@ grid.arrange(widths=c(1,1), make_precision_support_graph("original_10") + xlab(N
                             make_precision_support_graph("quality_projects_10", only_bottom_n=20) + ylab(NULL))
 ```
 
+
 ```{r, fig.width=25, fig.height=10}
 mann_whitney_significance <- function(experiment) {
   precision_result <- wilcox.test(experiment_data$original$precision, experiment_data[[experiment]]$precision, exact=FALSE)
@@ -548,34 +552,104 @@ selection_names <- sapply(PAPER_EXPERIMENTS, make_selection_label, simplify=FALS
 selection_name_order <- c("Original", paste0("Top Stars ", 1:stars_sequence), paste0("Interesting ", 1:quality_sequence))
 ```
 
-```{r fig.width=10, fig.height=5}
-graphs <- lapply(PAPER_EXPERIMENTS, function(x) make_precision_support_graph(x, use_selection_name = T))
-do.call("grid.arrange", c(graphs, ncol=4))
+
+```{r fig.width=8, fig.height=4}
+make_precision_support_graph <- function (experiment, uniform_scales=TRUE, labels=FALSE, color_by_selection=FALSE, log_scale=FALSE, only_top_n=NULL,  only_bottom_n=NULL, use_selection_name=FALSE, left=T, bottom=T) {
+  
+  
+  data <- experiment_data[[experiment]]
+  if (!is.null(only_top_n)) {
+    data <- data %>% mutate(i=1:n()) %>% top_n(only_top_n, i)
+    print(data)
+  }
+  if (!is.null(only_bottom_n)) {
+    data <- data %>% mutate(i=1:n()) %>% top_n(-only_bottom_n, i)
+    print(data)
+  }
+  plot <- 
+  if (color_by_selection) {
+    ggplot(data, aes(x=precision, y=support, alpha=0.2, color=selection)) + geom_point(size=2, shape=4)
+  } else {
+    ggplot(data, aes(x=precision, y=support, alpha=0.2)) + geom_point(size=2, shape=4)
+  }
+  if (labels) {
+    plot <- plot + geom_text(aes(label=repo), position=position_nudge(y=-10000),  size=3)
+  }
+  
+  x_range <- if(uniform_scales) c(min_precision, 1) else NULL
+  y_range <- if(uniform_scales) c(0 - 10000, max_support) else NULL
+  
+  if (log_scale) {
+    plot <- plot + scale_y_log10(labels=label_number_si(), limits = y_range)
+  } else {
+    plot <- plot + scale_y_continuous(labels=label_number_si(), limits = y_range)
+  }
+  
+  plot <- plot +
+    scale_x_continuous(labels=function(x) format(x, digits=2), limits = x_range) +
+    xlab("Precision") + 
+    ylab("Samples in the training set") +
+    ggtitle(ifelse(use_selection_name, selection_names[[experiment]], paste0("Selection: ", experiment))) +
+    theme_bw() + 
+    theme(legend.position="none", panel.grid.major = element_blank(), panel.grid.minor = element_blank()) # panel.border=element_blank(), 
+  
+  #if (!left) { plot <- plot + theme(axis.title.y = element_blank(), axis.text.y = element_blank()) }
+  #if (!bottom) { plot <- plot + theme(axis.title.x = element_blank(), axis.text.x = element_blank()) }
+  
+  plot
+}
+
+col_index <- 0;
+row_index <- 0;
+cols <- 4
+max_rows <- ceiling(length(PAPER_EXPERIMENTS) / cols)
+
+graphs <- lapply(PAPER_EXPERIMENTS, function(x) {
+  print(c(col_index, row_index, col_index == 0, row_index==max_rows))
+  graph <- make_precision_support_graph(x, use_selection_name = T, left=(col_index == 0), bottom=(row_index==max_rows - 1))
+  col_index <<- col_index + 1
+  if (col_index == cols) {
+    col_index <<- 0
+    row_index <<- row_index + 1
+  }
+  graph
+})
+graph <- do.call("grid.arrange", c(graphs, ncol=cols))
+
+graph
+
+dev.copy(pdf, file=paste0(FIGS, "/precision_vs_samples.pdf"), height=4, width=8)
+dev.off()
 ```
 
-
-```{r, fig.width=10, fig.height=5}
+```{r, fig.width=8, fig.height=4}
 significance <- sapply(PAPER_EXPERIMENTS, mann_whitney_significance, simplify=FALSE)
 stripped_and_labelled <- lapply(PAPER_EXPERIMENTS, function(experiment) significance[[experiment]] %>% strip_and_label(experiment))
 comparison_data <- do.call(bind_rows, stripped_and_labelled) %>% mutate(selection_name = factor(selection_name, levels=selection_name_order))
 
-support_comparison <- ggplot(comparison_data, aes(x=selection_name, y=support, fill=selection)) + 
+support_comparison <- ggplot(comparison_data, aes(x=selection_name, y=support, fill=selection, color=selection, alpha=!support_significance)) + 
   geom_boxplot() + 
   xlab("Selection") + ylab("Samples in training set") + 
   scale_y_continuous(labels=label_number_si()) + 
   #scale_fill_manual("Legend", values = ifelse(!support_significance, selection, NA)) +
-  scale_alpha_discrete(range=c(1, 0.01)) +
+  scale_alpha_discrete(range=c(0.5, 0)) +
   theme_bw() + 
-  theme(legend.position="none") 
+  theme(legend.position="none", panel.grid.major = element_blank(), panel.grid.minor = element_blank()) #, axis.text.x = element_blank(), axis.title.x = element_blank()) 
 
-precision_comparison <- ggplot(comparison_data, aes(x=selection_name, y=precision, fill=selection, alpha=!precision_significance)) +
+precision_comparison <- ggplot(comparison_data, aes(x=selection_name, y=precision, fill=selection, color=selection, alpha=!precision_significance)) +
   geom_boxplot() + 
   xlab("Selection") + ylab("Precision") + 
-  scale_alpha_discrete(range=c(0.1, 1)) +
+  scale_alpha_discrete(range=c(0, 0.5)) +
   theme_bw() + 
-  theme(legend.position="none") + scale_y_continuous(limits=c(0.75,1))
+  theme(legend.position="none",  panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
+  scale_y_continuous(limits=c(0.75,1)) #, panel_border(element_blank()))
 
-grid.arrange(widths=c(1), support_comparison, precision_comparison)
+graph <- grid.arrange(widths=c(1), support_comparison, precision_comparison)
+
+graph
+
+dev.copy(pdf, file=paste0(FIGS, "/precision_and_samples_comparison.pdf"), height=4, width=8)
+dev.off()
 ```
 
 # Notes
