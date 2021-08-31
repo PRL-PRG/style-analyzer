@@ -1,0 +1,193 @@
+# Model report for file:///tmp/top-repos-quality-repos-wjoo6l8x/douban.fm.git HEAD 777928a28ab43c12733505a9374a8323d44df4b5
+
+### Dump
+
+```json
+{'created_at': '2021-08-30 07:49:19',
+ 'datasets': [],
+ 'dependencies': [],
+ 'description': 'Model bound to style.format.analyzer.FormatAnalyzer Lookout analyzer.',
+ 'environment': {'packages': 'ConfigArgParse==0.13.0 Jinja2==2.10 MarkupSafe==1.1.1 PyStemmer==1.3.0 PyYAML==5.1 Pympler==0.5 SQLAlchemy==1.2.10 SQLAlchemy-Utils==0.33.3 asdf==2.3.2 bblfsh==2.12.7 boto==2.49.0 boto3==1.9.130 botocore==1.12.130 cachetools==2.0.1 certifi==2019.3.9 chardet==3.0.4 clint==0.5.1 docker==3.7.0 docker-pycreds==0.4.0 dulwich==0.19.11 grpcio==1.19.0 grpcio-tools==1.19.0 humanfriendly==4.16.1 humanize==0.5.1 idna==2.8 jmespath==0.9.4 jsonschema==2.6.0 lookout-sdk==0.4.1 lookout-sdk-ml==0.19.0 lookout-style==0.2.0 lz4==2.1.6 modelforge==0.12.1 numpy==1.16.2 packaging==19.0 pandas==0.22.0 pip==19.0.3 protobuf==3.7.0 psycopg2-binary==2.7.5 pygtrie==2.3 pyparsing==2.3.1 python-dateutil==2.8.0 python-igraph==0.7.1.post6 pytz==2019.1 requests==2.21.0 requirements-parser==0.2.0 scikit-learn==0.20.1 scikit-optimize==0.5.2 scipy==1.2.1 semantic-version==2.6.0 setuptools==40.8.0 six==1.12.0 smart-open==1.8.1 sourced-ml==0.8.2 spdx==2.5.0 stringcase==1.2.0 tabulate==0.8.2 tqdm==4.31.1 '
+                             'urllib3==1.24.1 websocket-client==0.55.0 xxhash==1.3.0',
+                 'platform': 'Linux-4.15.0-135-generic-x86_64-with-Ubuntu-18.04-bionic',
+                 'python': '3.6.7 (default, Oct 22 2018, 11:32:17) [GCC 8.2.0]'},
+ 'license': 'ODbL-1.0',
+ 'metrics': {},
+ 'model': 'style.format.analyzer.FormatAnalyzer',
+ 'references': [],
+ 'series': 'Lookout',
+ 'size': '15.8 kB',
+ 'tags': [],
+ 'uuid': '4f4037a6-4751-40da-bd16-cd6b9fd0827c',
+ 'vendor': 'source{d}',
+ 'version': [1]}
+style.format.analyzer.FormatAnalyzer/[1] file:///tmp/top-repos-quality-repos-wjoo6l8x/douban.fm.git 777928a28ab43c12733505a9374a8323d44df4b5
+
+# javascript
+36 rules, avg.len. 4.2
+## train
+PPCR: 0.741127
+### report
+macro
+{'f1-score': 0.33982319784212817,
+ 'precision': 0.35614151015325185,
+ 'recall': 0.3294448655462287,
+ 'support': 2840}
+micro
+{'f1-score': 0.85, 'precision': 0.85, 'recall': 0.85, 'support': 2840}
+weighted
+{'f1-score': 0.832286377191634,
+ 'precision': 0.8224137414775077,
+ 'recall': 0.85,
+ 'support': 2840}
+### report_full
+macro
+{'f1-score': 0.30102029804685954,
+ 'precision': 0.35614151015325185,
+ 'recall': 0.26727356768084937,
+ 'support': 3832}
+micro
+{'f1-score': 0.723621103117506,
+ 'precision': 0.85,
+ 'recall': 0.6299582463465553,
+ 'support': 3832}
+weighted
+{'f1-score': 0.6680053414114502,
+ 'precision': 0.7299721880630309,
+ 'recall': 0.6299582463465553,
+ 'support': 3832}
+## test
+PPCR: 0.473795
+### report
+macro
+{'f1-score': 0.34562126639993757,
+ 'precision': 0.3433332617006086,
+ 'recall': 0.3500883012744022,
+ 'support': 226}
+micro
+{'f1-score': 0.831858407079646,
+ 'precision': 0.831858407079646,
+ 'recall': 0.831858407079646,
+ 'support': 226}
+weighted
+{'f1-score': 0.8306077166057166,
+ 'precision': 0.8327362777425988,
+ 'recall': 0.831858407079646,
+ 'support': 226}
+### report_full
+macro
+{'f1-score': 0.25225214346093466,
+ 'precision': 0.3433332617006086,
+ 'recall': 0.2032518376478108,
+ 'support': 477}
+micro
+{'f1-score': 0.534850640113798,
+ 'precision': 0.831858407079646,
+ 'recall': 0.3941299790356394,
+ 'support': 477}
+weighted
+{'f1-score': 0.48517183509926615,
+ 'precision': 0.6514667781514143,
+ 'recall': 0.3941299790356394,
+ 'support': 477}
+```
+
+## javascript
+### Summary
+20 rules, avg.len. 3.8
+
+| | |
+|-|-|
+|Min support|129|
+|Max support|777|
+|Min confidence|0.9253246784210205|
+|Max confidence|0.9976076483726501|
+
+### Configuration
+
+```json
+{'feature_extractor': {'cutoff_label_support': 80,
+                       'debug_parsing': False,
+                       'label_composites': '<cut>',
+                       'left_features': ['length',
+                                         'diff_offset',
+                                         'diff_col',
+                                         'diff_line',
+                                         'internal_type',
+                                         'label',
+                                         'reserved',
+                                         'roles'],
+                       'left_siblings_window': 5,
+                       'no_labels_on_right': True,
+                       'node_features': ['start_line', 'start_col'],
+                       'parent_features': ['internal_type', 'roles'],
+                       'parents_depth': 2,
+                       'return_sibling_indices': False,
+                       'right_features': ['length', 'internal_type', 'reserved', 'roles'],
+                       'right_siblings_window': 5,
+                       'select_features_number': 500,
+                       'selected_features': '<cut>'},
+ 'line_length_limit': 500,
+ 'lines_ratio_train_trigger': 0.2,
+ 'lower_bound_instances': 500,
+ 'optimizer': {'base_model_name_categories': ['sklearn.ensemble.RandomForestClassifier',
+                                              'sklearn.tree.DecisionTreeClassifier'],
+               'cv': 3,
+               'max_depth_categories': [None, 5, 10],
+               'max_features_categories': [None, 'auto'],
+               'min_samples_leaf_max': 120,
+               'min_samples_leaf_min': 90,
+               'min_samples_split_max': 240,
+               'min_samples_split_min': 180,
+               'n_iter': 50,
+               'n_jobs': -1},
+ 'overall_size_limit': 5242880,
+ 'random_state': 42,
+ 'test_dataset_ratio': 0.2,
+ 'trainable_rules': {'attribute_similarity_threshold': 0.98,
+                     'base_model_name': 'sklearn.ensemble.RandomForestClassifier',
+                     'confidence_threshold': 0.8,
+                     'min_samples_leaf': 90,
+                     'min_samples_split': 180,
+                     'n_estimators': 10,
+                     'prune_attributes': True,
+                     'prune_branches_algorithms': ['reduced-error'],
+                     'prune_dataset_ratio': 0.2,
+                     'top_down_greedy_budget': [False, 0.5]}}
+```
+
+### Rules
+
+| rule number | description |
+|----:|:-----|
+| 1 | `  ^1.internal_type = MemberExpression<br>⇒ y = ∅<br>Confidence: 0.975. Support: 777.` |
+| 2 | `  -1.reserved = (<br>	∧ -1.roles not in {LITERAL}<br>	∧ +1.internal_type not in {StringLiteral}<br>	∧ ^1.internal_type not in {MemberExpression}<br>⇒ y = ∅<br>Confidence: 0.988. Support: 213.` |
+| 3 | `  -1.reserved not in {(}<br>	∧ -1.roles in {EXPRESSION} and not in {LITERAL}<br>	∧ +1.internal_type not in {StringLiteral}<br>	∧ +1.reserved = (<br>	∧ ^1.internal_type not in {MemberExpression}<br>⇒ y = ∅<br>Confidence: 0.997. Support: 193.` |
+| 4 | `  ^1.roles in {IDENTIFIER}<br>⇒ y = ∅<br>Confidence: 0.986. Support: 749.` |
+| 5 | `  -1.roles not in {LITERAL}<br>	∧ +1.internal_type not in {StringLiteral}<br>	∧ ^1.roles in {OPERATOR} and not in {IDENTIFIER}<br>⇒ y = ␣<br>Confidence: 0.964. Support: 152.` |
+| 6 | `  -1.reserved = (<br>	∧ -1.roles not in {EXPRESSION, LITERAL}<br>	∧ +1.internal_type not in {StringLiteral}<br>	∧ ^1.roles not in {IDENTIFIER, OPERATOR}<br>⇒ y = ∅<br>Confidence: 0.992. Support: 196.` |
+| 7 | `  -1.roles in {STRING}<br>	∧ ^1.roles not in {IDENTIFIER}<br>⇒ y = '<br>Confidence: 0.925. Support: 154.` |
+| 8 | `  -1.roles not in {STRING}<br>	∧ +1.internal_type not in {StringLiteral}<br>	∧ +1.reserved = )<br>	∧ ^1.roles not in {IDENTIFIER}<br>⇒ y = ∅<br>Confidence: 0.982. Support: 247.` |
+| 9 | `  -1.roles not in {STRING}<br>	∧ +1.internal_type not in {StringLiteral}<br>	∧ +1.reserved not in {)}<br>	∧ ^1.internal_type not in {CallExpression}<br>	∧ ^1.roles in {OPERATOR} and not in {IDENTIFIER}<br>⇒ y = ␣<br>Confidence: 0.931. Support: 138.` |
+| 10 | `  ^1.roles in {QUALIFIED}<br>⇒ y = ∅<br>Confidence: 0.979. Support: 701.` |
+| 11 | `  -1.internal_type = StringLiteral<br>	∧ ^1.roles not in {QUALIFIED}<br>⇒ y = '<br>Confidence: 0.997. Support: 164.` |
+| 12 | `  -1.internal_type not in {StringLiteral}<br>	∧ -1.reserved = (<br>	∧ +1.internal_type not in {StringLiteral}<br>	∧ ^1.roles not in {QUALIFIED}<br>⇒ y = ∅<br>Confidence: 0.994. Support: 234.` |
+| 13 | `  -1.internal_type not in {StringLiteral}<br>	∧ -1.reserved not in {(}<br>	∧ -1.roles in {EXPRESSION}<br>	∧ +1.internal_type not in {StringLiteral}<br>	∧ +1.reserved = (<br>	∧ ^1.roles not in {QUALIFIED}<br>⇒ y = ∅<br>Confidence: 0.997. Support: 197.` |
+| 14 | `  -1.roles not in {STRING}<br>	∧ +1.internal_type not in {StringLiteral}<br>	∧ +1.reserved = )<br>	∧ ^1.roles not in {QUALIFIED}<br>⇒ y = ∅<br>Confidence: 0.989. Support: 235.` |
+| 15 | `  -1.roles not in {STRING}<br>	∧ +1.internal_type not in {StringLiteral}<br>	∧ +1.reserved not in {)}<br>	∧ ^1.internal_type not in {CallExpression}<br>	∧ ^1.roles in {OPERATOR} and not in {QUALIFIED}<br>⇒ y = ␣<br>Confidence: 0.928. Support: 159.` |
+| 16 | `  -1.internal_type = Identifier<br>	∧ +1.reserved = (<br>	∧ ^1.roles not in {QUALIFIED}<br>⇒ y = ∅<br>Confidence: 0.997. Support: 196.` |
+| 17 | `  -1.internal_type = StringLiteral<br>	∧ ^1.roles not in {IDENTIFIER}<br>⇒ y = '<br>Confidence: 0.996. Support: 129.` |
+| 18 | `  -1.internal_type not in {StringLiteral}<br>	∧ +1.internal_type not in {StringLiteral}<br>	∧ +1.reserved = )<br>	∧ ^1.roles not in {IDENTIFIER}<br>⇒ y = ∅<br>Confidence: 0.988. Support: 208.` |
+| 19 | `  -1.internal_type not in {StringLiteral}<br>	∧ +1.internal_type not in {StringLiteral}<br>	∧ +1.reserved not in {)}<br>	∧ ^1.internal_type not in {CallExpression}<br>	∧ ^1.roles in {OPERATOR} and not in {IDENTIFIER}<br>⇒ y = ␣<br>Confidence: 0.949. Support: 168.` |
+| 20 | `  -1.roles in {IDENTIFIER}<br>	∧ +1.reserved = (<br>	∧ ^1.roles not in {QUALIFIED}<br>⇒ y = ∅<br>Confidence: 0.998. Support: 209.` |
+
+### Note
+All statistics are calculated with respect to the "analyze" config. This means that the rules were filtered by
+`confidence_threshold` and `support_threshold` values.
+
+<details>
+    <summary>Machine-readable report</summary>
+```json
+{"javascript": {"avg_rule_len": 3.75, "max_conf": 0.9976076483726501, "max_support": 777, "min_conf": 0.9253246784210205, "min_support": 129, "num_rules": 20}}
+```
+</details>
