@@ -85,6 +85,7 @@ library(gridExtra)
 library(ggridges)
 library(ggpubr)
 library(tidyr)
+library(digest)
 ```
 
 ```{r}
@@ -99,10 +100,11 @@ REPRO_DIR <- "reproductions/"
 
 # A list of all rperoductions, these are subdirectories of REPRO_DIR. These should not have spaces in them.
 # They are used as names, they should not have / in them.
-random_projects <- paste0("random_projects_", c(0,2,3,6:9), "_", 10)
-random_projects_by_size <- paste0("random_projects_by_size_", c(0:2, 6:9), "_", 10)
-quality_projects <- paste0("quality_projects_", 10) # 7:9, "_"
-EXPERIMENTS <- c("original_reproduction", "original_10", random_projects, random_projects_by_size, "top_starred_projects", quality_projects)
+#random_projects <- paste0("random_projects_", c(0,2,3,6:9), "_", 10)
+#random_projects_by_size <- paste0("random_projects_by_size_", c(0:2, 6:9), "_", 10)
+quality_projects <- paste0("quality_projects_", c(0:3,7:9))
+top_starred_projects <- paste0("top_starred_projects_", c(2:6,8:9))
+EXPERIMENTS <- c("original_reproduction", "original_10", top_starred_projects, quality_projects)
 
 # Convert to bash variables
 Sys.setenv(REPRO_DIRS = paste(paste0(REPRO_DIR, "/", EXPERIMENTS), collapse = " "))
@@ -149,24 +151,27 @@ url_to_repo <- function(url) str_replace_all(url, c("(^.*/)|([.]git$)"), "")
 
 # Common: all projects and their locs
 all_projects_path <- paste0(DJANCO_DIR, "info/javascript_projects.csv")
+all_projects_extended_path <- paste0(DJANCO_DIR, "info/javascript_projects_extended.csv")
 project_locs_path <- paste0(DJANCO_DIR, "info/project_locs.csv")
-  
+ 
+# Fix: these are now part of all projects 
 # Common: from small datatset containing only the projects from the paper
-project_locs_path_repro <- paste0(DJANCO_DIR, "info/repro_project_locs.csv")
-all_projects_path_repro <- paste0(DJANCO_DIR, "info/repro_javascript_projects.csv")
+#project_locs_path_repro <- paste0(DJANCO_DIR, "info/repro_project_locs.csv")
+#all_projects_path_repro <- paste0(DJANCO_DIR, "info/repro_javascript_projects.csv")
 
-# Load common data.
+# Load common data: this is only data for the 1000-or-so projects we use for analysis
 all_projects <- read_csv(all_projects_path) %>% mutate(repo = url_to_repo(url))
 project_locs <- read_csv(project_locs_path) %>% mutate(repo = url_to_repo(url))
 
+# Fix: these are now part of all projects 
 # Repro extras: attach the data from small dataset to the big dataset
-all_projects_repro <- read_csv(all_projects_path_repro) %>% mutate(repo = url_to_repo(url))
-project_locs_repro <- read_csv(project_locs_path_repro) %>% mutate(repo = url_to_repo(url))
-all_projects <- bind_rows(all_projects, all_projects_repro) %>% distinct
-project_locs <- bind_rows(project_locs, project_locs_repro) %>% distinct
+# all_projects_repro <- read_csv(all_projects_path_repro) %>% mutate(repo = url_to_repo(url))
+# project_locs_repro <- read_csv(project_locs_path_repro) %>% mutate(repo = url_to_repo(url))
+# all_projects <- bind_rows(all_projects, all_projects_repro) %>% distinct
+# project_locs <- bind_rows(project_locs, project_locs_repro) %>% distinct
 
 # Construct a table with the results of one experiment
-prepare_data <- function(experiment) {
+prepare_data <- function(experiment, size=19) {
   cat(paste0("Preparing results for ", experiment))
   
   # Paths
@@ -203,9 +208,9 @@ prepare_data <- function(experiment) {
     left_join(samples, by="repo") %>%
     left_join(precision, by="repo")
    
-    
+  #browser()  
   # Format the output
-  collated %>%
+  data <- collated %>%
     select(-recall, -f1, -support, -precision) %>%
     mutate(pred_r=predictions/samples) %>%
     rename(recall=full_recall, 
@@ -219,11 +224,20 @@ prepare_data <- function(experiment) {
            labels, rules, avg_rule_len,  
            training_time) %>%
     filter(!is.na(precision)) %>%
-    distinct 
+    distinct
+    
+  if ((data %>% count)$n > size) {
+    seed <- digest::digest2int(experiment, seed=42)
+    set.seed(seed)
+    data %>% sample_n(19)
+  } else {
+    data
+  }
 }
 
 # Prepare data for all experiments. Put the results in a list.
-experiment_data <- lapply(EXPERIMENTS, prepare_data)
+experiment_data <- lapply(EXPERIMENTS, prepare_data) 
+# prepare_data("top_starred_projects_5")
 names(experiment_data) <- EXPERIMENTS
 
 experiment_data[["paper"]] <- tibble(
@@ -242,7 +256,7 @@ See what finished processing:
 ```{r}
 status_table <- tibble(experiment=character(0), url=character(0), locs=integer(0), done=logical(0))
 for (experiment in EXPERIMENTS) {
-  query_result_path <- paste0(DJANCO_DIR, experiment, ".csv")
+  query_result_path <- paste0(DJANCO_DIR, "/specs/", experiment, ".csv")
   if (!file.exists(query_result_path)) {
     warning("Could not find file: ", query_result_path, ". Skipping.\n")
   } else {
@@ -259,72 +273,6 @@ for (experiment in EXPERIMENTS) {
   }
 }
 status_table
-```
-
-```{r}
-summary_status_table <- status_table %>% 
-  mutate(completed=ifelse(is.na(done), 0, ifelse(done, 1, 0))) %>% 
-  group_by(experiment) %>% 
-  summarize(completed=sum(completed), 
-            percent_completed=(completed*100)/n(), 
-            failed=n()-completed, 
-            percent_failed=(100*failed)/n()) %>% 
-  ungroup
-
-summary_status_table
-```
-
-```{r}
-summary_status_table %>% 
-  summarize(projects_in_all_datasets=sum(completed) + sum(failed), 
-            completed=sum(completed), 
-            percent_completed=format((completed*100)/projects_in_all_datasets, digits=1), 
-            failed=sum(failed), 
-            percent_failed=format((100*failed)/projects_in_all_datasets, digits=1))
-```
-
-```{r}
-classify_by_size <- function(n) {
-    ifelse(n >= 10**5, "very large", 
-    ifelse(n >= 10**4, "large",
-    ifelse(n >= 10**3, "medium",
-                       "small")))
-  }
-
-status_by_size <- status_table %>% 
-  mutate(size=classify_by_size(locs)) %>% 
-  mutate(completed=ifelse(is.na(done), 0, ifelse(done, 1, 0))) %>% 
-  group_by(size) %>%
-  summarise(projects=n(), 
-            completed=sum(completed), 
-            percent_completed=format((completed*100)/projects, digits=1), 
-            failed=projects-completed,
-            percent_failed=format((failed*100)/projects, digits=1)) %>%
-  ungroup
-  
-status_by_size
-
-```
-
-## Making them big
-
-```{r}
-connect_selections <- function(selections, label) {
-  random_data <- NULL
-  for (random in random_projects) {
-    if (is.null(random_data)) {
-      random_data <- experiment_data[[random]] %>% mutate(selection = random)
-    } else {
-      random_data <- bind_rows(random_data, experiment_data[[random]] %>% mutate(selection = random))
-    }
-  }
-  experiment_data[[label]] <<- random_data %>% distinct
-  EXPERIMENTS <<- c(EXPERIMENTS, label)
-  experiment_data[[label]]
-}
-
-connect_selections(random_projects, "random_projects_all_10")
-connect_selections(random_projects_by_size, "random_projects_by_size_all_10")
 ```
 
 ## Metrics measured on the validation part of the dataset. 
@@ -402,12 +350,6 @@ make_paper_table <- function(experiment, latex = FALSE, digits=3) {
 ```
 
 ```{r}
-#for (experiment in EXPERIMENTS) {
-#  print(make_paper_table(experiment, TRUE))
-#}
-```
-
-```{r}
 make_paper_table("original_reproduction")
 ```
 
@@ -416,21 +358,13 @@ make_paper_table("original_10")
 ```
 
 ```{r}
-make_paper_table("random_projects_all_10")
-```
-
-```{r}
-for (experiment in random_projects) {
+for (experiment in top_starred_projects) {
   print(make_paper_table(experiment))
 }
 ```
 
 ```{r}
-make_paper_table("random_projects_by_size_all_10")
-```
-
-```{r}
-for (experiment in random_projects_by_size) {
+for (experiment in quality_projects) {
   print(make_paper_table(experiment))
 }
 ```
@@ -499,8 +433,14 @@ make_precision_support_graph("original_reproduction")
 make_precision_support_graph("original_10")
 ```
 
-```{r}
-make_precision_support_graph("top_starred_projects")
+```{r fig.width=20, fig.height=10}
+graphs <- lapply(top_starred_projects, make_precision_support_graph)
+do.call("grid.arrange", c(graphs, ncol=4))
+```
+
+```{r fig.width=20, fig.height=10}
+graphs <- lapply(quality_projects, make_precision_support_graph)
+do.call("grid.arrange", c(graphs, ncol=4))
 ```
 
 ```{r}
@@ -545,38 +485,24 @@ comparison %>%
 
 ### Quality projects vs original
 
-```{r}
-make_precision_support_graph("original_10")
-```
 
-```{r}
-make_precision_support_graph("quality_projects_10", only_top_n=20)
-```
-
-```{r}
-make_precision_support_graph("quality_projects_10", only_bottom_n=20)
-```
-
-```{r, fig.width=10, fig.height=10}
+``` 
+r, fig.width=10, fig.height=10
 grid.arrange(widths=c(1,1), make_precision_support_graph("original_10") + xlab(NULL), 
                             make_precision_support_graph("top_starred_projects") + xlab(NULL) + ylab(NULL), 
                             make_precision_support_graph("quality_projects_10", only_top_n=20), 
                             make_precision_support_graph("quality_projects_10", only_bottom_n=20) + ylab(NULL))
 ```
 
-```{r, fig.width=12, fig.height=5}
+```{r, fig.width=25, fig.height=5}
 strip_and_label <- function(data, label) data %>% mutate(selection=label) %>% select(selection, repo, precision, support)
+stripped_and_labelled <- lapply(EXPERIMENTS, function(experiment) experiment_data[[experiment]] %>% strip_and_label(experiment))
+comparison_data <- do.call(bind_rows, stripped_and_labelled)
 
-comparison_data <- 
-  experiment_data[["original_10"]] %>% strip_and_label("original") %>%
-  bind_rows(experiment_data[["top_starred_projects"]] %>% strip_and_label("top_starred_projects")) %>%
-  bind_rows(experiment_data[["quality_projects_10"]] %>% mutate(i=1:n()) %>% top_n(20, i) %>% strip_and_label("quality_projects_1")) %>%
-  bind_rows(experiment_data[["quality_projects_10"]] %>% mutate(i=1:n()) %>% top_n(-20, i) %>% strip_and_label("quality_projects_2"))
-
-support_comparison <- ggplot(comparison_data, aes(x=selection, y=support, color=selection)) + geom_boxplot() + xlab("Selection") + ylab("Support") + scale_y_continuous(labels=label_number_si()) + theme_bw()+ theme(legend.position="none") 
+support_comparison <- ggplot(comparison_data, aes(x=selection, y=support, color=selection)) + geom_boxplot() + xlab("Selection") + ylab("Samples in training set") + scale_y_continuous(labels=label_number_si()) + theme_bw()+ theme(legend.position="none") 
 precision_comparison <- ggplot(comparison_data, aes(x=selection, y=precision, color=selection)) + geom_boxplot() + xlab("Selection") + ylab("Precision") + theme_bw()+ theme(legend.position="none") + scale_y_continuous(limits=c(0.75,1))
 
-grid.arrange(widths=c(1,1), support_comparison, precision_comparison)
+grid.arrange(widths=c(1), support_comparison, precision_comparison)
 ```
 
 ```{r}
