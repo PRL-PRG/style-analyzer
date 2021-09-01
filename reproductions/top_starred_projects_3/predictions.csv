@@ -1,0 +1,23 @@
+repo, url, training_samples, samples, predictions, uncovered, prediction_rate, training_time, review_time
+kbone, https://github.com/tencent/kbone.git, 226103, 205107, 188583, 16524, 0.919437, 956, 390
+instafeed.js, https://github.com/stevenschobert/instafeed.js.git, 4922, 4922, 1494, 3428, 0.303535, 151, 109
+clockpicker, https://github.com/weareoutman/clockpicker.git, 18523, 18528, 10363, 8165, 0.559316, 171, 224
+autocomplete-plus, https://github.com/atom/autocomplete-plus.git, 49117, 60131, 50957, 9174, 0.847433, 173, 128
+babybuddy, https://github.com/babybuddy/babybuddy.git, 45749, 45232, 34438, 10794, 0.761364, 259, 84
+vue-h5-template, https://github.com/sunniejs/vue-h5-template.git, 3825, 3814, 1144, 2670, 0.299948, 34, 2
+karma-coverage, https://github.com/karma-runner/karma-coverage.git, 9420, 3185, 1725, 1460, 0.541601, 82, 67
+three.js, https://github.com/mrdoob/three.js.git, 998374, 1040317, 953591, 86726, 0.916635, 9309, 4848
+anon, https://github.com/edsu/anon.git, 2411, 2474, 158, 2316, 0.0638642, 61, 52
+ts-node, https://github.com/typestrong/ts-node.git, 21205, 17116, 8240, 8876, 0.481421, 51, 18
+webrtc-book-cn, https://github.com/a-wing/webrtc-book-cn.git, 4052, 4042, 2254, 1788, 0.557645, 141, 114
+reactor.js, https://github.com/fynyky/reactor.js.git, 7479, 7272, 4412, 2860, 0.606711, 151, 96
+pose-animator, https://github.com/yemount/pose-animator.git, 15117, 15117, 8160, 6957, 0.53979, 73, 93
+nocturn, https://github.com/k0kubun/nocturn.git, 17873, 17737, 9140, 8597, 0.515307, 39, 97
+chai-as-promised, https://github.com/domenic/chai-as-promised.git, 12853, 2484, 311, 2173, 0.125201, 111, 72
+masteringnode, https://github.com/visionmedia/masteringnode.git, 1787, 1787, 359, 1428, 0.200895, 20, 86
+glow-sans, https://github.com/welai/glow-sans.git, 25305, 25305, 19461, 5844, 0.769057, 176, 125
+grpcui, https://github.com/fullstorydev/grpcui.git, 14821, 14821, 11951, 2870, 0.806356, 150, 
+flexslider, https://github.com/woocommerce/flexslider.git, 24101, 23232, 11862, 11370, 0.510589, 157, 108
+create-snowpack-app, https://github.com/snowpackjs/create-snowpack-app.git, 50782, 8189, 6080, 2109, 0.742459, 144, 16
+react-query-devtools, https://github.com/tannerlinsley/react-query-devtools.git, 5720, 5552, 748, 4804, 0.134726, 129, 93
+redaxios, https://github.com/developit/redaxios.git, 2346, 2327, 532, 1795, 0.228621, 153, 80

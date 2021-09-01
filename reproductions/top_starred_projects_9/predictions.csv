@@ -1,0 +1,22 @@
+repo, url, training_samples, samples, predictions, uncovered, prediction_rate, training_time, review_time
+response, https://github.com/monzo/response.git, 34033, 34033, 29706, 4327, 0.872859, 130, 
+web-vitals, https://github.com/googlechrome/web-vitals.git, 9279, 9279, 7208, 2071, 0.776808, 108, 92
+formula.js, https://github.com/sutoiku/formula.js.git, 97732, 96955, 93457, 3498, 0.963921, 318, 290
+resumake.io, https://github.com/saadq/resumake.io.git, 38733, 36038, 24962, 11076, 0.692658, 159, 104
+npm-check-updates, https://github.com/raineorshine/npm-check-updates.git, 37100, 30953, 20873, 10080, 0.674345, 215, 102
+karma-webpack, https://github.com/ryanclark/karma-webpack.git, 4638, 2208, 847, 1361, 0.383605, 134, 36
+npm-shrinkwrap, https://github.com/uber-archive/npm-shrinkwrap.git, 10523, 10177, 6311, 3866, 0.620124, 62, 11
+formidable, https://github.com/node-formidable/formidable.git, 28228, 23438, 17957, 5481, 0.766149, 83, 96
+structor, https://github.com/react-ui-builder/structor.git, 116255, 113494, 88591, 24903, 0.780579, 448, 529
+archer, https://github.com/jly8866/archer.git, 45721, 45721, 28099, 17622, 0.614575, 139, 188
+angular-starter, https://github.com/patrickjs/angular-starter.git, 5443, 5212, 2108, 3104, 0.404451, 86, 39
+react-contextmenu, https://github.com/vkbansal/react-contextmenu.git, 13738, 13282, 9079, 4203, 0.683557, 87, 67
+flask-debugtoolbar, https://github.com/flask-debugtoolbar/flask-debugtoolbar.git, 43817, 43817, 34608, 9209, 0.78983, 119, 215
+pipedream, https://github.com/pipedreamhq/pipedream.git, 184143, 170819, 152801, 18018, 0.89452, 600, 442
+autoprefixer, https://github.com/postcss/autoprefixer.git, 44424, 47555, 42825, 4730, 0.900536, 134, 185
+microstates, https://github.com/thefrontside/microstates.git, 27921, 26817, 21359, 5458, 0.796472, 107, 87
+ar.js, https://github.com/ar-js-org/ar.js.git, 42362, 43851, 29095, 14756, 0.663497, 257, 257
+backbone-forms, https://github.com/powmedia/backbone-forms.git, 163435, 158049, 132997, 25052, 0.841492, 476, 1773
+adele, https://github.com/uxpin/adele.git, 2600, 1720, 581, 1139, 0.337791, 74, 30
+codelab-friendlychat-web, https://github.com/firebase/codelab-friendlychat-web.git, 14110, 13641, 9676, 3965, 0.709332, 171, 59
+bilibili-helper-o, https://github.com/bilibili-helper/bilibili-helper-o.git, 86403, 78526, 60928, 17598, 0.775896, 185, 153

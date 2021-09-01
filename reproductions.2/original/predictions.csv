@@ -1,0 +1,17 @@
+repo, url, training_samples, samples, predictions, uncovered, prediction_rate, training_time, review_time
+carlo, https://github.com/googlechromelabs/carlo.git, 21422, 21096, 14712, 6384, 0.697383, 43, 18
+react, https://github.com/facebook/react.git, 754069, 650686, 589802, 60884, 0.906431, 6161, 1291
+redux, https://github.com/reduxjs/redux.git, 27952, 31105, 20687, 10418, 0.66507, 81, 29
+axios, https://github.com/axios/axios.git, 41850, 32265, 28150, 4115, 0.872462, 103, 28
+reveal.js, https://github.com/hakimel/reveal.js.git, 39227, 60317, 51415, 8902, 0.852413, 87, 1097
+storybook, https://github.com/storybookjs/storybook.git, 100019, 115979, 98707, 17272, 0.851076, 238, 141
+node, https://github.com/nodejs/node.git, 973051, 972445, 878765, 93680, 0.903666, 12909, 1504
+jquery, https://github.com/jquery/jquery.git, 253532, 190724, 170439, 20285, 0.893642, 1025, 1045
+telescope, https://github.com/laravel/telescope.git, 5489, 2152, 1383, 769, 0.642658, 31, 7
+meteor, https://github.com/meteor/meteor.git, 643175, 666017, 535184, 130833, 0.803559, 6830, 3517
+evergreen, https://github.com/evergreen-ci/evergreen.git, 179941, 178641, 141322, 37319, 0.791095, 572, 311
+create-react-app, https://github.com/facebook/create-react-app.git, 23470, 21068, 15613, 5455, 0.741077, 83, 58
+express, https://github.com/expressjs/express.git, 215270, 88406, 78446, 9960, 0.887338, 632, 
+citgm, https://github.com/nodejs/citgm.git, 30448, 29995, 25077, 4918, 0.836039, 80, 27
+react-native, https://github.com/facebook/react-native.git, 666345, 613331, 514017, 99314, 0.838074, 4229, 1220
+webpack, https://github.com/webpack/webpack.git, 773884, 690055, 635921, 54134, 0.921551, 10361, 1984

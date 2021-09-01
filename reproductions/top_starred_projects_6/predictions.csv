@@ -1,0 +1,26 @@
+repo, url, training_samples, samples, predictions, uncovered, prediction_rate, training_time, review_time
+g-desktop-suite, https://github.com/alexkim205/g-desktop-suite.git, 3628, 3329, 826, 2503, 0.248123, 95, 20
+sockjs-node, https://github.com/sockjs/sockjs-node.git, 11207, 10461, 6178, 4283, 0.590575, 64, 54
+aleph, https://github.com/alephdata/aleph.git, 20217, 17952, 14270, 3682, 0.794898, 171, 42
+generator-chrome-extension, https://github.com/yeoman/generator-chrome-extension.git, 3594, 3536, 1176, 2360, 0.332579, 171, 54
+webext-redux, https://github.com/tshaddix/webext-redux.git, 18697, 18122, 12934, 5188, 0.713718, 88, 139
+eslint-plugin-jsx-a11y, https://github.com/jsx-eslint/eslint-plugin-jsx-a11y.git, 73424, 72317, 67348, 4969, 0.931289, 312, 315
+opensource.builders, https://github.com/junaid33/opensource.builders.git, 6377, 6315, 1046, 5269, 0.165637, 165, 62
+reactive-resume, https://github.com/amruthpillai/reactive-resume.git, 57934, 40194, 32937, 7257, 0.819451, 258, 100
+rsmq, https://github.com/smrchy/rsmq.git, 9914, 9831, 6873, 2958, 0.699115, 149, 82
+node-open-mining-portal, https://github.com/zone117x/node-open-mining-portal.git, 24039, 23873, 15010, 8863, 0.628744, 108, 85
+hydrogen, https://github.com/nteract/hydrogen.git, 10791, 38374, 19011, 19363, 0.495414, 89, 243
+diyhue, https://github.com/diyhue/diyhue.git, 9605, 3781, 289, 3492, 0.0764348, 155, 74
+sync-settings, https://github.com/atom-community/sync-settings.git, 29355, 29355, 23692, 5663, 0.807086, 141, 170
+zero, https://github.com/remoteinterview/zero.git, 30308, 27605, 19186, 8419, 0.695019, 206, 100
+cryptocurrency-icons, https://github.com/spothq/cryptocurrency-icons.git, 857, 590, 170, 420, 0.288136, 90, 
+kimchi, https://github.com/kimchi-project/kimchi.git, 318609, 122781, 95264, 27517, 0.775886, 1353, 1965
+universal-bypass, https://github.com/sainan/universal-bypass.git, 28676, 26620, 23504, 3116, 0.882945, 211, 153
+oauthd, https://github.com/oauth-io/oauthd.git, 10202, 9226, 5812, 3414, 0.629959, 210, 63
+facebox, https://github.com/defunkt/facebox.git, 1262, 1229, 636, 593, 0.517494, 127, 
+jso, https://github.com/andreassolberg/jso.git, 6197, 5760, 2894, 2866, 0.502431, 170, 65
+diaporama, https://github.com/gre/diaporama.git, 17944, 17601, 7955, 9646, 0.451963, 93, 36
+go-in-5-minutes, https://github.com/arschles/go-in-5-minutes.git, 3323, 52, 7, 45, 0.134615, 121, 51
+covid19india-react, https://github.com/covid19india/covid19india-react.git, 51164, 41838, 33600, 8238, 0.803098, 166, 286
+carbon, https://github.com/carbon-app/carbon.git, 51315, 43890, 29849, 14041, 0.680087, 198, 192
+covid19india-cluster, https://github.com/someshkar/covid19india-cluster.git, 10683, 8956, 4861, 4095, 0.542765, 196, 66

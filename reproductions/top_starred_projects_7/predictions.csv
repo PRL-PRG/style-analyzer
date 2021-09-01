@@ -1,0 +1,21 @@
+repo, url, training_samples, samples, predictions, uncovered, prediction_rate, training_time, review_time
+fdir, https://github.com/thecodrr/fdir.git, 8035, 7266, 4446, 2820, 0.611891, 131, 63
+nylas-mail, https://github.com/nylas/nylas-mail.git, 352146, 350720, 306040, 44680, 0.872605, 1433, 982
+doodlemaster, https://github.com/karanchahal/doodlemaster.git, 31594, 31594, 26421, 5173, 0.836266, 222, 192
+aleph, https://github.com/alephdata/aleph.git, 20217, 17952, 14270, 3682, 0.794898, 102, 49
+content, https://github.com/nuxt/content.git, 26609, 23111, 18728, 4383, 0.81035, 118, 91
+ac-nh-turnip-prices, https://github.com/mikebryant/ac-nh-turnip-prices.git, 8717, 7979, 3901, 4078, 0.488908, 66, 24
+cool-ascii-faces, https://github.com/maxogden/cool-ascii-faces.git, 822, 519, 519, 0, 1, 101, 0
+calla, https://github.com/capnmidnight/calla.git, 228043, 179562, 172198, 7364, 0.958989, 555, 1097
+startbootstrap-clean-blog, https://github.com/startbootstrap/startbootstrap-clean-blog.git, 1671, 5954, 264, 5690, 0.0443399, 168, 83
+fbt, https://github.com/facebook/fbt.git, 191322, 188235, 179282, 8953, 0.952437, 614, 707
+tlroadmap, https://github.com/tlbootcamp/tlroadmap.git, 570, 550, 0, 550, 0, 53, 
+redux-mock-store, https://github.com/reduxjs/redux-mock-store.git, 1418, 1280, 283, 997, 0.221094, 119, 69
+engine.io, https://github.com/socketio/engine.io.git, 38524, 30457, 27792, 2665, 0.9125, 210, 616
+vue-cnodejs, https://github.com/shinygang/vue-cnodejs.git, 4423, 4402, 2615, 1787, 0.594048, 110, 75
+shifty, https://github.com/jeremyckahn/shifty.git, 13300, 12756, 9499, 3257, 0.744669, 221, 44
+cuckoo, https://github.com/cuckoosandbox/cuckoo.git, 110200, 31510, 25031, 6479, 0.794383, 332, 253
+apachecn-algo-zh, https://github.com/apachecn/apachecn-algo-zh.git, 5123, 4893, 3906, 987, 0.798283, 67, 11
+lbry-desktop, https://github.com/lbryio/lbry-desktop.git, 192222, 125941, 117445, 8496, 0.93254, 761, 638
+redux-actions, https://github.com/redux-utilities/redux-actions.git, 13560, 12876, 9446, 3430, 0.733613, 150, 76
+noflo, https://github.com/noflo/noflo.git, 118334, 102569, 88117, 14452, 0.8591, 365, 313

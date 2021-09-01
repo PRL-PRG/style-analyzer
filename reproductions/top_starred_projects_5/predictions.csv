@@ -1,0 +1,22 @@
+repo, url, training_samples, samples, predictions, uncovered, prediction_rate, training_time, review_time
+api, https://github.com/disease-sh/api.git, 85027, 73249, 71004, 2245, 0.969351, 239, 389
+codeceptjs, https://github.com/codeceptjs/codeceptjs.git, 256251, 255609, 240589, 15020, 0.941238, 865, 1436
+fraidycat, https://github.com/kickscondor/fraidycat.git, 24469, 24036, 17046, 6990, 0.709186, 95, 174
+wordpress-editor-ios, https://github.com/wordpress-mobile/wordpress-editor-ios.git, 64880, 64443, 50202, 14241, 0.779014, 286, 769
+takana, https://github.com/mechio/takana.git, 16229, 776, 264, 512, 0.340206, 83, 1
+netflix, https://github.com/karlhadwen/netflix.git, 17979, 17979, 11747, 6232, 0.653373, 175, 105
+enzyme, https://github.com/enzymejs/enzyme.git, 38939, 36368, 31469, 4899, 0.865294, 137, 114
+uvu, https://github.com/lukeed/uvu.git, 30745, 27924, 23564, 4360, 0.843862, 95, 90
+handlebars.js, https://github.com/handlebars-lang/handlebars.js.git, 66015, 72007, 60571, 11436, 0.841182, 237, 660
+vanta, https://github.com/tengbao/vanta.git, 23221, 22820, 13277, 9543, 0.581814, 118, 151
+react-keeper, https://github.com/lanistor/react-keeper.git, 12086, 12078, 4587, 7491, 0.379781, 85, 27
+ssbc, https://github.com/78/ssbc.git, 5447, 5447, 2750, 2697, 0.504865, 212, 35
+0bin, https://github.com/tygs/0bin.git, 22149, 22149, 12778, 9371, 0.576911, 168, 125
+vanilla-lazyload, https://github.com/verlok/vanilla-lazyload.git, 7023, 6866, 4371, 2495, 0.636615, 84, 37
+termynal, https://github.com/ines/termynal.git, 891, 833, 408, 425, 0.489796, 67, 
+birdseye, https://github.com/alexmojaki/birdseye.git, 12458, 12458, 10218, 2240, 0.820196, 102, 95
+cursedchrome, https://github.com/mandatoryprogrammer/cursedchrome.git, 27481, 27481, 17355, 10126, 0.631527, 200, 165
+prettier-eslint, https://github.com/prettier/prettier-eslint.git, 7869, 7875, 3199, 4676, 0.406222, 177, 85
+parinfer, https://github.com/shaunlebron/parinfer.git, 36573, 28353, 22728, 5625, 0.801608, 97, 214
+apachecn-algo-zh, https://github.com/apachecn/apachecn-algo-zh.git, 5123, 4893, 3906, 987, 0.798283, 61, 10
+ackee, https://github.com/electerious/ackee.git, 66990, 63089, 56314, 6775, 0.892612, 273, 206
