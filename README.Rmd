@@ -8,6 +8,49 @@ author: Konrad Siek
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# Preparing the datasets
+
+Move to the query:
+
+```bash
+cd style-analyzer-query
+```
+
+We generate project selections:
+
+```bash
+cargo run --bin djanco --release -- --output-path output --dataset-path /mnt/data/codedj-icse/javascript/ --cache-path /mnt/data/kondziu/codedj-icse/javascript-cache/
+```
+
+We create a dataset with just the projects we selected. Needs parasiter and a GitHub token (https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token).
+
+```
+# Create a list of all unique projects in the selections.
+cat output/selections/*.csv | sort | uniq | head -n -1 | tail -n +2 > output/selections/all.csv
+
+# Prepare for running parasite
+mkdir -p /mnt/data/codedj-icse/js-selection/
+mkdir -p /mnt/data/codedj-icse/js-selection/repo_clones
+
+# Add projects to datastore
+parasite --datastore /mnt/data/codedj-icse/js-selection/ add output/selections/all.csv
+
+# Run parasite (updateall)
+parasite --datastore /mnt/data/codedj-icse/js-selection/ -ght ghtokens.csv -n 8 --interactive
+```
+
+Merge the dataset:
+
+```
+parasite --datastore /mnt/data/codedj-icse/js-selection-merged/ --merge-all /mnt/data/codedj-icse/js-selection Generic
+```
+
+Generate head and base commits for each project.
+
+```bash
+cargo run --bin djanco --release -- --output-path output --dataset-path /mnt/data/codedj-icse/js-selection-merged/ --cache-path /mnt/data/kondziu/codedj-icse/js-selection-merged/
+```
+
 # Setup
 
 ```bash
@@ -90,7 +133,8 @@ library(digest)
 
 ```{r}
 # This is where figures are generated into
-FIGS="figs/"
+FIGS="figs/style-analyzer"
+dir.create(FIGS, recursive=TRUE)
 
 # This is where the results of style-analyzer-query live.
 # Must have a / at the end.
@@ -105,7 +149,7 @@ REPRO_DIR <- "reproductions/"
 # They are used as names, they should not have / in them.
 #random_projects <- paste0("random_projects_", c(0,2,3,6:9), "_", 10)
 #random_projects_by_size <- paste0("random_projects_by_size_", c(0:2, 6:9), "_", 10)
-quality_projects <- paste0("quality_projects_", c(0:3,6:9))
+quality_projects <- paste0("quality_projects_", c(0:3,7:9))
 top_starred_projects <- paste0("top_starred_projects_", c(2:9))
 EXPERIMENTS <- c("original_reproduction", "original", top_starred_projects, quality_projects)
 
@@ -233,6 +277,8 @@ prepare_data <- function(experiment, size=19) {
     filter(!is.na(precision)) %>%
     distinct
     
+  print(paste0((data %>% count)$n, " projects in ", experiment))
+  
   if ((data %>% count)$n > size) {
     seed <- digest::digest2int(experiment, seed=42)
     set.seed(seed)
@@ -303,16 +349,30 @@ ggplot() +
 How much more precision/support do we get for the reproduction:
 
 ```{r}
-comparison %>% 
+deltas <- comparison %>% 
   mutate(precision=precision.y,
-         precision_delta=precision.y-precision.x, 
+         precision_delta=abs(precision.y-precision.x), 
          precision_delta_perc=format(100*precision_delta/precision.x, digits=1),
          support=support.y,
-         support_delta=support.y-support.x,
+         support_delta=abs(support.y-support.x),
          support_delta_perc=format(100*support_delta/support.x, digits=1)) %>% 
   select(repo, precision, precision_delta, precision_delta_perc, support, support_delta,  support_delta_perc)
+
+deltas
 ```
 
+```{r}
+deltas %>% summarize(
+  mean_precision_delta=mean(as.numeric(precision_delta)),
+  max_precision_delta=max(as.numeric(precision_delta)),
+  mean_support_delta=mean(as.numeric(support_delta)),
+  max_support_delta=max(as.numeric(support_delta)),
+  mean_precision_delta_perc=mean(as.numeric(precision_delta_perc)),
+  max_precision_delta_perc=max(as.numeric(precision_delta_perc)),
+  mean_support_delta_perc=mean(as.numeric(support_delta_perc)),
+  max_support_delta_perc=max(as.numeric(support_delta_perc)))
+```
+  
 ## Metrics measured on the validation part of the dataset. 
 
 The last row is weighed by the number of samples.
@@ -506,8 +566,7 @@ mann_whitney_significance <- function(experiment) {
 significance <- sapply(EXPERIMENTS, mann_whitney_significance, simplify=FALSE)
 
 strip_and_label <- function(data, label) {
-  selection_name <- selection_names[[label]]
-  data %>% mutate(selection=label, selection_name=selection_name) %>% select(selection, selection_name, repo, precision, support, precision_significance, support_significance)
+  data %>% mutate(selection=label) %>% select(selection, repo, precision, support, precision_significance, support_significance)
 }
 stripped_and_labelled <- lapply(EXPERIMENTS, function(experiment) significance[[experiment]] %>% strip_and_label(experiment))
 comparison_data <- do.call(bind_rows, stripped_and_labelled)
@@ -550,6 +609,10 @@ make_selection_label <- function(experiment) {
 }
 selection_names <- sapply(PAPER_EXPERIMENTS, make_selection_label, simplify=FALSE)
 selection_name_order <- c("Original", paste0("Top Stars ", 1:stars_sequence), paste0("Interesting ", 1:quality_sequence))
+strip_and_label <- function(data, label) {
+  selection_name <- selection_names[[label]]
+  data %>% mutate(selection=label, selection_name=selection_name) %>% select(selection, selection_name, repo, precision, support, precision_significance, support_significance)
+}
 ```
 
 
@@ -618,7 +681,7 @@ graph <- do.call("grid.arrange", c(graphs, ncol=cols))
 
 graph
 
-dev.copy(pdf, file=paste0(FIGS, "/precision_vs_samples.pdf"), height=4, width=8)
+dev.copy(pdf, file=paste0(FIGS, "/precision-vs-samples.pdf"), height=4, width=8)
 dev.off()
 ```
 
@@ -648,7 +711,7 @@ graph <- grid.arrange(widths=c(1), support_comparison, precision_comparison)
 
 graph
 
-dev.copy(pdf, file=paste0(FIGS, "/precision_and_samples_comparison.pdf"), height=4, width=8)
+dev.copy(pdf, file=paste0(FIGS, "/precision-and-samples-comparison.pdf"), height=4, width=8)
 dev.off()
 ```
 
