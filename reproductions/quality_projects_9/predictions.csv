@@ -1,0 +1,24 @@
+repo, url, training_samples, samples, predictions, uncovered, prediction_rate, training_time, review_time
+food-pickup-app, https://github.com/jfcon/food-pickup-app.git, 7143, 7148, 246, 6902, 0.0344152, 127, 82
+frozen-island, https://github.com/jschwantz/frozen-island.git, 7630, 4694, 2321, 2373, 0.494461, 79, 6
+slurmprio200428, https://github.com/mmesiti/slurmprio200428.git, 65614, 63014, 42289, 20725, 0.671105, 295, 466
+fullstack, https://github.com/robertrantanen/fullstack.git, 25472, 16898, 13495, 3403, 0.798615, 119, 104
+sysdevops, https://github.com/rmit-s3488937-tyler-larrad/sysdevops.git, 10833, 11269, 8785, 2484, 0.779572, 88, 90
+react-component-mounting-and-unmounting-lab-re-coded_sanaa_web001, https://github.com/learn-co-students/react-component-mounting-and-unmounting-lab-re-coded_sanaa_web001.git, 1321, 1321, 194, 1127, 0.146858, 90, 46
+governance-portal, https://github.com/zorancuc/governance-portal.git, 90569, 83485, 65294, 18191, 0.782105, 231, 217
+advancednodejs_ci, https://github.com/shaaandi/advancednodejs_ci.git, 5385, 3602, 0, 3602, 0, 167, 
+portfolio-site, https://github.com/dylanagibb/portfolio-site.git, 5969, 5942, 2132, 3810, 0.358802, 183, 72
+seniorproject, https://github.com/andy021/seniorproject.git, 18863, 19735, 13187, 6548, 0.668204, 223, 137
+anypoint-dropdown-menu, https://github.com/anypoint-web-components/anypoint-dropdown-menu.git, 9288, 9197, 5550, 3647, 0.603458, 158, 112
+avalon, https://github.com/laserbeam2045/avalon.git, 16501, 17494, 12492, 5002, 0.714073, 104, 68
+app, https://github.com/mgmxru/app.git, 75461, 64188, 54943, 9245, 0.85597, 335, 284
+best-webdriver, https://github.com/mobily-enterprises/best-webdriver.git, 9791, 9411, 4633, 4778, 0.492296, 79, 15
+bluetooh-developer-app, https://github.com/centipede5/bluetooh-developer-app.git, 105085, 105020, 81973, 23047, 0.780547, 234, 288
+octane-tech-talk, https://github.com/tomwayson/octane-tech-talk.git, 65614, 62734, 42105, 20629, 0.671167, 212, 516
+kingsland-blockchain-advanced-project, https://github.com/pappas999/kingsland-blockchain-advanced-project.git, 46805, 81886, 69549, 12337, 0.849339, 180, 965
+plugin-battle-detail, https://github.com/poooi/plugin-battle-detail.git, 12379, 10642, 5141, 5501, 0.483086, 205, 72
+regular-expert, https://github.com/jonathan-meyer/regular-expert.git, 10521, 9986, 5713, 4273, 0.572101, 87, 21
+whats-new, https://github.com/j-poulter/whats-new.git, 2244, 2244, 473, 1771, 0.210784, 190, 67
+forum_site, https://github.com/rmdegeorge/forum_site.git, 7715, 7766, 3249, 4517, 0.418362, 104, 67
+codearchive, https://github.com/shanemiller89/codearchive.git, 47573, 46295, 32302, 13993, 0.697743, 124, 79
+headstocks, https://github.com/guptabhavana08/headstocks.git, 69901, 69655, 53028, 16627, 0.761295, 230, 225

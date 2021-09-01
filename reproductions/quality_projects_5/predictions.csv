@@ -1,0 +1,22 @@
+repo, url, training_samples, samples, predictions, uncovered, prediction_rate, training_time, review_time
+project3, https://github.com/xgabe973/project3.git, 11752, 11732, 1108, 10624, 0.0944426, 95, 44
+sauti-studio-fe-v2, https://github.com/labs13-sauti-studio/sauti-studio-fe-v2.git, 10735, 9344, 2155, 7189, 0.230629, 81, 75
+apprend, https://github.com/jorisnijkamp1/apprend.git, 39293, 45559, 38649, 6910, 0.848329, 146, 251
+fcqa, https://github.com/picholasnaridon/fcqa.git, 33129, 27979, 27927, 52, 0.998141, 761, 555
+xnote, https://github.com/xupingmao/xnote.git, 183148, 176996, 136576, 40420, 0.771633, 919, 1565
+jcp_payroll, https://github.com/bridgetklingler/jcp_payroll.git, 5228, 5518, 0, 5518, 0, 138, 
+colesnyder.github.io, https://github.com/colesnyder/colesnyder.github.io.git, 99613, 99604, 80089, 19515, 0.804074, 357, 362
+sonos, https://github.com/dudeofprosper/sonos.git, 20985, 19100, 3376, 15724, 0.176754, 90, 81
+imlachchatt, https://github.com/pgomez465/imlachchatt.git, 35888, 33938, 25598, 8340, 0.754258, 219, 112
+overlook, https://github.com/karlfunhouse/overlook.git, 8185, 7227, 2713, 4514, 0.375398, 287, 147
+hogwarts-london-web-career-042219, https://github.com/learn-co-students/hogwarts-london-web-career-042219.git, 5217, 5241, 2760, 2481, 0.526617, 82, 16
+patstagram, https://github.com/jaesukhwang/patstagram.git, 13658, 13393, 5602, 7791, 0.418278, 97, 46
+reciperoost, https://github.com/michaelyonkman/reciperoost.git, 12171, 11066, 5899, 5167, 0.533074, 96, 33
+employee-referral, https://github.com/namith-poojary/employee-referral.git, 112410, 109045, 97983, 11062, 0.898556, 334, 214
+hair-shop-cap, https://github.com/dannybarker/hair-shop-cap.git, 16710, 16711, 10890, 5821, 0.651667, 96, 139
+m, https://github.com/asd-xiv/m.git, 38150, 35240, 20855, 14385, 0.591799, 151, 104
+run_tracker, https://github.com/myk1118/run_tracker.git, 20826, 20357, 16094, 4263, 0.790588, 86, 92
+qixiang, https://github.com/jicaiming/qixiang.git, 4516, 4445, 637, 3808, 0.143307, 150, 73
+cocktail-manual, https://github.com/acornapps/cocktail-manual.git, 37298, 37298, 28988, 8310, 0.7772, 145, 306
+sports_shop_fullstack, https://github.com/masko-vl/sports_shop_fullstack.git, 1638, 57222, 20938, 36284, 0.365908, 67, 164
+udemy_nodejs, https://github.com/woonglae/udemy_nodejs.git, 10138, 9975, 4648, 5327, 0.465965, 77, 85

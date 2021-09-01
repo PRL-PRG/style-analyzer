@@ -1,0 +1,96 @@
+--------------------
+Failed to process https://github.com/bridgetklingler/jcp_payroll.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 137, in measure_quality
+    bblfsh=bblfsh, config_json=config)
+  File "/lookout-sdk-ml/lookout/core/helpers/analyzer_context_manager.py", line 87, in review
+    log_level=log_level, config_json=config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 101, in review
+    return self._run("review", fr, to, port, git_dir, bblfsh, log_level, config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 131, in _run
+    return subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/tmp/lookout-sdk-ml/lookout-sdk-v0.7.0', 'review', 'ipv4://localhost:2494', '--from', '3daa011c04dc82a94f5b59cb3d1aa9e17c9dde61', '--to', 'ff7d92d50176e4881316bfafd73f916122d11606', '--git-dir', '/tmp/top-repos-quality-repos-y3bs9rr2/jcp_payroll.git', '--log-format', 'json', '--log-level', 'warning', '--config-json', '{"style.format.analyzer.FormatAnalyzer": {"aggregate": true}}']' returned non-zero exit status 1.
+--------------------
+Failed to process https://github.com/bridgetklingler/jcp_payroll.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 137, in measure_quality
+    bblfsh=bblfsh, config_json=config)
+  File "/lookout-sdk-ml/lookout/core/helpers/analyzer_context_manager.py", line 87, in review
+    log_level=log_level, config_json=config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 101, in review
+    return self._run("review", fr, to, port, git_dir, bblfsh, log_level, config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 131, in _run
+    return subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/tmp/lookout-sdk-ml/lookout-sdk-v0.7.0', 'review', 'ipv4://localhost:5526', '--from', '3daa011c04dc82a94f5b59cb3d1aa9e17c9dde61', '--to', 'ff7d92d50176e4881316bfafd73f916122d11606', '--git-dir', '/tmp/top-repos-quality-repos-vcz3k3t8/jcp_payroll.git', '--log-format', 'json', '--log-level', 'warning', '--config-json', '{"style.format.analyzer.FormatAnalyzer": {"aggregate": true}}']' returned non-zero exit status 1.
+--------------------
+Failed to process https://github.com/chakra-core/chakracore.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 137, in measure_quality
+    bblfsh=bblfsh, config_json=config)
+  File "/lookout-sdk-ml/lookout/core/helpers/analyzer_context_manager.py", line 87, in review
+    log_level=log_level, config_json=config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 101, in review
+    return self._run("review", fr, to, port, git_dir, bblfsh, log_level, config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 131, in _run
+    return subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/tmp/lookout-sdk-ml/lookout-sdk-v0.7.0', 'review', 'ipv4://localhost:5526', '--from', 'e2ae5db9b79d221321437070b447139379d85c04', '--to', '4841a76a6a0c7c9c212846e8c96c8675ce7653da', '--git-dir', '/tmp/top-repos-quality-repos-uoo2qf0a/chakracore.git', '--log-format', 'json', '--log-level', 'warning', '--config-json', '{"style.format.analyzer.FormatAnalyzer": {"aggregate": true}}']' returned non-zero exit status 1.
+--------------------
+Failed to process https://github.com/rishpan/gatsby-starter-netlify-cms1.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 137, in measure_quality
+    bblfsh=bblfsh, config_json=config)
+  File "/lookout-sdk-ml/lookout/core/helpers/analyzer_context_manager.py", line 87, in review
+    log_level=log_level, config_json=config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 101, in review
+    return self._run("review", fr, to, port, git_dir, bblfsh, log_level, config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 131, in _run
+    return subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/tmp/lookout-sdk-ml/lookout-sdk-v0.7.0', 'review', 'ipv4://localhost:5526', '--from', '6ea94b43e0ac65f7282c01707a738fde975d4899', '--to', '7c1d09728f585d13ce558891541b3f8630b24999', '--git-dir', '/tmp/top-repos-quality-repos-u7__e5uh/gatsby-starter-netlify-cms1.git', '--log-format', 'json', '--log-level', 'warning', '--config-json', '{"style.format.analyzer.FormatAnalyzer": {"aggregate": true}}']' returned non-zero exit status 1.
+--------------------
+Failed to process https://github.com/kumajogo/1-4_presents.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 137, in measure_quality
+    bblfsh=bblfsh, config_json=config)
+  File "/lookout-sdk-ml/lookout/core/helpers/analyzer_context_manager.py", line 87, in review
+    log_level=log_level, config_json=config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 101, in review
+    return self._run("review", fr, to, port, git_dir, bblfsh, log_level, config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 131, in _run
+    return subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/tmp/lookout-sdk-ml/lookout-sdk-v0.7.0', 'review', 'ipv4://localhost:5526', '--from', '60288444521bd7cfd0943e943e4ac464f6254ab9', '--to', '5407ba0197e9b4a77ab861496cbc2e20d166bac6', '--git-dir', '/tmp/top-repos-quality-repos-p8ql8l9v/1-4_presents.git', '--log-format', 'json', '--log-level', 'warning', '--config-json', '{"style.format.analyzer.FormatAnalyzer": {"aggregate": true}}']' returned non-zero exit status 1.
+--------------------
+Failed to process https://github.com/andersonalmeida/desig-system-ta.git repo
+Traceback (most recent call last):
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 312, in generate_quality_report
+    vnodes_expected_number=vnodes_expected_number)
+  File "/style-analyzer/lookout/style/format/benchmarks/quality_report.py", line 137, in measure_quality
+    bblfsh=bblfsh, config_json=config)
+  File "/lookout-sdk-ml/lookout/core/helpers/analyzer_context_manager.py", line 87, in review
+    log_level=log_level, config_json=config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 101, in review
+    return self._run("review", fr, to, port, git_dir, bblfsh, log_level, config_json)
+  File "/lookout-sdk-ml/lookout/core/helpers/server.py", line 131, in _run
+    return subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+  File "/usr/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/tmp/lookout-sdk-ml/lookout-sdk-v0.7.0', 'review', 'ipv4://localhost:5526', '--from', '5577c24a144eec0c7790c7787d9c4b31c747c685', '--to', '52e2c65d1a684d17142cf48c65a2b8dfd24a0f3d', '--git-dir', '/tmp/top-repos-quality-repos-dda9ii45/desig-system-ta.git', '--log-format', 'json', '--log-level', 'warning', '--config-json', '{"style.format.analyzer.FormatAnalyzer": {"aggregate": true}}']' returned non-zero exit status 1.

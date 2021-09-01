@@ -1,0 +1,24 @@
+repo, url, training_samples, samples, predictions, uncovered, prediction_rate, training_time, review_time
+toscani, https://github.com/zdfs/toscani.git, 12936, 12936, 7364, 5572, 0.569264, 137, 108
+linter, https://github.com/steelbrain/linter.git, 18408, 26742, 19057, 7685, 0.712624, 163, 109
+artillery, https://github.com/artilleryio/artillery.git, 48353, 45132, 31462, 13670, 0.697111, 200, 67
+dynamoose, https://github.com/dynamoose/dynamoose.git, 108242, 95849, 91379, 4470, 0.953364, 292, 195
+keen-slider, https://github.com/rcbyr/keen-slider.git, 4322, 4257, 890, 3367, 0.209067, 74, 102
+react-antd-admin-template, https://github.com/nlrx-wjc/react-antd-admin-template.git, 10994, 8400, 2554, 5846, 0.304048, 152, 79
+stress-css, https://github.com/andyedinborough/stress-css.git, 2823, 2837, 1309, 1528, 0.461403, 60, 
+dinero.js, https://github.com/dinerojs/dinero.js.git, 3769, 3825, 281, 3544, 0.0734641, 98, 123
+house, https://github.com/nccgroup/house.git, 11542, 11542, 6139, 5403, 0.531884, 195, 112
+angular-starter, https://github.com/patrickjs/angular-starter.git, 5443, 5212, 2108, 3104, 0.404451, 137, 113
+cnn-explainer, https://github.com/poloclub/cnn-explainer.git, 37714, 37698, 30571, 7127, 0.810945, 167, 201
+realtime-multiplayer-in-html5, https://github.com/ruby0x1/realtime-multiplayer-in-html5.git, 8769, 8769, 3474, 5295, 0.396168, 161, 91
+enquire.js, https://github.com/wickynilliams/enquire.js.git, 3497, 3486, 2383, 1103, 0.683592, 49, 29
+redux-query, https://github.com/amplitude/redux-query.git, 23371, 23003, 9934, 13069, 0.431857, 49, 14
+rogue.js, https://github.com/alidlorenzo/rogue.js.git, 3256, 3228, 813, 2415, 0.251859, 25, 2
+qrbtf, https://github.com/ciaochaos/qrbtf.git, 28340, 27538, 15050, 12488, 0.546518, 137, 105
+frida-snippets, https://github.com/iddoeldor/frida-snippets.git, 3115, 3115, 1271, 1844, 0.408026, 74, 106
+puer, https://github.com/leeluolee/puer.git, 39362, 5603, 4548, 1055, 0.811708, 106, 6
+pslab-desktop, https://github.com/fossasia/pslab-desktop.git, 58480, 57746, 50210, 7536, 0.869497, 160, 89
+htmx, https://github.com/bigskysoftware/htmx.git, 819831, 835566, 757661, 77905, 0.906764, 7380, 1684
+front-end-roadmap, https://github.com/objtube/front-end-roadmap.git, 4808, 4808, 1045, 3763, 0.217346, 146, 83
+textures, https://github.com/riccardoscalco/textures.git, 9805, 9912, 7598, 2314, 0.766546, 140, 124
+glasscord, https://github.com/arytonex/glasscord.git, 5765, 6903, 2277, 4626, 0.329857, 84, 115
