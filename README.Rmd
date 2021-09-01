@@ -19,12 +19,12 @@ cd style-analyzer-query
 We generate project selections:
 
 ```bash
-cargo run --bin djanco --release -- --output-path output --dataset-path /mnt/data/codedj-icse/javascript/ --cache-path /mnt/data/kondziu/codedj-icse/javascript-cache/
+cargo run --bin select --release -- --output-path output --dataset-path /mnt/data/codedj-icse/javascript/ --cache-path /mnt/data/kondziu/codedj-icse/javascript-cache/
 ```
 
 We create a dataset with just the projects we selected. Needs parasiter and a GitHub token (https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token).
 
-```
+```bash
 # Create a list of all unique projects in the selections.
 cat output/selections/*.csv | sort | uniq | head -n -1 | tail -n +2 > output/selections/all.csv
 
@@ -41,14 +41,14 @@ parasite --datastore /mnt/data/codedj-icse/js-selection/ -ght ghtokens.csv -n 8 
 
 Merge the dataset:
 
-```
+```bash
 parasite --datastore /mnt/data/codedj-icse/js-selection-merged/ --merge-all /mnt/data/codedj-icse/js-selection Generic
 ```
 
 Generate head and base commits for each project.
 
 ```bash
-cargo run --bin djanco --release -- --output-path output --dataset-path /mnt/data/codedj-icse/js-selection-merged/ --cache-path /mnt/data/kondziu/codedj-icse/js-selection-merged/
+cargo run --bin generate_experiment_inputs --release -- --output-path output --dataset-path /mnt/data/codedj-icse/js-selection-merged/ --cache-path /mnt/data/kondziu/codedj-icse/js-selection-merged/
 ```
 
 # Setup
@@ -149,12 +149,10 @@ REPRO_DIR <- "reproductions/"
 # They are used as names, they should not have / in them.
 #random_projects <- paste0("random_projects_", c(0,2,3,6:9), "_", 10)
 #random_projects_by_size <- paste0("random_projects_by_size_", c(0:2, 6:9), "_", 10)
-quality_projects <- paste0("quality_projects_", c(0:3,7:9))
-top_starred_projects <- paste0("top_starred_projects_", c(2:9))
-EXPERIMENTS <- c("original_reproduction", "original", top_starred_projects, quality_projects)
+quality_projects <- paste0("quality_projects_", c(0:3,5:9))
+EXPERIMENTS <- c("original_reproduction", "original", quality_projects)
+PAPER_EXPERIMENTS <- c("original", quality_projects)
 
-# The selections that we will use in the paper. A few last ones, I suppose.
-PAPER_EXPERIMENTS <- c("original", paste0("top_starred_projects_", c(7:9)), paste0("quality_projects_", c(6:9)))
 
 # Convert to bash variables
 Sys.setenv(REPRO_DIRS = paste(paste0(REPRO_DIR, "/", EXPERIMENTS), collapse = " "))
@@ -280,9 +278,9 @@ prepare_data <- function(experiment, size=19) {
   print(paste0((data %>% count)$n, " projects in ", experiment))
   
   if ((data %>% count)$n > size) {
-    seed <- digest::digest2int(experiment, seed=42)
+    seed <- digest::digest2int(experiment, seed=1111)
     set.seed(seed)
-    data %>% sample_n(19)
+    data %>% sample_n(size)
   } else {
     data
   }
@@ -459,17 +457,6 @@ make_paper_table("original")
 make_paper_table("original")
 ```
 
-```{r}
-for (experiment in top_starred_projects) {
-  print(make_paper_table(experiment))
-}
-```
-
-```{r}
-for (experiment in quality_projects) {
-  print(make_paper_table(experiment))
-}
-```
 
 ```{r}
 for (experiment in EXPERIMENTS) {
@@ -531,11 +518,6 @@ make_precision_support_graph("original_reproduction")
 
 ```{r}
 make_precision_support_graph("original")
-```
-
-```{r fig.width=20, fig.height=10}
-graphs <- lapply(top_starred_projects, make_precision_support_graph)
-do.call("grid.arrange", c(graphs, ncol=4))
 ```
 
 ```{r fig.width=20, fig.height=10}
@@ -616,7 +598,8 @@ strip_and_label <- function(data, label) {
 ```
 
 
-```{r fig.width=8, fig.height=4}
+
+```{r fig.width=8, fig.height=8}
 make_precision_support_graph <- function (experiment, uniform_scales=TRUE, labels=FALSE, color_by_selection=FALSE, log_scale=FALSE, only_top_n=NULL,  only_bottom_n=NULL, use_selection_name=FALSE, left=T, bottom=T) {
   
   
@@ -662,13 +645,15 @@ make_precision_support_graph <- function (experiment, uniform_scales=TRUE, label
   plot
 }
 
+short_experiments = PAPER_EXPERIMENTS %>% head(4)
+
 col_index <- 0;
 row_index <- 0;
-cols <- 4
-max_rows <- ceiling(length(PAPER_EXPERIMENTS) / cols)
+cols <- 2
+max_rows <- ceiling(length(short_experiments) / cols)
 
-graphs <- lapply(PAPER_EXPERIMENTS, function(x) {
-  print(c(col_index, row_index, col_index == 0, row_index==max_rows))
+graphs <- lapply(short_experiments, function(x) {
+  #print(c(col_index, row_index, col_index == 0, row_index==max_rows))
   graph <- make_precision_support_graph(x, use_selection_name = T, left=(col_index == 0), bottom=(row_index==max_rows - 1))
   col_index <<- col_index + 1
   if (col_index == cols) {
@@ -685,7 +670,7 @@ dev.copy(pdf, file=paste0(FIGS, "/precision-vs-samples.pdf"), height=4, width=8)
 dev.off()
 ```
 
-```{r, fig.width=8, fig.height=4}
+```{r, fig.width=8, fig.height=3}
 significance <- sapply(PAPER_EXPERIMENTS, mann_whitney_significance, simplify=FALSE)
 stripped_and_labelled <- lapply(PAPER_EXPERIMENTS, function(experiment) significance[[experiment]] %>% strip_and_label(experiment))
 comparison_data <- do.call(bind_rows, stripped_and_labelled) %>% mutate(selection_name = factor(selection_name, levels=selection_name_order))
@@ -707,107 +692,12 @@ precision_comparison <- ggplot(comparison_data, aes(x=selection_name, y=precisio
   theme(legend.position="none",  panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
   scale_y_continuous(limits=c(0.75,1)) #, panel_border(element_blank()))
 
-graph <- grid.arrange(widths=c(1), support_comparison, precision_comparison)
+#graph <- grid.arrange(widths=c(1), support_comparison, precision_comparison)
 
-graph
+precision_comparison
 
 dev.copy(pdf, file=paste0(FIGS, "/precision-and-samples-comparison.pdf"), height=4, width=8)
 dev.off()
 ```
 
 # Notes
-
-## Size analysis
-
-```{r}
-ggplot(project_locs, aes(x=locs)) +
-    geom_histogram(aes(y=..density..),
-                   binwidth=1000,
-                   colour="black", fill="white") +
-    geom_density(alpha=.2, fill="#FF6666") +
-    xlab("Lines of code in head of default branch") +
-    ylab("# projects") +
-    scale_x_continuous(labels=label_number_si()) +
-    scale_y_continuous(labels=label_number_si()) +
-    theme_bw()
-```
-
-```{r}
-ggplot(project_locs %>% filter(locs < 100000), aes(x=locs)) +
-    geom_histogram(aes(y=..density..),
-                   binwidth=1000,
-                   colour="black", fill="white") +
-    geom_density(alpha=.2, fill="#FF6666") +
-    xlab("Lines of code in head of default branch (only 50K or less)") +
-    ylab("# projects") +
-    scale_x_continuous(labels=label_number_si()) +
-    scale_y_continuous(labels=label_number_si()) +
-    theme_bw()
-```
-
-```{r}
-project_size <- project_locs %>% 
-  mutate(size = ifelse(locs > 10**5, "very large", 
-                ifelse(locs > 10**4, "large", 
-                ifelse(locs > 10**3, "medium", "small"))))
-
-ggplot(project_size, aes(x=size)) +
-    geom_histogram(stat="count") +
-    xlab("Project size") +
-    ylab("# projects") +
-    scale_x_discrete() +
-    scale_y_continuous(labels=label_number_si()) +
-    theme_bw()
-```
-
-```{r}
-ggplot(project_size %>% filter(size == "very large"), aes(x=locs)) +
-    geom_histogram(aes(y=..density..),
-                   binwidth=10000,
-                   colour="black", fill="white") +
-    geom_density(alpha=.2, fill="#FF6666") +
-    xlab("Lines of code in head of default branch (very large projects)") +
-    ylab("# projects") +
-    scale_x_continuous(labels=label_number_si()) +
-    scale_y_continuous(labels=label_number_si()) +
-    theme_bw()
-```
-
-```{r}
-ggplot(project_size %>% filter(size == "large"), aes(x=locs)) +
-    geom_histogram(aes(y=..density..),
-                   binwidth=1000,
-                   colour="black", fill="white") +
-    geom_density(alpha=.2, fill="#FF6666") +
-    xlab("Lines of code in head of default branch (large projects)") +
-    ylab("# projects") +
-    scale_x_continuous(labels=label_number_si()) +
-    scale_y_continuous(labels=label_number_si()) +
-    theme_bw()
-```
-
-```{r}
-ggplot(project_size %>% filter(size == "medium"), aes(x=locs)) +
-    geom_histogram(aes(y=..density..),
-                   binwidth=100,
-                   colour="black", fill="white") +
-    geom_density(alpha=.2, fill="#FF6666") +
-    xlab("Lines of code in head of default branch (medium projects)") +
-    ylab("# projects") +
-    scale_x_continuous(labels=label_number_si()) +
-    scale_y_continuous(labels=label_number_si()) +
-    theme_bw()
-```
-
-```{r}
-ggplot(project_size %>% filter(size == "small"), aes(x=locs)) +
-    geom_histogram(aes(y=..density..),
-                   binwidth=10,
-                   colour="black", fill="white") +
-    geom_density(alpha=.2, fill="#FF6666") +
-    xlab("Lines of code in head of default branch (small projects)") +
-    ylab("# projects") +
-    scale_x_continuous(labels=label_number_si()) +
-    scale_y_continuous(labels=label_number_si()) +
-    theme_bw()
-```

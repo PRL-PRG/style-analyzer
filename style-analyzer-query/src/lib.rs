@@ -2,6 +2,9 @@ use std::collections::HashMap;
 use std::path::Path;
 use std::path::PathBuf;
 
+use chrono::Datelike;
+use chrono::TimeZone;
+use chrono::Utc;
 use regex;
 use ::csv as csv_reader;
 use serde::Deserialize;
@@ -12,10 +15,7 @@ use djanco::database::*;
 use djanco::log::*;
 use djanco::csv::*;
 
-use djanco::objects::Head;
-use djanco::objects::ItemWithData;
-use djanco::objects::Language;
-use djanco::objects::Project;
+use djanco::objects::*;
 
 use djanco::time::Duration;
 use djanco_ext::*;
@@ -260,4 +260,13 @@ pub fn _project_spec<'a>(project: &ItemWithData<'a, Project>) -> Option<(Project
     let base_commit_hash = base_commit_hash.unwrap();
 
     return Some((url, head_commit_hash, base_commit_hash))
+}
+
+
+pub fn has_commits_in_year(project: ItemWithData<Project>, year: i32) -> bool {
+    let commits = project.commits_with_data().unwrap_or_else(Vec::new);
+    commits.into_iter()
+        .flat_map(|commit: ItemWithData<Commit>| commit.author_timestamp())
+        .map(|author_time| Utc.timestamp(author_time /*seconds*/, 0 /*nanos*/).date().year())
+        .any(|commit_year| commit_year == year)
 }
